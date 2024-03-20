@@ -55,9 +55,9 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 
 ## User Management Endpoints:
 - [✅] Get User Profile: `GET /api/users/me`
-- [ ] Update User Profile: `PUT /api/users/me`
-- [ ] Get User by Username: `GET /api/users/:username`
-- [ ] Delete User: `DELETE /api/users/me`
+- [✅] Update User Profile: `PUT /api/users/me`
+- [✅] Get User by Username: `GET /api/users/:username`
+- [✅] Delete User: `DELETE /api/users/me`
 
 ## Book Management Endpoints:
 - [ ] Get All Books: `GET /api/books`

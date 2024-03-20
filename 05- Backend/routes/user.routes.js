@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth.middleware');
 const userService = require('../services/user.service');
-
+const userController = require('../controllers/user.controller')
 /**
  * Route to get the profile of the authenticated user.
  * @name GET /api/users/me
@@ -22,5 +22,49 @@ router.get('/me', authMiddleware.authenticateToken, async (req, res, next) => {
     next(error);
   }
 });
+
+/**
+ * Update the profile of the currently authenticated user.
+ * @name PUT /api/users/me
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express path.
+ * @param {callback} middleware - Express middleware.
+ */
+router.put('/me', authMiddleware.authenticateToken, userController.updateUserProfile);
+
+
+/**
+ * Register a new user.
+ * @name POST /api/users/register
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Express middleware.
+ * @param {function} callback - Route handler function.
+ */
+
+router.post('/register', userController.registerUser);
+
+/**
+ * Get user by username.
+ * @name GET /api/users/:username
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} callback - Route handler function.
+ */
+router.get('/:username', userController.getUserByUsername);
+
+/**
+ * Delete the authenticated user.
+ * @name DELETE /api/users/me
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Authentication middleware to verify user token.
+ * @param {function} callback - Route handler function.
+ */
+router.delete('/me', authMiddleware.authenticateToken, userController.deleteUser);
 
 module.exports = router;

@@ -19,7 +19,7 @@ exports.authenticateUser = async (email, password) => {
 
     // Check if the user exists
     if (!user) {
-      throw new Error('Invalid email or password');
+      throw new Error('User don\'t exist with this email');
     }
 
     // Compare the provided password with the hashed password in the database
@@ -27,7 +27,7 @@ exports.authenticateUser = async (email, password) => {
 
     // If passwords don't match, throw an error
     if (!isPasswordValid) {
-      throw new Error('Invalid email or password');
+      throw new Error('Invalid password');
     }
 
     // Generate JWT token

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user.model');
-
+const userService = require('../services/user.service')
 /**
  * Controller function to register a new user.
  * @param {object} req - The request object.
@@ -57,4 +57,62 @@ exports.getUserProfile = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+};
+
+/**
+ * Controller function to handle updating the profile of the currently authenticated user.
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
+exports.updateUserProfile = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const updatedUserData = req.body;
+    await userService.updateUserProfile(userId, updatedUserData);
+    res.status(204).json({ message: 'Profile Updated Sucessfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Controller function to get a user by username.
+ * @name getUserByUsername
+ * @function
+ * @memberof module:controllers/userController
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @param {function} next - Express next function.
+ */
+exports.getUserByUsername = async (req, res, next) => {
+  try {
+    const username = req.params.username;
+    const user = await userService.getUserByUsername(username);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Controller function to delete a user.
+ * @name deleteUser
+ * @function
+ * @memberof module:controllers/userController
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @param {function} next - Express next function.
+ */
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const userId = req.user.id; 
+    await userService.deleteUser(userId);
+    res.status(204).end(); 
+  } catch (error) {
+    next(error);
+  }
 };

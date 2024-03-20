@@ -1,0 +1,27 @@
+const express = require('express');
+const connectToDatabase = require('./config/db.config');
+const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
+const app = express();
+
+// Connect to MongoDB
+connectToDatabase();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes); 
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Internal server error' });
+});
+
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});

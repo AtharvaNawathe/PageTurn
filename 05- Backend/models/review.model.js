@@ -1,5 +1,3 @@
-// models/review.model.js
-
 const mongoose = require('mongoose');
 
 /**

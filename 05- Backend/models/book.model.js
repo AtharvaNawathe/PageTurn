@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const tags = require('../constants/tags');
-const removeBookFromUserShelves = require('../middlewares/removeBookFromUserShelves.middleware');
-const reviewSchema = require('./review.model');
-
+const {reviewSchema} = require('../models/review.model');
 /**
  * Represents a book in the Pageturn application.
  * @typedef {Object} Book
@@ -46,7 +44,10 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  reviews: [reviewSchema],
+  reviews:{
+    type: [reviewSchema],
+    required:true
+  },
   publishedDate: {
     type: Date
   },
@@ -70,8 +71,7 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
-// Middleware to remove references from users' virtual shelves when a book is deleted
-bookSchema.pre('findOneAndDelete', removeBookFromUserShelves);
+
 
 const Book = mongoose.model('Book', bookSchema);
 

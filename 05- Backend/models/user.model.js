@@ -1,8 +1,50 @@
-// models/user.model.js
-
 const mongoose = require('mongoose');
-const updateBookCounts = require('../middlewares/updateBookCounts.middleware');
-const removeBookFromShelves = require('../middlewares/removeBookFromShelves.middleware');
+const bcrypt = require('bcrypt');
+
+/**
+ * Middleware to update book counts when a user modifies their virtual shelf.
+ * @param {function} next - The callback function to proceed to the next middleware function.
+ * @returns {Promise<void>} A Promise indicating the completion of the middleware operation.
+ */
+async function updateBookCounts(next) {
+  const user = this;
+  try {
+    // Get the IDs of books being added or removed from the virtual shelf
+    const bookIds = [...user.wantToRead, ...user.currentlyReading, ...user.read];
+    // Update book counts for each book in the virtual shelf
+    await Promise.all(bookIds.map(async (bookId) => {
+      const book = await Book.findById(bookId);
+      if (!book) return; // Book not found, skip
+      book.usersCurrentlyReading = await User.countDocuments({ currentlyReading: bookId });
+      book.usersWantToRead = await User.countDocuments({ wantToRead: bookId });
+      book.usersRead = await User.countDocuments({ read: bookId });
+      await book.save();
+    }));
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Middleware to remove references to a deleted book from the virtual shelves of all users.
+ * @param {function} next - The callback function to proceed to the next middleware function.
+ * @returns {Promise<void>} A Promise indicating the completion of the middleware operation.
+ */
+async function removeBookFromShelves(next) {
+  const user = this;
+  try {
+    await Promise.all([
+      mongoose.model('User').updateMany({}, { $pull: { wantToRead: user._conditions._id } }),
+      mongoose.model('User').updateMany({}, { $pull: { currentlyReading: user._conditions._id } }),
+      mongoose.model('User').updateMany({}, { $pull: { read: user._conditions._id } })
+    ]);
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 /**
  * Represents a user in the Pageturn application.
@@ -90,6 +132,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   }],
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now

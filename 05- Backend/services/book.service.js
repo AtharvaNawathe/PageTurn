@@ -1,4 +1,4 @@
-const Book = require('../models/book.model');
+const Book = require("../models/book.model");
 
 /**
  * Service function to add a new book.
@@ -10,7 +10,7 @@ exports.addBook = async (bookData) => {
     // Check if the ISBN already exists
     const existingBook = await Book.findOne({ isbn: bookData.isbn });
     if (existingBook) {
-      throw new Error('A book with this ISBN already exists');
+      throw new Error("A book with this ISBN already exists");
     }
 
     // Create the book object
@@ -22,7 +22,6 @@ exports.addBook = async (bookData) => {
     throw error;
   }
 };
-
 
 /**
  * Service function to get all books.
@@ -36,7 +35,6 @@ exports.getAllBooks = async () => {
     throw error;
   }
 };
-
 
 /**
  * Service function to get a book by its ID.
@@ -52,8 +50,6 @@ exports.getBookById = async (bookId) => {
   }
 };
 
-
-
 /**
  * Service function to update a book by its ID.
  * @param {string} bookId - The ID of the book to update.
@@ -62,16 +58,15 @@ exports.getBookById = async (bookId) => {
  */
 exports.updateBookById = async (bookId, updatedBookData) => {
   try {
-    const updatedBook = await Book.findByIdAndUpdate(bookId, updatedBookData, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(bookId, updatedBookData);
     if (!updatedBook) {
-      throw new Error('Book not found');
+      throw new Error("Book not found");
     }
     return updatedBook;
   } catch (error) {
     throw error;
   }
 };
-
 
 /**
  * Service function to delete a book by its ID.
@@ -82,13 +77,12 @@ exports.deleteBookById = async (bookId) => {
   try {
     const deletedBook = await Book.findByIdAndDelete(bookId);
     if (!deletedBook) {
-      throw new Error('Book not found');
+      throw new Error("Book not found");
     }
   } catch (error) {
     throw error;
   }
 };
-
 
 /**
  * Service function to search books by title, author name, and ISBN number.
@@ -100,12 +94,27 @@ exports.searchBooks = async (query) => {
     // Perform case-insensitive search for books matching the query in title, author name, and ISBN number
     const books = await Book.find({
       $or: [
-        { title: { $regex: query, $options: 'i' } }, // Search by title
-        { authors: { $regex: query, $options: 'i' } }, // Search by author name
-        { isbn: { $regex: query, $options: 'i' } } // Search by ISBN number
-      ]
+        { title: { $regex: query, $options: "i" } }, // Search by title
+        { authors: { $regex: query, $options: "i" } }, // Search by author name
+        { isbn: { $regex: query, $options: "i" } }, // Search by ISBN number
+      ],
     });
     return books;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Service function to check if a book exists by its ID.
+ * @param {string} bookId - The ID of the book to check.
+ * @returns {Promise<boolean>} A Promise representing whether the book exists or not.
+ */
+exports.bookExists = async (bookId) => {
+  try {
+    const book = await Book.findById(bookId);
+    console.log("Book", book);
+    return !!book;
   } catch (error) {
     throw error;
   }

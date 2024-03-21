@@ -1,19 +1,27 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user.model');
+const bcrypt = require("bcrypt");
+const User = require("../models/user.model");
 
 /**
  * Service function to register a new user.
- * @param {object} userData - The user data object containing user details.
+ * @param {string} username - The username of the user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ * @param {string} fullName - The full name of the user.
+ * @param {Date} dateOfBirth - The date of birth of the user.
+ * @param {string} gender - The gender of the user.
+ * @param {string} country - The country of the user.
+ * @param {Array} interests - The interests of the user.
+ * @param {string} bio - The bio of the user.
+ * @param {string} profilePicture - The profile picture of the user.
+ * @param {boolean} isAdmin - The isAdmin status of the user.
  * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-exports.registerUser = async (userData) => {
+exports.registerUser = async (username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin) => {
   try {
-    const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture } = userData;
-
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the user object
+    // Create the user
     const user = new User({
       username,
       email,
@@ -24,7 +32,8 @@ exports.registerUser = async (userData) => {
       country,
       interests,
       bio,
-      profilePicture
+      profilePicture,
+      isAdmin
     });
 
     // Save the user to the database
@@ -34,7 +43,6 @@ exports.registerUser = async (userData) => {
   }
 };
 
-
 /**
  * Service function to retrieve the profile of a user.
  * @param {string} userId - The ID of the user whose profile is being retrieved.
@@ -42,9 +50,9 @@ exports.registerUser = async (userData) => {
  */
 exports.getUserProfile = async (userId) => {
   try {
-    const user = await User.findById(userId).select('-password'); // Exclude password field
+    const user = await User.findById(userId).select("-password"); // Exclude password field
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     return user;
   } catch (error) {
@@ -62,7 +70,7 @@ exports.updateUserProfile = async (userId, updatedUserData) => {
   try {
     const user = await User.findById(userId);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     await User.findByIdAndUpdate(userId, updatedUserData);
@@ -79,7 +87,7 @@ exports.updateUserProfile = async (userId, updatedUserData) => {
  */
 exports.getUserByUsername = async (username) => {
   try {
-    const user = await User.findOne({ username }).select('-password');
+    const user = await User.findOne({ username }).select("-password");
     return user;
   } catch (error) {
     throw error;
@@ -98,5 +106,131 @@ exports.deleteUser = async (userId) => {
     await User.findByIdAndDelete(userId);
   } catch (error) {
     throw error;
+  }
+};
+
+/**
+ * Check if a user exists by user ID.
+ * @param {string} userId - The ID of the user to check.
+ * @returns {Promise<boolean>} A Promise that resolves to true if the user exists, false otherwise.
+ * @throws {Error} If an error occurs while checking for the user.
+ */
+exports.userExists = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    return !!user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Add a book to the user's Currently Reading shelf.
+ * @param {string} userId - The ID of the user.
+ * @param {string} bookId - The ID of the book to add.
+ * @returns {Promise<User>} A Promise that resolves with the updated user object.
+ * @throws {Error} If an error occurs while adding the book to the shelf.
+ */
+exports.addToCurrentlyReading = async (userId, bookId) => {
+  // Retrieve the user document from the database
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // Check if the book is already in the Currently Reading list
+  if (user.currentlyReading.includes(bookId)) {
+    throw new Error("Book is already in the Currently Reading list");
+  }
+
+  // Check if the book is in the Want to Read list
+  if (user.wantToRead.includes(bookId)) {
+    // Remove the book from the Want to Read list
+    user.wantToRead.pull(bookId);
+  }
+
+  // Check if the book is in the Read list
+  if (user.read.includes(bookId)) {
+    // Remove the book from the Read list
+    user.read.pull(bookId);
+  }
+
+  // Add the book to the Currently Reading list
+  user.currentlyReading.push(bookId);
+
+  // Save the updated user document
+  await user.save();
+
+  return user;
+};
+
+/**
+ * Add a book to the user's Want to Read shelf.
+ * @param {string} userId - The ID of the user.
+ * @param {string} bookId - The ID of the book to add.
+ * @returns {Promise<User>} A Promise that resolves with the updated user object.
+ * @throws {Error} If an error occurs while adding the book to the shelf.
+ */
+exports.addToWantToRead = async (userId, bookId) => {
+  try {
+    const user = await User.findById(userId);
+
+    // Check if book is already in currentlyReading or read shelf, remove it if present
+    user.currentlyReading.pull(bookId);
+    user.read.pull(bookId);
+
+    // Add book to wantToRead shelf
+    if (!user.wantToRead.includes(bookId)) {
+      user.wantToRead.push(bookId);
+    }
+
+    // Save updated user
+    await user.save();
+  } catch (error) {
+    throw new Error(
+      "Error adding book to Want to Read shelf: " + error.message
+    );
+  }
+};
+
+/**
+ * Add a book to the user's Read shelf.
+ * @param {string} userId - The ID of the user.
+ * @param {string} bookId - The ID of the book to add.
+ * @returns {Promise<User>} A Promise that resolves with the updated user object.
+ * @throws {Error} If an error occurs while adding the book to the shelf.
+ */
+exports.addToRead = async (userId, bookId) => {
+  try {
+    const user = await User.findById(userId);
+
+    // Check if book is already in currentlyReading or wantToRead shelf, remove it if present
+    user.currentlyReading.pull(bookId);
+    user.wantToRead.pull(bookId);
+
+    // Add book to read shelf
+    if (!user.read.includes(bookId)) {
+      user.read.push(bookId);
+    }
+
+    // Save updated user
+    await user.save();
+  } catch (error) {
+    throw new Error("Error adding book to Read shelf: " + error.message);
+  }
+};
+
+/**
+ * Get all users.
+ * @returns {Promise<User[]>} A Promise that resolves with an array of user objects.
+ * @throws {Error} If an error occurs while fetching the users.
+ */
+exports.getAllUsers = async () => {
+  try {
+    const users = await User.find();
+    return users;
+  } catch (error) {
+    throw new Error("Error fetching all users: " + error.message);
   }
 };

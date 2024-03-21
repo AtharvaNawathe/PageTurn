@@ -13,9 +13,9 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 - [✅] Set up Node.js and Express.js for the backend server.
 - [✅] Create and configure MongoDB for the database.
 - [✅] Develop API endpoints for user authentication (e.g., registration, login) using JWT.
-- [ ] Implement CRUD operations for managing users and books.
-- [ ] Develop API endpoints for handling reviews, likes, comments, and search functionality.
-- [ ] Implement error handling and validation for API requests.
+- [✅] Implement CRUD operations for managing users and books.
+- [✅] Develop API endpoints for handling reviews, likes, comments, and search functionality.
+- [✅] Implement error handling and validation for API requests.
 
 ## 3. Frontend Development
 - [ ] Set up Angular for the frontend application.
@@ -51,43 +51,34 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 ## Authentication Endpoints:
 - [✅] Register User: `POST /api/auth/register`
 - [✅] Login User: `POST /api/auth/login`
-- [ ] Logout User: `POST /api/auth/logout`
+- [ ] Logout User: `POST /api/auth/logout`    [will implement while building frontend]
 
 ## User Management Endpoints:
 - [✅] Get User Profile: `GET /api/users/me`
-- [✅] Update User Profile: `PUT /api/users/me`
-- [✅] Get User by Username: `GET /api/users/:username`
-- [✅] Delete User: `DELETE /api/users/me`
+- [✅] Update User Profile: `PUT /api/users/me`   			 
+- [✅] Get User by Username: `GET /api/users/:username`  
+- [✅] Delete User: `DELETE /api/users/me`    	
+- [✅] Get all Users: `GET /api/users`		 
+- [✅] Add Book to Currently Reading: `POST /api/users/:userId/currently-reading`
+- [✅] Add Book to Want to Read: `POST /api/users/:userId/want-to-read`
+- [✅] Add Book to Read: `POST /api/users/:userId/read`
 
 ## Book Management Endpoints:
 - [✅] Get All Books: `GET /api/books`
 - [✅] Get Book by ID: `GET /api/books/:id`
-- [✅] Search Books: `GET /api/books/search`
-- [✅] Add Book: `POST /api/books`
+- [✅] Search Books: `GET /api/books/search` 			 	
+- [✅] Add Book: `POST /api/books`				
 - [✅] Update Book: `PUT /api/books/:id`
-- [✅] Delete Book: `DELETE /api/books/:id`
-
+- [✅] Delete Book: `DELETE /api/books/:id` 			 
+ 
 ## Review Management Endpoints:
-- [ ] Get Reviews for Book: `GET /api/books/:id/reviews`
-- [ ] Write Review for Book: `POST /api/books/:id/reviews`
-- [ ] Get Review by ID: `GET /api/reviews/:id`
-- [ ] Update Review: `PUT /api/reviews/:id`
-- [ ] Delete Review: `DELETE /api/reviews/:id`
+- [✅] Get Reviews for Book: `GET /api/books/:id/reviews`  
+- [✅] Write Review for Book: `POST /api/books/:id/reviews` 		
+- [✅] Get Review by ID: `GET /api/reviews/:id` 			
+- [✅] Update Review: `PUT /api/reviews/:id`       
+- [✅] Delete Review: `DELETE /api/reviews/:id`    
 
 ## Interaction Endpoints:
-- [ ] Like Review: `POST /api/reviews/:id/like`
-- [ ] Unlike Review: `POST /api/reviews/:id/unlike`
-- [ ] Add Comment to Review: `POST /api/reviews/:id/comments`
-- [ ] Delete Comment: `DELETE /api/comments/:id`
-
-## Admin Endpoints:
-- [ ] User Graphs: `GET /api/admin/graphs/users`
-- [ ] Book Graphs: `GET /api/admin/graphs/books`
-- [ ] User Management: `GET /api/admin/users`
-- [ ] Book Management: `GET /api/admin/books`
-- [ ] Create User: `POST /api/admin/users`
-- [ ] Update User: `PUT /api/admin/users/:id`
-- [ ] Delete User: `DELETE /api/admin/users/:id`
-- [ ] Create Book: `POST /api/admin/books`
-- [ ] Update Book: `PUT /api/admin/books/:id`
-- [ ] Delete Book: `DELETE /api/admin/books/:id`
+- [✅] Like Review: `POST /api/reviews/:id/like` 				
+- [✅] Unlike Review: `POST /api/reviews/:id/unlike`
+- [✅] Add Comment to Review: `POST /api/reviews/:id/comments`

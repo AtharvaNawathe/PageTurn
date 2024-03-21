@@ -3,7 +3,7 @@ const router = express.Router();
 const authMiddleware = require('../middlewares/auth.middleware');
 const adminMiddleware = require('../middlewares/admin.middleware');
 const bookController = require('../controllers/book.controller');
-
+const reviewController = require('../controllers/review.controller');
 /**
  * Route to add a new book.
  * @name POST /api/books
@@ -59,7 +59,7 @@ router.put('/:id', authMiddleware.authenticateToken, adminMiddleware.authenticat
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.delete('/:id', bookController.deleteBookById);
+router.delete('/:id', authMiddleware.authenticateToken, adminMiddleware.authenticateAdmin,bookController.deleteBookById);
 
 
 /**
@@ -71,5 +71,17 @@ router.delete('/:id', bookController.deleteBookById);
  * @param {function} callback - Route handler function.
  */
 router.get('/search', bookController.searchBooks);
+
+
+
+/**
+ * Route to get reviews for a book by its ID.
+ * @name GET /api/books/:id/reviews
+ * @function
+ * @memberof module:routes/reviewRoutes
+ * @param {string} path - Express route path.
+ * @param {function} callback - Route handler function.
+ */
+router.get('/:id/reviews', reviewController.getReviewsForBook);
 
 module.exports = router;

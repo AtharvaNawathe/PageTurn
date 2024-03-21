@@ -4,7 +4,7 @@ const {reviewSchema} = require('../models/review.model');
 /**
  * Represents a book in the Pageturn application.
  * @typedef {Object} Book
- * @property {string}isbn - International Standard Book Number
+ * @property {string} isbn - International Standard Book Number
  * @property {string} title - The title of the book.
  * @property {string[]} authors - The authors of the book.
  * @property {string} genre - The genre of the book.

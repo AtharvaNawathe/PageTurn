@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Book = require('../models/book.model');
 
 /**
  * Middleware to update book counts when a user modifies their virtual shelf.

@@ -54,7 +54,7 @@ router.post('/register', userController.registerUser);
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/:username', userController.getUserByUsername);
+router.get('/:username',authMiddleware.authenticateToken, userController.getUserByUsername);
 
 /**
  * Delete the authenticated user.
@@ -66,5 +66,51 @@ router.get('/:username', userController.getUserByUsername);
  * @param {function} callback - Route handler function.
  */
 router.delete('/me', authMiddleware.authenticateToken, userController.deleteUser);
+
+/**
+ * Add a book to the "Currently Reading" shelf of the authenticated user.
+ * @name POST /api/users/currently-reading
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Authentication middleware to verify user token.
+ * @param {function} callback - Route handler function.
+ */
+router.post('/currently-reading', authMiddleware.authenticateToken, userController.addToCurrentlyReading);
+
+/**
+ * Add a book to the "Want to Read" shelf of the authenticated user.
+ * @name POST /api/users/want-to-read
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Authentication middleware to verify user token.
+ * @param {function} callback - Route handler function.
+ */
+
+router.post('/want-to-read', authMiddleware.authenticateToken, userController.addToWantToRead);
+
+/**
+ * Add a book to the "Read" shelf of the authenticated user.
+ * @name POST /api/users/read
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Authentication middleware to verify user token.
+ * @param {function} callback - Route handler function.
+ */
+router.post('/read', authMiddleware.authenticateToken, userController.addToRead)
+
+/**
+ * Get all users.
+ * @name GET /api/users/all/users
+ * @function
+ * @memberof module:routes/userRoutes
+ * @param {string} path - Express route path.
+ * @param {function} middleware - Authentication middleware to verify user token.
+ * @param {function} callback - Route handler function.
+ */
+router.get('/all/users',authMiddleware.authenticateToken, userController.getAllUsers);
+
 
 module.exports = router;

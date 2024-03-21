@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user.model');
 const userService = require('../services/user.service')
+
 /**
  * Controller function to register a new user.
  * @param {object} req - The request object.
@@ -10,33 +11,21 @@ const userService = require('../services/user.service')
  */
 exports.registerUser = async (req, res, next) => {
   try {
-    const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture } = req.body;
+    const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin } = req.body;
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // If isAdmin is not provided, set its default value to false
+    const isAdminValue = isAdmin !== undefined ? isAdmin : false;
 
-    // Create the user
-    const user = new User({
-      username,
-      email,
-      password: hashedPassword,
-      fullName,
-      dateOfBirth,
-      gender,
-      country,
-      interests,
-      bio,
-      profilePicture
-    });
-
-    // Save the user to the database
-    await user.save();
+    // Call the user service to register the user
+    await userService.registerUser(username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdminValue);
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     next(error);
   }
 };
+
+
 
 /**
  * Controller function to get the profile of the authenticated user.
@@ -114,5 +103,79 @@ exports.deleteUser = async (req, res, next) => {
     res.status(204).end(); 
   } catch (error) {
     next(error);
+  }
+};
+
+/**
+ * Controller function to add a book to the Currently Reading shelf of the authenticated user.
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
+exports.addToCurrentlyReading = async (req, res, next) => {
+  try {
+      const userId = req.user.id; 
+      const { bookId } = req.body;
+
+      const user = await userService.addToCurrentlyReading(userId, bookId);
+
+      res.status(200).json({ message: 'Book added to Currently Reading list', user: user });
+  } catch (error) {
+      next(error);
+  }
+};
+
+/**
+ * Controller function to add a book to the Want to Read shelf of the authenticated user.
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
+exports.addToWantToRead = async (req, res, next) => {
+  try {
+      const userId = req.user.id;
+      const { bookId } = req.body;
+
+      const user = await userService.addToWantToRead(userId, bookId);
+
+      res.status(200).json({ message: 'Book added to Want to Read shelf successfully', user: user  });
+  } catch (error) {
+      next(error);
+  }
+};
+
+
+/**
+ * Controller function to add a book to the Read shelf of the authenticated user.
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
+exports.addToRead = async (req, res, next) => {
+  try {
+        const userId = req.user.id;
+      const { bookId } = req.body;
+
+      await userService.addToRead(userId, bookId);
+
+      res.status(200).json({ message: 'Book added to Read shelf successfully' });
+  } catch (error) {
+      next(error);
+  }
+};
+
+
+/**
+ * Controller function to get all users.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @param {function} next - Express next function.  
+ */
+exports.getAllUsers = async (req, res, next) => {
+  try {
+      const users = await userService.getAllUsers();
+      res.status(200).json(users);
+  } catch (error) {
+      next(error);
   }
 };

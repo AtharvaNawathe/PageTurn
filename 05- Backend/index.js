@@ -3,6 +3,7 @@ const connectToDatabase = require('./config/db.config');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
 const bookRoutes = require('./routes/book.routes');
+const reviewRoutes = require('./routes/review.routes');
 const app = express();
 
 // Connect to MongoDB
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes); 
+app.use('/api/books', reviewRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

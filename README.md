@@ -60,12 +60,12 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 - [✅] Delete User: `DELETE /api/users/me`
 
 ## Book Management Endpoints:
-- [ ] Get All Books: `GET /api/books`
-- [ ] Get Book by ID: `GET /api/books/:id`
-- [ ] Search Books: `GET /api/books/search`
-- [ ] Add Book: `POST /api/books`
-- [ ] Update Book: `PUT /api/books/:id`
-- [ ] Delete Book: `DELETE /api/books/:id`
+- [✅] Get All Books: `GET /api/books`
+- [✅] Get Book by ID: `GET /api/books/:id`
+- [✅] Search Books: `GET /api/books/search`
+- [✅] Add Book: `POST /api/books`
+- [✅] Update Book: `PUT /api/books/:id`
+- [✅] Delete Book: `DELETE /api/books/:id`
 
 ## Review Management Endpoints:
 - [ ] Get Reviews for Book: `GET /api/books/:id/reviews`

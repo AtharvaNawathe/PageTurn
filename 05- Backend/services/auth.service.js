@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const User = require('../models/user.model');
-
+const errorMessages = require('../constants/errorMessages');
 // Load environment variables from .env file
 dotenv.config();
 
@@ -19,7 +19,7 @@ exports.authenticateUser = async (email, password) => {
 
     // Check if the user exists
     if (!user) {
-      throw new Error('User don\'t exist with this email');
+      throw new Error(errorMessages.USER_NOT_FOUND);
     }
 
     // Compare the provided password with the hashed password in the database
@@ -27,7 +27,7 @@ exports.authenticateUser = async (email, password) => {
 
     // If passwords don't match, throw an error
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      throw new Error(errorMessages.INCORRECT_PASSWORD);
     }
 
     // Generate JWT token
@@ -35,6 +35,14 @@ exports.authenticateUser = async (email, password) => {
 
     return token;
   } catch (error) {
-    throw error;
+    // Return specific error messages based on the error condition
+    switch (error.message) {
+      case errorMessages.USER_NOT_FOUND:
+        return errorMessages.USER_NOT_FOUND;
+      case errorMessages.INCORRECT_PASSWORD:
+        return errorMessages.INCORRECT_PASSWORD;
+      default:
+        return errorMessages.GENERIC_ERROR;
+    }
   }
 };

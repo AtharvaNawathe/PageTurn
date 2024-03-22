@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
-
+const errorMessages = require('../constants/errorMessages');
 /**
  * Service function to register a new user.
  * @param {string} username - The username of the user.
@@ -18,6 +18,18 @@ const User = require("../models/user.model");
  */
 exports.registerUser = async (username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin) => {
   try {
+    // Check if the email already exists
+    const existingUserWithEmail = await User.findOne({ email });
+    if (existingUserWithEmail) {
+      throw new Error(errorMessages.EMAIL_ALREADY_EXISTS);
+    }
+
+    // Check if the username already exists
+    const existingUserWithUsername = await User.findOne({ username });
+    if (existingUserWithUsername) {
+      throw new Error(errorMessages.USERNAME_ALREADY_EXISTS);
+    }
+
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -56,7 +68,14 @@ exports.getUserProfile = async (userId) => {
     }
     return user;
   } catch (error) {
-    throw error;
+    switch (error.message) {
+      case errorMessages.USER_NOT_FOUND:
+        return errorMessages.USER_NOT_FOUND;
+      case errorMessages.INCORRECT_PASSWORD:
+        return errorMessages.INCORRECT_PASSWORD;
+      default:
+        return errorMessages.GENERIC_ERROR;
+    }
   }
 };
 

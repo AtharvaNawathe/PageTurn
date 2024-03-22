@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-</head>
-<body>
-    <h1 class="heading">Page<span class="turn">Turn</span></h1>
-<div class="container">
-  <h2>Sign In </h2>
-  <form>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email">
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password">
-    </div>
-    <button type="submit">Sign In</button>
-  </form>
-</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="loginLayout">
+        <p class="heading3">Welcome back to,</p>
+        <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
+        <p class="heading2" style="margin-top: 8px">Sign In</p>
 
-</body>
+        <div class="emailInputLayout">
+          <span class="email"> Email: </span>
+          <input class="customInputField" type="email" />
+        </div>
+        <div class="passwordInputLayout">
+          <span class="password"> Password: </span>
+          <input class="customInputField" type="password" />
+        </div>
+        <div class="forgotPasswordLayout">
+          <span class="forgotPassword">Forgot Password ?</span>
+        </div>
+        <button class="signInBtn">Sign In</button>
+        <div class="signup">
+          <span style="margin-left: 25px; color: #5a471d">
+            New to Pageturn ?
+          </span>
+          <button class="signUpBtn">Sign Up</button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

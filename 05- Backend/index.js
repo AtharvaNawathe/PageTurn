@@ -5,13 +5,13 @@ const authRoutes = require('./routes/auth.routes');
 const bookRoutes = require('./routes/book.routes');
 const reviewRoutes = require('./routes/review.routes');
 const app = express();
-
+const cors = require('cors')
 // Connect to MongoDB
 connectToDatabase();
 
 // Middleware
 app.use(express.json());
-
+app.use(cors());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);

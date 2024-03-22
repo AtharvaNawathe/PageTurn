@@ -1,0 +1,26 @@
+<main>
+    <div class="loginLayout">
+      <p class="heading3">Welcome back to,</p>
+      <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
+      <p class="heading2" style="margin-top: 8px">Sign In</p>
+
+      <div class="emailInputLayout">
+        <span class="email"> Email: </span>
+        <input class="customInputField" type="email" #emailInput />
+      </div>
+      <div class="passwordInputLayout">
+        <span class="password"> Password: </span>
+        <input class="customInputField" type="password" #passwordInput/>
+      </div>
+      <div class="forgotPasswordLayout">
+        <span class="forgotPassword">Forgot Password ?</span>
+      </div>
+      <button class="signInBtn" (click)="signIn(emailInput.value, passwordInput.value)">Sign In</button>
+      <div class="signup">
+        <span style="margin-left: 25px; color: #5a471d">
+          New to Pageturn ?
+        </span>
+        <button class="signUpBtn">Sign Up</button>
+      </div>
+    </div>
+  </main>

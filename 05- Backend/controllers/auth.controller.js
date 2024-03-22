@@ -13,7 +13,7 @@ exports.loginUser = async (req, res, next) => {
 
     // Call the service function to authenticate the user
     const token = await authService.authenticateUser(email, password);
-
+    
     // Send the JWT token in the response
     res.status(200).json({ token });
   } catch (error) {

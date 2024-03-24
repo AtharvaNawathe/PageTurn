@@ -20,9 +20,9 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 - [✅] Implement error handling and validation for API requests.
 
 ## 3. Frontend Development
-- [ ] Set up Angular for the frontend application.
+- [✅] Set up Angular for the frontend application.
 - [ ] Design and develop user interfaces using Angular components, templates, and styles.
-- [ ] Implement user authentication forms (e.g., registration form, login form).
+- [✅] Implement user authentication forms (e.g., registration form, login form).
 - [ ] Create components for displaying user profiles, book details, reviews, and search results.
 - [ ] Handle user interactions and navigation between pages/routes.
 

@@ -25,7 +25,7 @@ router.post('/', authMiddleware.authenticateToken, adminMiddleware.authenticateA
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/', authMiddleware.authenticateToken, bookController.getAllBooks);
+router.get('/', bookController.getAllBooks);
 
 /**
  * Route to get a book by its ID.

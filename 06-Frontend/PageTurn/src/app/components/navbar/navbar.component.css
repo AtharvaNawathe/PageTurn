@@ -1,0 +1,67 @@
+.navbarLayout {
+  height: 55px;
+  width: auto;
+  background-color: #e9e5cd;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.heading1 {
+  padding: 15px;
+  font-size: 32px;
+  color: #726522;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar {
+  font-family: "Poppins", sans-serif;
+  padding-left: 30px;
+  background-color: #e9e5cd;
+  border-radius: 25px;
+  border: none;
+  width: 15rem;
+  height: 30px;
+}
+
+.searchBar:focus {
+  border: none;
+  outline: none;
+}
+
+.searchIcon {
+  margin-left: 10px;
+}
+
+.searchIcon i,
+.icon i {
+  font-size: 18px;
+  color: #726522;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .searchBar {
+    width: 8rem;
+    margin-right: 15px;
+  }
+  .heading1 {
+    font-size: 24px;
+  }
+}

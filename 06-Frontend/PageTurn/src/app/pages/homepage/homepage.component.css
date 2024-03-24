@@ -1,0 +1,118 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+.greetings{
+    margin-top: 5rem;
+    text-align: center;
+    height: 10rem;
+    width: auto;
+    background-color: #e9e5cd;
+    color: 	#75420e;
+}
+
+.heading1{
+    font-size: 30px;
+    color: 	#75420e;
+}
+
+.recommendation,.popular{
+   margin-top: 5rem;
+    height: 400px;
+    width: auto;
+    background-color: #b8a785;  
+}
+
+.heading2{
+    font-size: 24px;
+    color: 	#75420e;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.recommendedBooks{
+    height: 300px;
+    /* background-color: aqua; */
+    padding-top: 15px;
+    padding-left: 20px;
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of child elements */
+}
+
+.book{
+    height: 280px;
+    min-width: 180px;
+    /* background-color: red; */
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.recommendedBooks::-webkit-scrollbar {
+    width: 12px; 
+    display: none; 
+    /* Make it off when required bro */
+}
+
+
+.recommendedBooks::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 10px;
+}
+
+
+.recommendedBooks::-webkit-scrollbar-thumb {
+    background: #e9e5cd; 
+    border-radius: 10px;
+}
+
+.recommendedBooks::-webkit-scrollbar-thumb:hover {
+    background: #75420e;
+}
+
+
+.popular{
+margin-top: 6rem;
+}
+
+.bookDetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.bookImage{
+    margin-left: 15px;
+    margin-top: 5px;
+    height: 180px;
+    width: 150px;
+    background-color: aqua;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.bookTitle{
+    text-align: center;
+    margin-top: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bookRating{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.bookRating {
+    display: flex;
+    justify-content: center;
+}
+
+.bookRating i {
+    font-size: 20px; /* Adjust icon size as needed */
+    color: #ffa500; /* Adjust icon color as needed */
+}
+
+.half-star {
+    opacity: 0.5; /* Adjust opacity for half-star as needed */
+}

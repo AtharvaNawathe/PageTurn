@@ -1,11 +1,13 @@
 # 20240319_Capstone_PageTurn
-Pageturn: Your go-to destination for discovering, sharing, and discussing books. Explore diverse genres, read reviews. Dive into a world of literature and ignite your passion for reading with Pageturn.
+Pageturn: Your go-to destination for discovering, sharing, and discussing books. Explore diverse genres, and read reviews. Dive into a world of literature and ignite your passion for reading with Pageturn.
+
+![image](https://github.com/Sumit4482/20240319_Capstone_PageTurn/assets/61246873/939e6ed1-3e24-444f-867a-374c66180914)
 
 
 # PAGETURN Capstone Project Checklist
 
 ## 1. Design
-- [✅] Define basic functionality and features of the application.
+- [✅] Define the basic functionality and features of the application.
 - [✅] Sketch or wireframe user interface layout.
 - [✅] Plan database schema based on application requirements.
 
@@ -35,14 +37,14 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 - [ ] Conduct end-to-end testing to ensure proper interaction between frontend and backend components.
 
 ## 6. Deployment
-- [ ] Prepare application for deployment to a hosting platform (e.g., Heroku, Firebase).
+- [ ] Prepare the application for deployment to a hosting platform (e.g., Heroku, Firebase).
 - [ ] Set up deployment pipelines for automatic deployment from version control (e.g., GitHub, GitLab).
 - [ ] Deploy both backend and frontend applications to the hosting platform.
 
 ## 7. Learning and Improvement
 - [ ] Continuously learn and explore new concepts, techniques, and best practices in MEAN stack development.
 - [ ] Seek feedback from peers or mentors to improve code quality and project structure.
-- [ ] Reflect on development process and identify areas for improvement in future projects.
+- [ ] Reflect on the development process and identify areas for improvement in future projects.
 
 
 

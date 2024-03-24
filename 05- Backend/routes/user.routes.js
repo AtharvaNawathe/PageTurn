@@ -54,6 +54,8 @@ router.post('/register', userController.registerUser);
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
+
+
 router.get('/:username',authMiddleware.authenticateToken, userController.getUserByUsername);
 
 /**

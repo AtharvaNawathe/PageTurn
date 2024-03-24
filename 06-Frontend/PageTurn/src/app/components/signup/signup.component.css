@@ -1,0 +1,138 @@
+main {
+  background-color: #f9f6ea;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  cursor: default;
+}
+
+.loginLayout {
+  margin-top: 5%;
+  height: 80vh;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.heading3 {
+  font-size: 24px;
+  color: #726522;
+}
+
+.heading1 {
+  font-size: 40px;
+  color: #726522;
+}
+
+.heading2 {
+  font-size: 22px;
+  color: #726522;
+}
+
+p {
+  margin: 3px;
+}
+
+.emailInputLayout,
+.passwordInputLayout,
+.forgotPasswordLayout,
+.nameInputLayout,
+.usernameInputLayout {
+  height: 80px;
+  width: 450px;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  transition: all 0.4s ease-in-out;
+}
+
+.forgotPasswordLayout {
+  margin-top: 2px;
+  margin-left: 20px;
+  height: 20px;
+  cursor: default;
+}
+
+.customInputField {
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 25px;
+  background-color: #eee9ce;
+  padding-left: 40px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.customInputField:focus {
+  border: 1px solid #726522;
+  outline: none;
+}
+
+.signInBtn,
+.signUpBtn {
+  margin-top: 20px;
+  height: 50px;
+  width: 200px;
+  border-radius: 25px;
+  font-size: 16px;
+  box-shadow: none;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.signInBtn {
+  background-color: #5a471d;
+  color: #eee9ce;
+}
+
+.signInBtn:hover {
+  background-color: #726522;
+  cursor: pointer;
+}
+
+.signup {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signUpBtn {
+  background-color: #eee9ce;
+  color: #5a471d;
+}
+
+.signUpBtn:hover {
+  background-color: #d6cba6;
+  cursor: pointer;
+}
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.step.active {
+  opacity: 1;
+  background-color: #b8a785;
+}
+.signup {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}

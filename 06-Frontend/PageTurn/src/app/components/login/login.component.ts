@@ -2,20 +2,22 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { log } from 'console';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [HttpClientModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService,private http :HttpClient) { }
-  
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
   signIn(email: string, password: string): void {
-    console.log("hello from login compoenent ts");
-    
     this.authService.signIn(email, password).subscribe(
       (response) => {
         const token = response.token;
@@ -31,5 +33,7 @@ export class LoginComponent {
       }
     );
   }
-
+  signUp() {
+    this.router.navigate(['/signup']);
+  }
 }

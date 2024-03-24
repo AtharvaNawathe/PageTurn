@@ -1,1 +1,139 @@
-<p>signup works!</p>
+<main>
+  <form [formGroup]="signUpForm" (submit)="onSubmit()">
+    <div class="loginLayout">
+      <p class="heading3">Hey Stranger,</p>
+      <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
+      <p class="heading2" style="margin-top: 8px">Create New Account</p>
+
+      <!-- Step 1: Full Name and Email -->
+      <div *ngIf="currentStep === 0">
+        <div class="nameInputLayout">
+          <span class="fullName"> Full Name: </span>
+          <input
+            formControlName="fullName"
+            class="customInputField"
+            type="text"
+            placeholder="Enter your full name"
+          />
+        </div>
+        <div class="emailInputLayout">
+          <span class="email"> Email: </span>
+          <input
+            formControlName="email"
+            class="customInputField"
+            type="email"
+            placeholder="Enter your email address"
+          />
+        </div>
+      </div>
+
+      <!-- Step 2: Gender and Country -->
+      <div *ngIf="currentStep === 1">
+        <div class="genderInputLayout">
+          <span class="gender"> Gender: </span>
+          <select
+            formControlName="gender"
+            class="customInputField"
+            style="margin-left: 2.3rem"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="countryInputLayout">
+          <span class="country"> Country: </span>
+          <select
+            formControlName="country"
+            class="customInputField"
+            style="margin-left: 2rem"
+          >
+            <option *ngFor="let country of countries" [value]="country">
+              {{ country }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Step 3: Date of Birth -->
+      <div *ngIf="currentStep === 2">
+        <div class="dobInputLayout">
+          <span class="dob"> Date of Birth: </span>
+          <input
+            formControlName="dateOfBirth"
+            class="customInputField"
+            type="date"
+            style="margin-left: 2rem"
+          />
+        </div>
+      </div>
+
+      <!-- Step 4: Password -->
+      <div *ngIf="currentStep === 3">
+        <div class="usernameInputLayout">
+          <span class="username"> Username: </span>
+          <input
+            formControlName="username"
+            class="customInputField"
+            type="text"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div class="passwordInputLayout">
+          <span class="password"> Password: </span>
+          <input
+            formControlName="password"
+            class="customInputField"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div style="overflow: auto">
+        <div style="float: right">
+          <button
+            type="button"
+            (click)="nextPrev(-1)"
+            class="signUpBtn"
+            style="margin-right: 10px"
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            (click)="nextPrev(1)"
+            class="signInBtn"
+            *ngIf="currentStep !== 3"
+          >
+            Next
+          </button>
+          <button type="submit" *ngIf="currentStep === 3" class="signInBtn">
+            Submit
+          </button>
+        </div>
+      </div>
+
+      <!-- Step Indicators -->
+      <div style="text-align: center; margin-top: 40px">
+        <span
+          class="step"
+          *ngFor="let step of steps; let i = index"
+          [ngClass]="{ active: i === currentStep }"
+        ></span>
+      </div>
+
+      <!-- <div *ngIf="signUpForm?.get('fullName')?.invalid && signUpForm?.get('fullName')?.touched" class="error-msg">
+        Full Name is required.
+      </div>
+      <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched" class="error-msg">Please enter a valid email address.</div>
+      <div *ngIf="signUpForm.get('gender')?.invalid && signUpForm.get('gender')?.touched" class="error-msg">Gender is required.</div>
+      <div *ngIf="signUpForm.get('country')?.invalid && signUpForm.get('country')?.touched" class="error-msg">Country is required.</div>
+      <div *ngIf="signUpForm.get('dob')?.invalid && signUpForm.get('dob')?.touched" class="error-msg">Date of Birth is required.</div>
+      <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched" class="error-msg">Password is required (minimum 6 characters).</div> -->
+    </div>
+    <span style="margin-left: 25px; color: #5a471d"> Already a Member ? </span>
+    <button class="signUpBtn" style="margin-left: 2rem" (click)="signIn()">Sign In</button>
+  </form>
+</main>

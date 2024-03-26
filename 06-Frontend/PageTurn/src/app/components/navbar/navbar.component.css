@@ -13,6 +13,7 @@
   padding: 15px;
   font-size: 32px;
   color: #726522;
+  cursor: pointer;
 }
 
 .searchContainer {
@@ -54,6 +55,7 @@
 .icon {
   margin-right: 10px;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

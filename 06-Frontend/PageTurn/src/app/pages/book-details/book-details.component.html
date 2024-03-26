@@ -1,0 +1,39 @@
+<app-navbar> </app-navbar>
+<main>
+
+
+<div class="detailsLayout">
+    <div class="leftSide">
+        <div class="leftSideLayout">
+            <div  *ngIf="bookDetails" class="book">
+                <img [src]="bookDetails.coverImage" alt="Book Cover" width="150" height="200">
+            </div>
+            <div class="bookRatings">
+                <span class="bookTitle"  *ngIf="bookDetails" style="color:  #726522;">{{ bookDetails.title }}</span>
+                <div class="actualRatings" *ngIf="bookDetails">
+                    Rating :   <ng-container  *ngFor="let rating of generateRatingArray(bookDetails.averageRating)">
+                        <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book" [ngClass]="{'half-star': rating === 0.5}">
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rightSide">
+        <div class="title" *ngIf="bookDetails" >{{ bookDetails.title }}</div>
+        <div class="authors" *ngIf="bookDetails"> <span style="color: #726522;"> Authors : </span> {{ bookDetails.authors.join(', ') }}</div>
+        <div class="description" *ngIf="bookDetails">{{ bookDetails.description }}</div>
+        <div class="genre" *ngIf="bookDetails"><span style="color: #726522;"> Genre :</span> {{ bookDetails.genre }}</div>
+        <div class="language" *ngIf="bookDetails"><span style="color: #726522;"> Language : </span>{{ bookDetails.language }}</div>
+        <div class="isbn" *ngIf="bookDetails"> <span style="color: #726522;"> ISBN : </span> {{ bookDetails.isbn }}</div>
+        <div class="publisher" *ngIf="bookDetails"><span style="color: #726522;"> Publisher : </span> {{ bookDetails.publisher }}</div>
+        <div class="published-date" *ngIf="bookDetails"> <span style="color: #726522;"> First Published : </span> {{ bookDetails.publishedDate }}</div>
+        <div class="edition" *ngIf="bookDetails">  <span style="color: #726522;"> Edition : </span>{{ bookDetails.edition }}</div>
+    </div>
+</div>
+
+<div class="buttonsLayout">
+    <button class="addToCurrentlyReadingBtn" (click)="addToCurrentlyReading()">Add to Currently Reading</button>
+    <button class="addToWantToReadBtn" (click)="addToWantToRead()">Add to Want to Read</button>
+    <button class="addToReadBtn" (click)="addToRead()">Add to Read</button>
+</div>
+</main>

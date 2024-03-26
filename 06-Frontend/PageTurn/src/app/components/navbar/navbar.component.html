@@ -1,12 +1,14 @@
 <div class="navbarLayout">
-  <span class="heading1"><span style="color: #b8a785">Page</span>turn</span>
+  <!-- This should redirect to home -->
+  <span class="heading1" [routerLink]="['/home']"><span style="color: #b8a785">Page</span>turn</span>
   <div class="searchContainer">
     <span class="searchIcon"><i class="fa fa-search"></i></span>
     <input type="text" placeholder="Search Book, Author, ISBN" class="searchBar" />
   </div>
   <div class="iconsContainer" style="margin-right: 5rem">
-    <span class="icon"><i class="fa fa-home"></i></span>
+    <!-- This should redirect to home -->
+    <span class="icon"><i class="fa fa-home" [routerLink]="['/home']"></i></span>
     <span class="icon"><i class="fa fa-book"></i></span>
-    <span class="icon"> <i class="fa fa-user"></i> <span style="margin-left: 10px;">Sumit</span> </span>
+    <span class="icon"> <i class="fa fa-user"></i> <span style="margin-left: 10px;">{{ username }}</span> </span>
   </div>
 </div>

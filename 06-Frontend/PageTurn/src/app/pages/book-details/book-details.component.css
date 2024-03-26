@@ -1,0 +1,124 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+.detailsLayout{
+ height: 38rem;
+ width: auto;
+ /* background-color: aqua; */
+ display: flex;   
+}
+
+.leftSide{
+    height: 38rem;
+    width: 35rem;
+    /* background-color: blue; */
+    display: flex;
+ 
+    justify-content: center;
+}
+.leftSideLayout{
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book{
+    margin-left: 5.5rem;
+    height: 12rem;
+    width: 8rem;
+    /* background-color: red; */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.bookRatings{
+    margin-top: 3rem;
+    height: 10rem;
+    width: 20rem;
+    /* background-color: orange; */
+    text-align: center;
+}
+
+.actualRatings{
+    height: 40px;
+    margin-top: 10px;
+    width: auto;
+    /* background-color: chartreuse; */
+}
+
+.bookTitle{
+    
+    font-size: 24px;
+   
+}
+
+.rightSide{
+    margin-top: 3rem;
+    margin-right: 10rem;
+    /* background-color: aqua; */
+    flex: 1;
+    height: 30rem;
+    
+}   
+
+
+.title {
+    font-weight: 500;
+    font-size: 28px;
+  }
+  
+  .title {
+    margin-bottom: 10px;
+  }
+  
+  .authors {
+    margin-top: 10px;
+  }
+  
+  .description {
+    margin-top: 10px;
+  }
+  
+  .genre {
+    margin-top: 10px;
+  }
+  
+  .language {
+    margin-top: 10px;
+  }
+  
+  .isbn {
+    margin-top: 10px;
+  }
+  
+  .publisher {
+    margin-top: 10px;
+  }
+  
+  .published-date {
+    margin-top: 10px;
+  }
+  
+  .edition {
+    margin-top: 10px;
+  }
+  
+  .buttonsLayout{
+    margin-top: 5rem;
+    width: auto;
+    height: 200px;
+    background-color: #b8a785;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+
+  .addToCurrentlyReadingBtn , .addToWantToReadBtn , .addToReadBtn{
+    margin-top: 5rem;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #6a4a3a;
+    color: white;
+    border: none;
+  }

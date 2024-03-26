@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { BookService } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import { log } from 'console';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   standalone: true,
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css',
-  imports: [NavbarComponent,CommonModule ],
+  imports: [NavbarComponent,CommonModule,RouterModule ],
 })
 export class HomepageComponent {
     quote: string = '';
@@ -21,7 +22,7 @@ export class HomepageComponent {
       this.fetchQuote();
       this.bookService.getBooks().subscribe(
         (data) => {
-          this.books = data;
+          this.books = data;      
         },
         (error) => {
           console.error('Error fetching books:', error);

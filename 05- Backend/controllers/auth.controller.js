@@ -10,7 +10,7 @@ exports.loginUser = async (req, res, next) => {
   try {
     // Extract email and password from the request body
     const { email, password } = req.body;
-
+    console.log("Calling login backend");
     // Call the service function to authenticate the user
     const token = await authService.authenticateUser(email, password);
     

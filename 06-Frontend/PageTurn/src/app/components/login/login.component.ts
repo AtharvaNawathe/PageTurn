@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { log } from 'console';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [HttpClientModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   constructor(
@@ -20,10 +19,22 @@ export class LoginComponent {
   signIn(email: string, password: string): void {
     this.authService.signIn(email, password).subscribe(
       (response) => {
+        console.log("Calling from login components", response);
         const token = response.token;
         if (token) {
-          this.authService.storeToken(token);
-          console.log('Sign-in successful! Token stored.');
+          // Decode the JWT token
+          const decodedToken: any = jwtDecode(token);
+          // Check if the token is expired
+          const currentTime = Date.now() / 1000;
+        
+          if (decodedToken.exp && decodedToken.exp < currentTime) {
+            console.error('Token is expired.');
+          } else {
+            // Token is valid, store it and navigate to homepage
+            this.authService.storeToken(token);
+            console.log('Sign-in successful! Token stored.');
+            this.authService.navigateToHomepage();
+          }
         } else {
           console.error('Token not found in response.');
         }
@@ -33,7 +44,14 @@ export class LoginComponent {
       }
     );
   }
+
   signUp() {
+    // Navigate to signup page
     this.router.navigate(['/signup']);
+  }
+
+  signUpSuccess() {
+    // Navigate to homepage
+    this.router.navigate(['/home']);
   }
 }

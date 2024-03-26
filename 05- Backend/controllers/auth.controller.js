@@ -8,13 +8,8 @@ const authService = require('../services/auth.service');
  */
 exports.loginUser = async (req, res, next) => {
   try {
-    // Extract email and password from the request body
     const { email, password } = req.body;
-    console.log("Calling login backend");
-    // Call the service function to authenticate the user
     const token = await authService.authenticateUser(email, password);
-    
-    // Send the JWT token in the response
     res.status(200).json({ token });
   } catch (error) {
     next(error);

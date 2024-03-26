@@ -24,6 +24,7 @@ exports.createReviewForBook = async (bookId, userId, rating, content) => {
     if (!book) {
       throw new Error("Book not found");
     }
+
     // Check if the user has already written a review for the book
     const existingReview = await Review.findOne({ book: bookId, user: userId });
     if (existingReview) {
@@ -38,20 +39,25 @@ exports.createReviewForBook = async (bookId, userId, rating, content) => {
       content,
     });
 
-    // Save the review
+    // Save the new review
     await newReview.save();
-    
-    // Calculate the new average review rating for the book
-    const existingReviews = await Review.find({ book: bookId });
-    const totalRatings = existingReviews.reduce((sum, review) => sum + review.rating, 0);
-    const averageRating = totalRatings / existingReviews.length;
 
-    // Update the average review field in the Book model
-    book.averageReview = averageRating;
+    const existingReviews = await Review.find({ book: bookId });
+    let totalRating = 0;
+    existingReviews.forEach(review => {
+      totalRating += review.rating;
+    });
+    const averageRating = totalRating / existingReviews.length;
+
+    
+  
+    // Update the book's averageRating field
+    book.averageRating = averageRating;
     await book.save();
 
-    return newReview;
-  } catch (error) {
+    
+      return newReview;
+    } catch (error) {
     throw error;
   }
 };

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user.model');
 const userService = require('../services/user.service')
-
+const { isValidEmail } = require('../utils/validations');
 /**
  * Controller function to register a new user.
  * @param {object} req - The request object.
@@ -12,6 +12,38 @@ const userService = require('../services/user.service')
 exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin } = req.body;
+
+    
+    // Validate required fields
+    const missingFields = [];
+    if (!username) missingFields.push('Username');
+    if (!email) missingFields.push('Email');
+    if (!password) missingFields.push('Password');
+    if (!fullName) missingFields.push('Full Name');
+
+    if (missingFields.length > 0) {
+      return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
+    }
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email address' });
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password should be at least 6 characters long' });
+    }
+
+    // Validate date of birth format
+    if (dateOfBirth && !(dateOfBirth instanceof Date && !isNaN(dateOfBirth))) {
+      return res.status(400).json({ error: 'Please provide a valid date of birth' });
+    }
+
+    // Validate gender (if provided)
+    if (gender && !['male', 'female', 'other'].includes(gender)) {
+      return res.status(400).json({ error: 'Invalid gender value' });
+    }
 
     // If isAdmin is not provided, set its default value to false
     const isAdminValue = isAdmin !== undefined ? isAdmin : false;
@@ -177,5 +209,17 @@ exports.getAllUsers = async (req, res, next) => {
       res.status(200).json(users);
   } catch (error) {
       next(error);
+  }
+};
+
+
+exports.getUserById = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+      const user = await userService.getUserById(userId);
+      res.json(user);
+  } catch (error) {
+      console.error('Error fetching user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 };

@@ -36,4 +36,17 @@
     <button class="addToWantToReadBtn" (click)="addToWantToRead()">Add to Want to Read</button>
     <button class="addToReadBtn" (click)="addToRead()">Add to Read</button>
 </div>
+
+
+<div class="ratingLayout"> 
+    <div class="reviewsSection">
+        <h2>Reviews from Other Users</h2>
+        <div *ngFor="let review of reviews">
+          <div class="user">{{ review.user }}</div>
+          <div class="user">{{ review.username }}</div>
+          <div class="rating">{{ review.rating }}</div>
+          <div class="content">{{ review.content }}</div>
+        </div>
+      </div>
+</div>
 </main>

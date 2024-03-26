@@ -253,3 +253,13 @@ exports.getAllUsers = async () => {
     throw new Error("Error fetching all users: " + error.message);
   }
 };
+
+
+exports.getUserById = async (userId) => {
+  try {
+      const user = await User.findById(userId);
+      return user;
+  } catch (error) {
+      throw error;
+  }
+};

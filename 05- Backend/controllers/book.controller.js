@@ -9,6 +9,19 @@ const bookService = require('../services/book.service');
 exports.addBook = async (req, res, next) => {
   try {
     const { isbn, title, authors, genre, description, publishedDate, coverImage, language, publisher, edition } = req.body;
+        // Validate required fields
+        const missingFields = [];
+        if (!isbn) missingFields.push('ISBN');
+        if (!title) missingFields.push('Title');
+        if (!authors || authors.length === 0) missingFields.push('Authors');
+        if (!genre) missingFields.push('Genre');
+        if (!description) missingFields.push('Description');
+        if (!language) missingFields.push('Language');
+        if (!publisher) missingFields.push('Publisher');
+    
+        if (missingFields.length > 0) {
+          return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
+        }
     const bookData = {
       isbn,
       title,

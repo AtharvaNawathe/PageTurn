@@ -8,7 +8,8 @@
   <div class="iconsContainer" style="margin-right: 5rem">
     <!-- This should redirect to home -->
     <span class="icon"><i class="fa fa-home" [routerLink]="['/home']"></i></span>
-    <span class="icon"><i class="fa fa-book"></i></span>
-    <span class="icon"> <i class="fa fa-user"></i> <span style="margin-left: 10px;">{{ username }}</span> </span>
+    <span class="icon" [routerLink]="['/myshelf']"><i class="fa fa-book"></i></span>
+    <span class="icon" [routerLink]="['/profile']"> <i class="fa fa-user" ></i> <span style="margin-left: 10px;">{{ username }}</span> </span>
   </div>
+
 </div>

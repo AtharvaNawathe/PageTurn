@@ -13,6 +13,17 @@ exports.createReviewForBook = async (req, res, next) => {
     const { bookId } = req.params;
     const userId = req.user.id;
     const { rating, content } = req.body;
+
+    // Validate rating
+    if (!rating || isNaN(rating) || rating < 1 || rating > 5) {
+      return res.status(400).json({ error: "Invalid rating value" });
+    }
+
+    // Validate content
+    if (!content || typeof content !== "string" || content.trim() === "") {
+      return res.status(400).json({ error: "Review content is required" });
+    }
+
     const newReview = await reviewService.createReviewForBook(
       bookId,
       userId,
@@ -20,9 +31,7 @@ exports.createReviewForBook = async (req, res, next) => {
       content
     );
 
-    res
-      .status(201)
-      .json({ message: "Review added successfully", review: newReview });
+    res.status(201).json({ message: "Review added successfully", review: newReview });
   } catch (error) {
     next(error);
   }
@@ -113,16 +122,15 @@ exports.deleteReviewById = async (req, res, next) => {
  * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.likeReviewById = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const userId = req.user.id; // Extract user ID from token
-        await reviewService.likeReviewById(id, userId);
-        res.status(200).json({ message: 'Review liked successfully' });
-    } catch (error) {
-        next(error);
-    }
+  try {
+    const { id } = req.params;
+    const userId = req.user.id; // Extract user ID from token
+    await reviewService.likeReviewById(id, userId);
+    res.status(200).json({ message: "Review liked successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 /**
  * Controller function to unlike a review.
@@ -132,16 +140,16 @@ exports.likeReviewById = async (req, res, next) => {
  * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.unlikeReview = async (req, res, next) => {
-    try {
-        const reviewId = req.params.id;
-        const userId = req.user.id; // Extract user ID from authenticated user
+  try {
+    const reviewId = req.params.id;
+    const userId = req.user.id; // Extract user ID from authenticated user
 
-        await reviewService.unlikeReview(reviewId, userId);
+    await reviewService.unlikeReview(reviewId, userId);
 
-        res.status(200).json({ message: 'Review unliked successfully' });
-    } catch (error) {
-        next(error);
-    }
+    res.status(200).json({ message: "Review unliked successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -152,17 +160,15 @@ exports.unlikeReview = async (req, res, next) => {
  * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.addCommentToReview = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const { comment } = req.body;
-        const userId = req.user.id; // User ID extracted by auth middleware
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+    const userId = req.user.id; // User ID extracted by auth middleware
 
-        await reviewService.addCommentToReview(id, userId, comment);
+    await reviewService.addCommentToReview(id, userId, comment);
 
-        res.status(201).json({ message: 'Comment added successfully' });
-    } catch (error) {
-        next(error);
-    }
+    res.status(201).json({ message: "Comment added successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
-
-

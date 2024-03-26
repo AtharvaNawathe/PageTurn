@@ -17,6 +17,8 @@ export class BookDetailsComponent {
   bookId!: string;
   bookDetails: any;
   token!: string;
+  newReview: any = { rating: 1, content: '' };
+  reviews: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +35,7 @@ export class BookDetailsComponent {
       this.router.navigate(['/login']);
     } else {
       this.getBookDetails();
+      this.getReviews(); 
     }
   }
 
@@ -43,6 +46,20 @@ export class BookDetailsComponent {
       },
       (error) => {
         console.error('Error fetching book details:', error);
+      }
+    );
+  }
+
+  getReviews(): void {
+    this.bookService.getBookReviews(this.bookId).subscribe(
+      (response) => {
+        this.reviews = response;
+        // Handle reviews response
+        console.log('Reviews:', this.reviews);
+      },
+      (error) => {
+        console.error('Error fetching reviews:', error);
+        // Handle error
       }
     );
   }
@@ -95,4 +112,6 @@ export class BookDetailsComponent {
       }
     );
   }
+
+  
 }

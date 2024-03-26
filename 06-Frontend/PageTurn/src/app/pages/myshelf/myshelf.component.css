@@ -1,0 +1,38 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+.greetings {
+  margin-top: 5rem;
+  text-align: center;
+  height: 10rem;
+  width: auto;
+  background-color: #e9e5cd;
+  color: #75420e;
+}
+
+.heading1 {
+  font-size: 30px;
+  color: #75420e;
+}
+
+.switch-toggle {
+  width: 40em;
+}
+
+.switch-toggle label:not(.disabled) {
+  cursor: pointer;
+}
+
+.toggleLayout {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+.tableHeading{
+    margin-top: 25px;
+    height: 40px;
+    width: auto;
+    background-color: purple;
+}

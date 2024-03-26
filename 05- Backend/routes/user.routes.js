@@ -115,4 +115,6 @@ router.post('/read', authMiddleware.authenticateToken, userController.addToRead)
 router.get('/all/users',authMiddleware.authenticateToken, userController.getAllUsers);
 
 
+
+router.get('/getUserById/:userId', userController.getUserById);
 module.exports = router;

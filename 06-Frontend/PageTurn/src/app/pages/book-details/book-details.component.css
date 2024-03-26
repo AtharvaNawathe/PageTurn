@@ -122,3 +122,9 @@
     color: white;
     border: none;
   }
+
+  .ratingLayout{
+    width: auto;
+    background-color: blue;
+    height: 400px;
+  }

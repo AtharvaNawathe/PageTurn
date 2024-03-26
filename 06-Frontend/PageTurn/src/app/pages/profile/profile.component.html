@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<div class="profileCard">
+  <div class="leftSide">
+    <img
+      class="circular--square"
+      src="../../../assets/user.jpg"
+      width="350"
+      height="350"
+    />
+  </div>
+
+  <div class="rightSide" *ngIf="userData">
+    <div class="fullName">{{ userData.fullName }}</div>
+    <div class="userName">Username: {{ userData.username }}</div>
+    <div class="email">Email: {{ userData.email }}</div>
+    <div class="dob">DOB: {{ userData.dob }}</div>
+    <div class="gender">Gender: {{ userData.gender }}</div>
+    <div class="country">Country: {{ userData.country }}</div>
+    <div>Your Favourite Genre: {{ userData.interests }}</div>
+    <div class="createdAt">Joined: {{ userData.createdAt }}</div>
+</div>
+
+</div>

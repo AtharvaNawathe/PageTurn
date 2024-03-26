@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { UserService } from '../../services/register.service';
-import countries from '../../Constants/countries';
+import countries from '../../constants/countries';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-up',

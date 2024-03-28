@@ -13,7 +13,8 @@ exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin } = req.body;
 
-    
+    console.log("body from backend register",req.body);
+    console.log("interests in backend :",interests);
     // Validate required fields
     const missingFields = [];
     if (!username) missingFields.push('Username');
@@ -35,10 +36,7 @@ exports.registerUser = async (req, res, next) => {
       return res.status(400).json({ error: 'Password should be at least 6 characters long' });
     }
 
-    // Validate date of birth format
-    if (dateOfBirth && !(dateOfBirth instanceof Date && !isNaN(dateOfBirth))) {
-      return res.status(400).json({ error: 'Please provide a valid date of birth' });
-    }
+
 
     // Validate gender (if provided)
     if (gender && !['male', 'female', 'other'].includes(gender)) {

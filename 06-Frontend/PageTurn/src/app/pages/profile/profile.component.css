@@ -17,7 +17,7 @@
 }
 .rightSide {
   flex: 2;
-  background-color: rgb(60, 60, 96);
+  /* background-color: rgb(60, 60, 96); */
 }
 
 .circular--square {

@@ -36,8 +36,8 @@
             class="customInputField"
             style="margin-left: 2.3rem"
           >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
             <option value="Other">Other</option>
           </select>
         </div>
@@ -55,18 +55,27 @@
         </div>
       </div>
 
-      <!-- Step 3: Date of Birth -->
-      <div *ngIf="currentStep === 2">
-        <div class="dobInputLayout">
-          <span class="dob"> Date of Birth: </span>
-          <input
-            formControlName="dateOfBirth"
-            class="customInputField"
-            type="date"
-            style="margin-left: 2rem"
-          />
-        </div>
-      </div>
+<!-- Step 3: Date of Birth and Interests -->
+<div *ngIf="currentStep === 2">
+  <div class="dobInputLayout">
+    <span class="dob"> Date of Birth: </span>
+    <input
+      formControlName="dateOfBirth"
+      class="customInputField"
+      type="date"
+      style="margin-left: 2rem"
+    />
+  </div>
+  <span class="dob">Select Interests : </span>
+  <mat-form-field appearance="fill" color="primary">
+    <mat-label>Select Interests</mat-label>
+    <mat-select multiple formControlName="interests">
+      <mat-option *ngFor="let interest of interests" [value]="interest">{{ interest }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
 
       <!-- Step 4: Password -->
       <div *ngIf="currentStep === 3">

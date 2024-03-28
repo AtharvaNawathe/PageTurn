@@ -60,10 +60,9 @@
 
 @media screen and (max-width: 768px) {
   .searchBar {
-    width: 8rem;
-    margin-right: 15px;
+    display: none; /* Hide the search bar on smaller screens */
   }
-  .heading1 {
-    font-size: 24px;
+  .username {
+    display: none; /* Hide the username on smaller screens */
   }
 }

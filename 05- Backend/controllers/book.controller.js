@@ -1,5 +1,5 @@
 const bookService = require('../services/book.service');
-
+const Book = require('../models/book.model');
 /**
  * Controller function to add a new book.
  * @param {object} req - The request object.
@@ -132,3 +132,5 @@ exports.searchBooks = async (req, res, next) => {
     next(error);
   }
 };
+
+

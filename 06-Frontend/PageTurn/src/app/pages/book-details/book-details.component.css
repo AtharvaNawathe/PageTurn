@@ -121,10 +121,79 @@
     background-color: #6a4a3a;
     color: white;
     border: none;
+    cursor: pointer;
   }
 
   .ratingLayout{
     width: auto;
-    background-color: blue;
+    /* background-color: rgb(77, 77, 110); */
     height: 400px;
   }
+
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.rating > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-input {
+    margin-bottom: 10px; /* Adjust as needed */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.review-textarea {
+    margin-bottom: 10px; /* Adjust as needed */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Set minimum height */
+}
+
+.post-button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post-button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.reviewsSection {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.review-item {
+    margin-bottom: 20px; /* Adjust as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.review-item .user {
+    font-weight: bold;
+}
+
+.review-item .rating {
+    margin-top: 5px;
+}
+
+.review-item .content {
+    margin-top: 10px;
+}
+
+  

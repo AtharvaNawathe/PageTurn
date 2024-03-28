@@ -10,18 +10,25 @@ import {
 import { UserService } from '../../services/register.service';
 import countries from '../../constants/countries';
 import { Router } from '@angular/router';
+import tags from '../../constants/tags';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,MatSelectModule,
+    MatIconModule],
   standalone: true,
 })
 export class SignUpComponent {
   countries: string[] = countries;
   signUpForm: FormGroup;
+  interests: string[] = tags;
   currentStep: number = 0;
   steps: number[] = [0, 1, 2, 3];
+  
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -35,9 +42,11 @@ export class SignUpComponent {
       country: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      interests: [[]] 
     });
   }
 
+  
   nextPrev(step: number) {
     this.currentStep += step;
     if (this.currentStep < 0) {
@@ -50,6 +59,8 @@ export class SignUpComponent {
   onSubmit() {
     this.userService.registerUser(this.signUpForm.value).subscribe(
       (response) => {
+        console.log("Final DATA:",this.signUpForm.value);
+        
         console.log('User registered successfully:', response);
         this.signUpForm.reset();
         this.currentStep = 0;

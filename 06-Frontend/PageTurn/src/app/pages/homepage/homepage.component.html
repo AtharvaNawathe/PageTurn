@@ -37,8 +37,8 @@
   <div class="popular">
     <div class="heading2">Popular</div>
     <div class="recommendedBooks">
-        <div *ngFor="let book of books" class="book">
-            <a [routerLink]="['/book-details', book._id]">
+        <div *ngFor="let book of allBooks" class="book">
+            <a [routerLink]="['/books', book._id]">
               <div class="bookImage">
                   <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
               </div>

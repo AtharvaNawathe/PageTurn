@@ -136,3 +136,25 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+/* Set border radius for mat-select panel */
+.mat-select-panel {
+  border-radius: 15px;
+}
+
+/* Set background color for mat-select */
+.mat-select-value {
+  background-color: #EEE9CE !important; /* Important to override default styles */
+}
+
+/* Set styles when mat-select is focused */
+.mat-select-trigger:focus {
+  background-color: #EEE9CE !important; /* Change background color when focused */
+  border-radius: 15px; /* Maintain border radius */
+}
+
+/* Set styles when mat-select is active */
+.mat-select-trigger:active {
+  background-color: #EEE9CE !important; /* Change background color when active */
+  border-radius: 15px; /* Maintain border radius */
+}

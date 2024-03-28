@@ -19,16 +19,19 @@
         </div>
     </div>
     <div class="rightSide">
-        <div class="title" *ngIf="bookDetails" >{{ bookDetails.title }}</div>
-        <div class="authors" *ngIf="bookDetails"> <span style="color: #726522;"> Authors : </span> {{ bookDetails.authors.join(', ') }}</div>
-        <div class="description" *ngIf="bookDetails">{{ bookDetails.description }}</div>
-        <div class="genre" *ngIf="bookDetails"><span style="color: #726522;"> Genre :</span> {{ bookDetails.genre }}</div>
-        <div class="language" *ngIf="bookDetails"><span style="color: #726522;"> Language : </span>{{ bookDetails.language }}</div>
-        <div class="isbn" *ngIf="bookDetails"> <span style="color: #726522;"> ISBN : </span> {{ bookDetails.isbn }}</div>
-        <div class="publisher" *ngIf="bookDetails"><span style="color: #726522;"> Publisher : </span> {{ bookDetails.publisher }}</div>
-        <div class="published-date" *ngIf="bookDetails"> <span style="color: #726522;"> First Published : </span> {{ bookDetails.publishedDate }}</div>
-        <div class="edition" *ngIf="bookDetails">  <span style="color: #726522;"> Edition : </span>{{ bookDetails.edition }}</div>
+        <div class="details-container" *ngIf="bookDetails">
+            <div class="title">{{ bookDetails.title }}</div>
+            <div class="authors"><span style="color: #726522;"> Authors: </span>{{ bookDetails.authors.join(', ') }}</div>
+            <div class="description">{{ bookDetails.description }}</div>
+            <div class="genre"><span style="color: #726522;"> Genre: </span>{{ bookDetails.genre }}</div>
+            <div class="language"><span style="color: #726522;"> Language: </span>{{ bookDetails.language }}</div>
+            <div class="isbn"><span style="color: #726522;"> ISBN: </span>{{ bookDetails.isbn }}</div>
+            <div class="publisher"><span style="color: #726522;"> Publisher: </span>{{ bookDetails.publisher }}</div>
+            <div class="published-date"><span style="color: #726522;"> First Published: </span>{{ bookDetails.publishedDate }}</div>
+            <div class="edition"><span style="color: #726522;"> Edition: </span>{{ bookDetails.edition }}</div>
+        </div>
     </div>
+    
 </div>
 
 <div class="buttonsLayout">
@@ -36,17 +39,24 @@
     <button class="addToWantToReadBtn" (click)="addToWantToRead()">Add to Want to Read</button>
     <button class="addToReadBtn" (click)="addToRead()">Add to Read</button>
 </div>
-
+<div class="rating">
+    <div>
+        <input type="number" min="1" max="5" #ratingInput class="rating-input" placeholder="Rating">
+        <textarea #reviewInput class="review-textarea" placeholder="Write your review here"></textarea>
+        <button class="post-button" (click)="postReview(bookId, ratingInput.value, reviewInput.value)">Post</button>
+    </div>
+</div>
 
 <div class="ratingLayout"> 
     <div class="reviewsSection">
         <h2>Reviews from Other Users</h2>
-        <div *ngFor="let review of reviews">
-          <div class="user">{{ review.user }}</div>
-          <div class="user">{{ review.username }}</div>
-          <div class="rating">{{ review.rating }}</div>
-          <div class="content">{{ review.content }}</div>
+        <div *ngFor="let review of reviews" class="review-item">
+            <div class="user">{{ review.user }}</div>
+            <div class="user">{{ review.username }}</div>
+            <div class="rating">{{ review.rating }}</div>
+            <div class="content">{{ review.content }}</div>
         </div>
-      </div>
+    </div>
 </div>
+
 </main>

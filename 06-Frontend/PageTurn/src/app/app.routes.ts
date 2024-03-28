@@ -5,6 +5,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyshelfComponent } from './pages/myshelf/myshelf.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -12,5 +13,7 @@ export const routes: Routes = [
     {path: 'home', component:HomepageComponent},
     {path: 'books/:id', component:BookDetailsComponent},
     {path:'myshelf',component:MyshelfComponent},
-    {path:'profile',component:ProfileComponent}
+    {path:'profile',component:ProfileComponent},{
+        path:'search',component:SearchComponent
+    }
 ];

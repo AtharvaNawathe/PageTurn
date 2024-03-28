@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/register.service';
 import { AuthService } from '../../services/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
   username: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private http: HttpClient, private router: Router ) { }
 
   ngOnInit(): void {
     const token = this.authService.getToken();
@@ -28,4 +29,25 @@ export class NavbarComponent {
       );
     }
   }
+
+
+
+  onEnterPressed(searchValue: string) {
+    console.log("HELLo");
+    
+    if (searchValue.trim() !== '') {
+      const apiUrl = 'http://localhost:3000/api/books/search';
+      const params = { q: searchValue };
+      
+      this.http.get(apiUrl, { params }).subscribe((response: any) => {
+        console.log('Search Result:', response);
+        this.router.navigate(['/search'], { state: { searchData: response } });
+      }, (error) => {
+        console.error('Error occurred while searching:', error);
+      });
+    } else {
+      console.log('Please enter a search term.');
+    }
+  }
+
 }

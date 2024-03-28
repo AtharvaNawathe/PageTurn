@@ -1,28 +1,29 @@
 <app-navbar> </app-navbar>
 <main>
-    <div class="greetings">
-        <span class="heading1"> Your Book Shelf </span>
-        <br />
-        Track your favourite books here.
-        <br />
+  <div class="greetings">
+    <span class="heading1"> Your Book Shelf </span>
+    <br />
+    Track your favourite books here.
+    <br />
+  </div>
+  <div *ngIf="currentlyReadingBooks.length > 0">
+    <h2>Currently Reading</h2>
+    <div *ngFor="let book of currentlyReadingBooks">
+      <div>{{book.title}}</div>
     </div>
-    <div class="toggleLayout">
-        <link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet" />
-
-        <div class="switch-toggle switch-3 switch-candy">
-            <input id="on" name="state-d" type="radio" checked="" />
-            <label for="on" onclick="">Currently Reading</label>
-
-            <input id="na" name="state-d" type="radio" checked="checked" />
-            <label for="na" onclick=""> Want to Read</label>
-
-            <input id="off" name="state-d" type="radio" />
-            <label for="off" onclick="">Read</label>
-
-            <a></a>
-        </div>
+  </div>
+  <div *ngIf="wantToReadBooks.length > 0">
+    <h2>Want to Read</h2>
+    <div *ngFor="let book of wantToReadBooks">
+      <div>{{book.title}}</div>
     </div>
-    <div class="tableHeading">
-
+  </div>
+  <div *ngIf="readBooks.length > 0">
+    <h2>Read</h2>
+    <div *ngFor="let book of readBooks">
+      <div>{{book.title}}</div>
     </div>
+  </div>
+
+  
 </main>

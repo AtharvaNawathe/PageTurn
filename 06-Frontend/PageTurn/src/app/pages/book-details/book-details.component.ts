@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/register.service';
+import { ReviewService } from '../../services/review.service';
 
 @Component({
   selector: 'app-book-details',
@@ -25,7 +26,8 @@ export class BookDetailsComponent {
     private router: Router,
     private bookService: BookService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +39,13 @@ export class BookDetailsComponent {
       this.getBookDetails();
       this.getReviews(); 
     }
+
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0) // for example
+  });
   }
 
   getBookDetails(): void {
@@ -113,5 +122,20 @@ export class BookDetailsComponent {
     );
   }
 
-  
+
+
+
+  postReview(bookId: string, rating: string, content: string) {
+    this.reviewService.postReview(bookId, rating, content)
+      .subscribe(
+        () => {
+          console.log('Review posted successfully');
+          // Optionally, you can handle success response here
+        },
+        (error) => {
+          console.error('Error posting review:', error);
+          // Optionally, you can handle error response here
+        }
+      );
+  }
 }

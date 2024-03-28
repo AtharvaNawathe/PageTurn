@@ -1,124 +1,158 @@
-main{
-    background-color: #F9F6EA;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    cursor: default;
+main {
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  cursor: default;
+}
+
+.loginLayout {
+  margin-top: 5%;
+  /* background-color: pink; */
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.heading3 {
+  font-size: 1.5rem;
+  color: #726522;
+}
+
+.heading1 {
+  font-size: 2.5rem;
+  color: #726522;
+}
+
+.heading2 {
+  font-size: 1.375rem;
+  color: #726522;
+}
+
+p {
+  margin: 0.1875rem 0;
+}
+
+.emailInputLayout,.passwordInputLayout,.forgotPasswordLayout,.errorLayout{
+
+  height: 5rem;
+
+  width: 50%;
+  
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+}
+.customInputField{
+  height: 5rem;
+  margin-top: 10px;
+  border-radius: 25px;
+  background-color: #EEE9CE;
+  padding-left:40px ;
+  border: none;
+  transition: border 0.3s ease;
+  border: 1px solid #726522;
+ }
+ 
+ .customInputField:focus {
+   border: 1px solid #726522;
+   outline: none;
+ }
+ 
+ .email,.password{
+   color: #726522;
+   cursor: default;
+ }
+
+ .forgotPasswordLayout,.errorLayout{
+  display: flex;
+  height: auto;
+  align-items: end;
+  /* background-color: red; */
+  cursor: default;
+}
+
+ .forgotPassword{
+  color: #726522;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.signInBtn,.signUpBtn {
+  margin-top: 10px;
+  height: 3.5rem; 
+  width: 20%; 
+  border-radius: 2.5rem; 
+  background-color: #5A471D;
+  color: #EEE9CE;
+  font-size: 100%; 
+  border: none;
+}
+
+.signInBtn:hover,.signUpBtn:hover{
+  cursor: pointer;
+}
+.signin,.signup{
+  width: 20%;
+  margin-top: 5px;
+}
+.newToPageTurn{
+  margin-top: 15px;
+  
+}
+.forgotPasswordLayout{
+  margin-top: 3px;
+}
+.errorLayout{
+  margin-top: 0px;
+}
+
+@media only screen and (max-width: 320px) {
+  .loginLayout {
+    width: 90%;
   }
-  
-  .loginLayout{
-    margin-top: 5%;
-    /* background-color: white;  */
-    height: 80vh;
-    width: 30rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
+
+  .signInBtn,.signUpBtn {
+    width: 90%; 
   }
-  
-  .heading3{
-    font-size: 24px;
-    
-    color: #726522;
+}
+
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+  .loginLayout {
+    width: 100%;
   }
-  
-  .heading1{
-    font-size: 40px;
-    color: #726522;
+
+  .signInBtn ,.signUpBtn{
+    width: 90%; 
   }
-  
-  .heading2{
-    font-size: 22px;
-    color: #726522;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .loginLayout {
+    width: 90%;
   }
-  
-  p{
-   margin: 3px;
+
+  .signInBtn ,.signUpBtn{
+    width: 90%; 
   }
-  
-  .emailInputLayout,.passwordInputLayout,.forgotPasswordLayout{
-    height: 80px;
-    width: 450px;
-    /* background-color: lavender; */
-    display: flex;
-    margin-top: 20px;
-    flex-direction: column;
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+  .loginLayout {
+    width: 70%;
   }
-  .forgotPasswordLayout{
-    margin-top:2px;
-    margin-left: 20px;
-    height: 20px;
-    cursor: default;
+
+  .signInBtn ,.signUpBtn{
+    width: 90%; 
   }
-  
-  
-  .customInputField{
-   height: 40px;
-   margin-top: 10px;
-   border-radius: 25px;
-   background-color: #EEE9CE;
-   padding-left:40px ;
-    border: none;
-    transition: border 0.3s ease;
+}
+
+@media only screen and (min-width: 1441px) {
+  .loginLayout {
+    width: 50%;
   }
-  
-  .customInputField:focus {
-    border: 1px solid #726522;
-    outline: none;
+
+  .signInBtn,.signUpBtn {
+    width: 90%; 
   }
-  
-  .email,.password{
-    color: #726522;
-    cursor: default;
-  }
-  
-  .forgotPassword{
-    margin-top: 0px;
-    color: #726522;
-    font-size: 13px;
-    cursor: pointer;
-  }
-  
-  .signInBtn{
-    margin-top: 20px;
-    height: 50px;
-    width: 200px;
-    border-radius: 25px;
-    background-color: #5A471D;
-    color: #EEE9CE;
-    font-size: 16px;
-    box-shadow: none;
-    border: none;
-  }
-  
-  .signInBtn:hover{
-    cursor: pointer;
-  }
-  
-  .signup{
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-   
-  }
-  
-  .signUpBtn{
-    margin-top: 10px;
-    height: 50px;
-    width: 200px;
-    border-radius: 25px;
-    background-color: #EEE9CE;
-    color: #5A471D;
-    font-size: 16px;
-    box-shadow: none;
-    border: none;
-  }
-  
-  
-  .signUpBtn:hover{
-    cursor: pointer;
-  }
-  
+}

@@ -3,13 +3,19 @@ import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  standalone:true,
+  imports: [CommonModule,FormsModule],
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+email: any;
+password: any;
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -54,4 +60,5 @@ export class LoginComponent {
     // Navigate to homepage
     this.router.navigate(['/home']);
   }
+ 
 }

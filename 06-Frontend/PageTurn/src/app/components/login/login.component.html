@@ -1,26 +1,48 @@
 <main>
-    <div class="loginLayout">
-      <p class="heading3">Welcome back to,</p>
-      <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
-      <p class="heading2" style="margin-top: 8px">Sign In</p>
+  <div class="loginLayout">
+    <p class="heading3">Welcome back to,</p>
+    <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
+    <p class="heading2" style="margin-top: 8px">Sign In</p>
 
-      <div class="emailInputLayout">
-        <span class="email"> Email: </span>
-        <input class="customInputField" type="email" #emailInput />
-      </div>
-      <div class="passwordInputLayout">
-        <span class="password"> Password: </span>
-        <input class="customInputField" type="password" #passwordInput/>
-      </div>
-      <div class="forgotPasswordLayout">
-        <span class="forgotPassword">Forgot Password ?</span>
-      </div>
-      <button class="signInBtn" (click)="signIn(emailInput.value, passwordInput.value)">Sign In</button>
-      <div class="signup">
-        <span style="margin-left: 25px; color: #5a471d">
-          New to Pageturn ?
-        </span>
-        <button class="signUpBtn" (click)="signUp()">Sign Up</button>
+    <div class="emailInputLayout">
+      <span class="email"> Email: </span>
+      <input class="customInputField" type="email" [(ngModel)]="email" name="email" #emailInput="ngModel"
+        autocomplete="off" required email />
+    </div>
+    <div class="errorLayout">
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error">
+        <span *ngIf="emailInput.errors?.['email']" class="forgotPassword">Invalid email format</span>
+        <span *ngIf="emailInput.errors?.['required']" class="forgotPassword">Email is required</span>
       </div>
     </div>
-  </main>
+
+    <div class="passwordInputLayout">
+      <span class="password"> Password: </span>
+      <input class="customInputField" type="password" [(ngModel)]="password" name="password" #passwordInput="ngModel"
+        required  minlength="6"/>
+    </div>
+    <div class="errorLayout">
+      <div *ngIf="passwordInput.invalid &&(passwordInput.dirty || passwordInput.touched)" class="forgotPassword">
+        <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+        <span *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters long</span>
+
+      </div>
+    </div>
+
+    <div class="forgotPasswordLayout">
+      <span class="forgotPassword">Forgot Password ?</span>
+    </div>
+    <div class="signin">
+      <button class="signInBtn" (click)="signIn(emailInput.value, passwordInput.value)"
+        [disabled]="!emailInput.valid || !passwordInput.valid">
+        Sign In
+      </button>
+    </div>
+    <div class="newToPageTurn">
+      <span style="color: #5a471d">New to Pageturn ? </span>
+    </div>
+    <div class="signup">
+      <button class="signUpBtn" (click)="signUp()">Sign Up</button>
+    </div>
+  </div>
+</main>

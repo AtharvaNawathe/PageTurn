@@ -1,62 +1,152 @@
 <app-navbar> </app-navbar>
 <main>
-
-    
-<div class="detailsLayout">
+  <div class="detailsLayout">
     <div class="leftSide">
-        <div class="leftSideLayout">
-            <div  *ngIf="bookDetails" class="book">
-                <img [src]="bookDetails.coverImage" alt="Book Cover" width="150" height="200">
-            </div>
-            <div class="bookRatings">
-                <span class="bookTitle"  *ngIf="bookDetails" style="color:  #726522;">{{ bookDetails.title }}</span>
-                <div class="actualRatings" *ngIf="bookDetails">
-                    Rating :   <ng-container  *ngFor="let rating of generateRatingArray(bookDetails.averageRating)">
-                        <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book" [ngClass]="{'half-star': rating === 0.5}">
-                    </ng-container>
-                </div>
-            </div>
+      <div class="leftSideLayout">
+        <div *ngIf="bookDetails" class="book">
+          <img
+            [src]="bookDetails.coverImage"
+            alt="Book Cover"
+            width="150"
+            height="200"
+          />
         </div>
+        <div class="bookRatings">
+          <span class="bookTitle" *ngIf="bookDetails" style="color: #726522">{{
+            bookDetails.title
+          }}</span>
+          <div class="actualRatings" *ngIf="bookDetails">
+            Rating :
+            <ng-container
+              *ngFor="
+                let rating of generateRatingArray(bookDetails.averageRating)
+              "
+            >
+              <img
+                width="16"
+                height="16"
+                src="https://img.icons8.com/office/16/book.png"
+                alt="book"
+                [ngClass]="{ 'half-star': rating === 0.5 }"
+              />
+            </ng-container>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="rightSide">
-        <div class="details-container" *ngIf="bookDetails">
-            <div class="title">{{ bookDetails.title }}</div>
-            <div class="authors"><span style="color: #726522;"> Authors: </span>{{ bookDetails.authors.join(', ') }}</div>
-            <div class="description">{{ bookDetails.description }}</div>
-            <div class="genre"><span style="color: #726522;"> Genre: </span>{{ bookDetails.genre }}</div>
-            <div class="language"><span style="color: #726522;"> Language: </span>{{ bookDetails.language }}</div>
-            <div class="isbn"><span style="color: #726522;"> ISBN: </span>{{ bookDetails.isbn }}</div>
-            <div class="publisher"><span style="color: #726522;"> Publisher: </span>{{ bookDetails.publisher }}</div>
-            <div class="published-date"><span style="color: #726522;"> First Published: </span>{{ bookDetails.publishedDate }}</div>
-            <div class="edition"><span style="color: #726522;"> Edition: </span>{{ bookDetails.edition }}</div>
+      <div class="details-container" *ngIf="bookDetails">
+        <div class="title">{{ bookDetails.title }}</div>
+        <div class="authors">
+          <span style="color: #726522"> Authors: </span
+          >{{ bookDetails.authors.join(", ") }}
         </div>
+        <div class="description">{{ bookDetails.description }}</div>
+        <div class="genre">
+          <span style="color: #726522"> Genre: </span>{{ bookDetails.genre }}
+        </div>
+        <div class="language">
+          <span style="color: #726522"> Language: </span
+          >{{ bookDetails.language }}
+        </div>
+        <div class="isbn">
+          <span style="color: #726522"> ISBN: </span>{{ bookDetails.isbn }}
+        </div>
+        <div class="publisher">
+          <span style="color: #726522"> Publisher: </span
+          >{{ bookDetails.publisher }}
+        </div>
+        <div class="published-date">
+          <span style="color: #726522"> First Published: </span
+          >{{ bookDetails.publishedDate }}
+        </div>
+        <div class="edition">
+          <span style="color: #726522"> Edition: </span
+          >{{ bookDetails.edition }}
+        </div>
+      </div>
     </div>
-    
-</div>
+  </div>
 
-<div class="buttonsLayout">
-    <button class="addToCurrentlyReadingBtn" (click)="addToCurrentlyReading()">Add to Currently Reading</button>
-    <button class="addToWantToReadBtn" (click)="addToWantToRead()">Add to Want to Read</button>
+  <div class="buttonsLayout">
+    <button class="addToCurrentlyReadingBtn" (click)="addToCurrentlyReading()">
+      Add to Currently Reading
+    </button>
+    <button class="addToWantToReadBtn" (click)="addToWantToRead()">
+      Add to Want to Read
+    </button>
     <button class="addToReadBtn" (click)="addToRead()">Add to Read</button>
-</div>
-<div class="rating">
-    <div>
-        <input type="number" min="1" max="5" #ratingInput class="rating-input" placeholder="Rating">
-        <textarea #reviewInput class="review-textarea" placeholder="Write your review here"></textarea>
-        <button class="post-button" (click)="postReview(bookId, ratingInput.value, reviewInput.value)">Post</button>
-    </div>
-</div>
+  </div>
 
-<div class="ratingLayout"> 
+  <div class="ratingLayout">
+    <div class="selectRating">
+      <h3>Select Ratings :</h3>
+      <div class="star-rating">
+        <input type="radio" id="5-stars" name="rating" value="5" #star5 />
+        <label for="5-stars" class="star">&#9733;</label>
+        <input type="radio" id="4-stars" name="rating" value="4" #star4 />
+        <label for="4-stars" class="star">&#9733;</label>
+        <input type="radio" id="3-stars" name="rating" value="3" #star3 />
+        <label for="3-stars" class="star">&#9733;</label>
+        <input type="radio" id="2-stars" name="rating" value="2" #star2 />
+        <label for="2-stars" class="star">&#9733;</label>
+        <input type="radio" id="1-star" name="rating" value="1" #star1 />
+        <label for="1-star" class="star">&#9733;</label>
+      </div>
+    </div>
+    <div class="writeReview">
+      <textarea
+        placeholder="Write your review here"
+        class="review"
+        #reviewInput
+      ></textarea>
+    </div>
+    <button
+      class="submitBtn"
+      (click)="
+        submitReview(star1, star2, star3, star4, star5, reviewInput.value)
+      "
+    >
+      Submit
+    </button>
+  </div>
+
+  <div class="showReviewsLayout">
     <div class="reviewsSection">
-        <h2>Reviews from Other Users</h2>
-        <div *ngFor="let review of reviews" class="review-item">
-            <div class="user">{{ review.user }}</div>
-            <div class="user">{{ review.username }}</div>
-            <div class="rating">{{ review.rating }}</div>
-            <div class="content">{{ review.content }}</div>
+      <h3>Reviews from Other Users</h3>
+  
+      <div *ngFor="let review of reviews" class="review-item">
+        <div class="card">
+          <div class="user">{{ review.username }}</div>
+          <div class="rating">Stars: {{ review.rating }}</div>
+          <div class="content">{{ review.content }}</div>
+          
+          <!-- Comments section -->
+          <div *ngIf="review.comments && review.comments.length > 0">
+            <h4>Comments:</h4>
+            <div *ngFor="let comment of review.comments">
+              <div class="comment-item">
+                <div class="comment-user">{{ comment.user }}</div>
+                <div class="comment-text">{{ comment.comment }}</div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Like button -->
+          <button (click)="likeReview(review)">Like</button>
+  
+          <!-- Comment button -->
+          <button (click)="toggleCommentBox(review)">Comment</button>
+          
+          <!-- Comment text box and post button -->
+          <div *ngIf="review.showCommentBox">
+            <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment"></textarea>
+            <button (click)="postComment(review)">Post</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
+  </div>
+  
+  
 </main>

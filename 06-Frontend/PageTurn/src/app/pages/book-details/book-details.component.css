@@ -107,7 +107,7 @@
     margin-top: 5rem;
     width: auto;
     height: 200px;
-    background-color: #b8a785;
+    background-color: #e9e5cd;
     display: flex;
     justify-content: space-evenly;
   }
@@ -124,76 +124,72 @@
     cursor: pointer;
   }
 
+
   .ratingLayout{
-    width: auto;
-    /* background-color: rgb(77, 77, 110); */
-    height: 400px;
+
+    display: flex;
+    align-items: center;
+  } 
+
+  .star-rating {
+    border:solid 1px #ccc;
+    display:flex;
+    flex-direction: row-reverse;
+    font-size:3rem;
+    justify-content:space-around;
+    padding:0 .2em;
+    text-align:center;
+    width:5em;
+  }
+  
+  .star-rating input {
+    display:none;
+  }
+  
+  .star-rating label {
+    color:#ccc;
+    cursor:pointer;
+  }
+  
+  .star-rating :checked ~ label {
+    color:#f90;
+  }
+  
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color:#fc0;
+  }
+  .review{
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 500px;
+    height: 100px;
   }
 
 
-  .rating {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px; /* Adjust as needed */
-}
-
-.rating > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rating-input {
-    margin-bottom: 10px; /* Adjust as needed */
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.review-textarea {
-    margin-bottom: 10px; /* Adjust as needed */
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: vertical; /* Allow vertical resizing */
-    min-height: 100px; /* Set minimum height */
-}
-
-.post-button {
-    padding: 8px 16px;
-    border-radius: 5px;
-    background-color: #4CAF50; /* Green */
-    color: white;
+  .submitBtn{
+    margin-left: 5rem;
+    margin-top: 5rem;
+    width: 250px;
+    height: 50px;
+    background-color: #e9e5cd;
+    color: #6a4a3a;
     border: none;
     cursor: pointer;
-}
+  }
 
-.post-button:hover {
-    background-color: #45a049; /* Darker green */
-}
+  .showReviewsLayout{
+    /* background-color: #6a4a3a; */
+    height: 20vh;
+  }
 
-.reviewsSection {
-    margin-top: 20px; /* Adjust as needed */
-}
 
-.review-item {
-    margin-bottom: 20px; /* Adjust as needed */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+  .card{
+    color: black;
+      margin-bottom: 5px;
 
-.review-item .user {
-    font-weight: bold;
-}
-
-.review-item .rating {
-    margin-top: 5px;
-}
-
-.review-item .content {
-    margin-top: 10px;
-}
-
-  
+    width: 300px;
+    background-color: #e9e5cd;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding-left: 20px;
+  }

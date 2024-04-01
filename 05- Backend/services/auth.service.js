@@ -31,7 +31,7 @@ exports.authenticateUser = async (email, password) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
     return token;
   } catch (error) {

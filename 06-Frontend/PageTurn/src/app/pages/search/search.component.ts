@@ -18,7 +18,5 @@ export class SearchComponent {
     ngOnInit(): void {
         this.searchResults = history.state.searchData;
         console.log(this.searchResults);
-        
-        // Access search data from history state
       }
 }

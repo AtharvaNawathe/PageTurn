@@ -132,15 +132,6 @@
           [ngClass]="{ active: i === currentStep }"
         ></span>
       </div>
-
-      <!-- <div *ngIf="signUpForm?.get('fullName')?.invalid && signUpForm?.get('fullName')?.touched" class="error-msg">
-        Full Name is required.
-      </div>
-      <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched" class="error-msg">Please enter a valid email address.</div>
-      <div *ngIf="signUpForm.get('gender')?.invalid && signUpForm.get('gender')?.touched" class="error-msg">Gender is required.</div>
-      <div *ngIf="signUpForm.get('country')?.invalid && signUpForm.get('country')?.touched" class="error-msg">Country is required.</div>
-      <div *ngIf="signUpForm.get('dob')?.invalid && signUpForm.get('dob')?.touched" class="error-msg">Date of Birth is required.</div>
-      <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched" class="error-msg">Password is required (minimum 6 characters).</div> -->
     </div>
     <span style="margin-left: 25px; color: #5a471d"> Already a Member ? </span>
     <button class="signUpBtn" style="margin-left: 2rem" (click)="signIn()">Sign In</button>

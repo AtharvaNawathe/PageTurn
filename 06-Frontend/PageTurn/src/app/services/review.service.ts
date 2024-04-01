@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,15 @@ export class ReviewService {
 
     // Make POST request with headers
     return this.http.post(`${this.apiUrl}/${bookId}/reviews`, { rating, content }, { headers });
+  }
+  addCommentToReview(reviewId: string, userId: string, comment: string, token: string): Observable<any> {
+    const url = `http://localhost:3000/api/books/${reviewId}/comments`;
+    const headers = new HttpHeaders().set('Authorization', `${token}`);
+    return this.http.post<any>(url, { comment }, { headers });
+  }
+  likeReview(reviewId: string, token: string): Observable<any> {
+    const url = `http://localhost:3000/api/books/${reviewId}/like`;
+    const headers = new HttpHeaders().set('Authorization', `${token}`);
+    return this.http.post<any>(url, { headers });
   }
 }

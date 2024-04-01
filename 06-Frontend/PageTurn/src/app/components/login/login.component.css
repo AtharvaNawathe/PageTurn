@@ -35,11 +35,8 @@ p {
 }
 
 .emailInputLayout,.passwordInputLayout,.forgotPasswordLayout,.errorLayout{
-
   height: 5rem;
-
   width: 50%;
-  
   display: flex;
   margin-top: 20px;
   flex-direction: column;

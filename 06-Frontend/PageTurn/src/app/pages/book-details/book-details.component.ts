@@ -6,13 +6,14 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/register.service';
 import { ReviewService } from '../../services/review.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css',
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule,FormsModule],
 })
 export class BookDetailsComponent {
   bookId!: string;
@@ -38,6 +39,7 @@ export class BookDetailsComponent {
     } else {
       this.getBookDetails();
       this.getReviews(); 
+     
     }
 
     this.router.events.subscribe((evt) => {
@@ -65,6 +67,7 @@ export class BookDetailsComponent {
         this.reviews = response;
         // Handle reviews response
         console.log('Reviews:', this.reviews);
+        this.fetchUsernamesForReviews();
       },
       (error) => {
         console.error('Error fetching reviews:', error);
@@ -123,13 +126,28 @@ export class BookDetailsComponent {
   }
 
 
-
+  submitReview(star1: HTMLInputElement, star2: HTMLInputElement, star3: HTMLInputElement, star4: HTMLInputElement, star5: HTMLInputElement, review: string): void {
+    let rating: string;
+    if (star1.checked) rating = star1.value;
+    else if (star2.checked) rating = star2.value;
+    else if (star3.checked) rating = star3.value;
+    else if (star4.checked) rating = star4.value;
+    else if (star5.checked) rating = star5.value;
+    else {
+      console.error('No rating selected');
+      return;
+    }
+    console.log(' rating:', rating);
+    console.log('content:', review);
+    this.postReview(this.bookId, rating, review)
+  }
 
   postReview(bookId: string, rating: string, content: string) {
     this.reviewService.postReview(bookId, rating, content)
       .subscribe(
         () => {
           console.log('Review posted successfully');
+          this.getReviews(); 
           // Optionally, you can handle success response here
         },
         (error) => {
@@ -138,4 +156,54 @@ export class BookDetailsComponent {
         }
       );
   }
+  fetchUsernamesForReviews(): void {
+    for (let review of this.reviews) {
+      this.userService.getUserById(review.user).subscribe(
+        (user) => {
+          review.username = user.username;
+          console.log("username",user.username);
+          
+        },
+        (error) => {
+          console.error('Error fetching user:', error);
+        }
+      );
+    }
+  }
+
+
+  toggleCommentBox(review: any): void {
+    review.showCommentBox = !review.showCommentBox; // Toggle visibility of comment box
+    review.newComment = ''; // Clear any existing comment
+  }
+
+  postComment(review: any): void {
+    // Call the API to post the comment
+    console.log("Comment ",review.
+    _id);
+    this.reviewService.addCommentToReview(review._id, review.userId, review.newComment,this.token).subscribe(
+      (response) => {
+        console.log('Comment posted successfully:', response);
+        review.showCommentBox = false;
+      },
+      (error) => {
+        // Handle error
+        console.error('Error posting comment:', error);
+      }
+    );
+  }
+  likeReview(review: any): void {
+    review.likes = review.likes ? review.likes + 1 : 1;
+    this.reviewService.likeReview(review._id,this.token).subscribe(
+      (response) => {
+        // Handle success
+        console.log('Review liked successfully:', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error liking review:', error);
+      }
+    );
+  }
+  
 }

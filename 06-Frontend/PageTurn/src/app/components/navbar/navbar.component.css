@@ -1,7 +1,8 @@
 .navbarLayout {
   height: 55px;
   width: auto;
-  background-color: #e9e5cd;
+  /* background-color: #e9e5cd; */
+  background-color: transparent;
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: space-between;
@@ -23,7 +24,7 @@
 
 .searchBar {
   font-family: "Poppins", sans-serif;
-  padding-left: 30px;
+  padding-left: 40px;
   background-color: #e9e5cd;
   border-radius: 25px;
   border: none;
@@ -38,6 +39,7 @@
 
 .searchIcon {
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 .searchIcon i,

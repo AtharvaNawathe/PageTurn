@@ -1,12 +1,13 @@
 *{
     font-family: "Poppins", sans-serif;
+    background-color: transparent;
 }
 .greetings{
     margin-top: 5rem;
     text-align: center;
     height: 10rem;
     width: auto;
-    background-color: #e9e5cd;
+    /* background-color: #e9e5cd; */
     color: 	#75420e;
 }
 
@@ -18,11 +19,12 @@
 .recommendation,.popular{
    margin-top: 5rem;
     height: 400px;
+    /* border: 2px solid saddlebrown; */
     width: auto;
 }
 .recommendation{
-    background-color: #b8a785;  
-    
+    /* background-color: #b8a785;   */
+    background-color: #e9e5cd;
 }
 
 .heading2{

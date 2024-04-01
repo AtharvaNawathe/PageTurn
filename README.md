@@ -21,15 +21,15 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 
 ## 3. Frontend Development
 - [✅] Set up Angular for the frontend application.
-- [ ] Design and develop user interfaces using Angular components, templates, and styles.
+- [✅] Design and develop user interfaces using Angular components, templates, and styles.
 - [✅] Implement user authentication forms (e.g., registration form, login form).
-- [ ] Create components for displaying user profiles, book details, reviews, and search results.
-- [ ] Handle user interactions and navigation between pages/routes.
+- [✅] Create components for displaying user profiles, book details, reviews, and search results.
+- [✅] Handle user interactions and navigation between pages/routes.
 
 ## 4. Integration
-- [ ] Integrate frontend with backend API endpoints.
-- [ ] Implement HTTP requests (e.g., GET, POST, PUT, DELETE) to communicate with the backend.
-- [ ] Test API integration using tools like Postman or Insomnia.
+- [✅] Integrate frontend with backend API endpoints.
+- [✅] Implement HTTP requests (e.g., GET, POST, PUT, DELETE) to communicate with the backend.
+- [✅] Test API integration using tools like Postman or Insomnia.
 
 ## 5. Testing
 - [ ] Perform unit testing for Angular components and services.

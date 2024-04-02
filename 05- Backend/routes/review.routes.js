@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const reviewController = require('../controllers/review.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const reviewController = require("../controllers/review.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 /**
  * Route to add a review for a book.
@@ -11,8 +11,11 @@ const authMiddleware = require('../middlewares/auth.middleware');
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.post('/:bookId/reviews', authMiddleware.authenticateToken, reviewController.createReviewForBook);
-
+router.post(
+  "/:bookId/reviews",
+  authMiddleware.authenticateToken,
+  reviewController.createReviewForBook
+);
 
 /**
  * Route to update a review by its ID.
@@ -23,8 +26,11 @@ router.post('/:bookId/reviews', authMiddleware.authenticateToken, reviewControll
  * @param {function} middleware - Authentication middleware to verify user token.
  * @param {function} callback - Route handler function.
  */
-router.put('/reviews/:id',authMiddleware.authenticateToken, reviewController.updateReview);
-
+router.put(
+  "/reviews/:id",
+  authMiddleware.authenticateToken,
+  reviewController.updateReview
+);
 
 /**
  * Route to get a review by its ID.
@@ -34,8 +40,11 @@ router.put('/reviews/:id',authMiddleware.authenticateToken, reviewController.upd
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/review/:id', authMiddleware.authenticateToken,reviewController.getReviewById);
-
+router.get(
+  "/review/:id",
+  authMiddleware.authenticateToken,
+  reviewController.getReviewById
+);
 
 /**
  * Route to delete a review by its ID.
@@ -45,8 +54,7 @@ router.get('/review/:id', authMiddleware.authenticateToken,reviewController.getR
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.delete('/review/:id', reviewController.deleteReviewById);
-
+router.delete("/review/:id", reviewController.deleteReviewById);
 
 /**
  * Route to like a review by its ID.
@@ -57,7 +65,11 @@ router.delete('/review/:id', reviewController.deleteReviewById);
  * @param {function} middleware - Authentication middleware to verify user token.
  * @param {function} callback - Route handler function.
  */
-router.post('/:id/like',  authMiddleware.authenticateToken, reviewController.likeReviewById);
+router.post(
+  "/:id/like",
+  authMiddleware.authenticateToken,
+  reviewController.likeReviewById
+);
 
 /**
  * Route to unlike a review by its ID.
@@ -68,7 +80,11 @@ router.post('/:id/like',  authMiddleware.authenticateToken, reviewController.lik
  * @param {function} middleware - Authentication middleware to verify user token.
  * @param {function} callback - Route handler function.
  */
-router.post('/:id/unlike', authMiddleware.authenticateToken, reviewController.unlikeReview);
+router.post(
+  "/:id/unlike",
+  authMiddleware.authenticateToken,
+  reviewController.unlikeReview
+);
 
 /**
  * Route to add a comment to a review.
@@ -79,9 +95,10 @@ router.post('/:id/unlike', authMiddleware.authenticateToken, reviewController.un
  * @param {function} middleware - Authentication middleware to verify user token.
  * @param {function} callback - Route handler function.
  */
-router.post('/:id/comments',authMiddleware.authenticateToken, reviewController.addCommentToReview);
-
-
-
+router.post(
+  "/:id/comments",
+  authMiddleware.authenticateToken,
+  reviewController.addCommentToReview
+);
 
 module.exports = router;

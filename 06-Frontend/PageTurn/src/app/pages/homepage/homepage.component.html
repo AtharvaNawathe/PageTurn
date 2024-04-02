@@ -15,41 +15,43 @@
   <div class="recommendation">
     <div class="heading2">Recommendation</div>
     <div class="recommendedBooks">
-      
-        <div *ngFor="let book of books" class="book">
-            <a [routerLink]="['/books', book._id]">
-              <div class="bookImage">
-                  <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
-              </div>
-              <div class="bookTitle"> {{ book.title }}</div>
-              <div class="bookRating">
-                  <ng-container *ngFor="let rating of generateRatingArray(book.averageRating)">
-                      <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book" [ngClass]="{'half-star': rating === 0.5}">
-                  </ng-container>
-              </div>
-            </a>
-        </div>
-        
+
+      <div *ngFor="let book of recommendedBooks" class="book">
+        <a [routerLink]="['/books', book._id]">
+          <div class="bookImage">
+            <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
+          </div>
+          <div class="bookTitle"> {{ book.title }}</div>
+          <div class="bookRating">
+            <ng-container *ngFor="let rating of generateRatingArray(book.averageRating)">
+              <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book"
+                [ngClass]="{'half-star': rating === 0.5}">
+            </ng-container>
+          </div>
+        </a>
+      </div>
+
     </div>
-   
+
   </div>
 
   <div class="popular">
     <div class="heading2">Popular</div>
     <div class="recommendedBooks">
-        <div *ngFor="let book of allBooks" class="book">
-            <a [routerLink]="['/books', book._id]">
-              <div class="bookImage">
-                  <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
-              </div>
-              <div class="bookTitle"> {{ book.title }}</div>
-              <div class="bookRating">
-                  <ng-container *ngFor="let rating of generateRatingArray(book.averageRating)">
-                      <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book" [ngClass]="{'half-star': rating === 0.5}">
-                  </ng-container>
-              </div>
-            </a>
-        </div>
+      <div *ngFor="let book of books" class="book">
+        <a [routerLink]="['/books', book._id]">
+          <div class="bookImage">
+            <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
+          </div>
+          <div class="bookTitle"> {{ book.title }}</div>
+          <div class="bookRating">
+            <ng-container *ngFor="let rating of generateRatingArray(book.averageRating)">
+              <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book"
+                [ngClass]="{'half-star': rating === 0.5}">
+            </ng-container>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </main>

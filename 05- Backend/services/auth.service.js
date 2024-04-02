@@ -1,8 +1,9 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-const User = require('../models/user.model');
-const errorMessages = require('../constants/errorMessages');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const User = require("../models/user.model");
+const errorMessages = require("../constants/errorMessages");
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -29,13 +30,15 @@ exports.authenticateUser = async (email, password) => {
     if (!isPasswordValid) {
       throw new Error(errorMessages.INCORRECT_PASSWORD);
     }
-
     // Generate JWT token
-    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
 
     return token;
   } catch (error) {
-    // Return specific error messages based on the error condition
     switch (error.message) {
       case errorMessages.USER_NOT_FOUND:
         return errorMessages.USER_NOT_FOUND;

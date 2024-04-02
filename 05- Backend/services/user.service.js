@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
-const errorMessages = require('../constants/errorMessages');
+const errorMessages = require("../constants/errorMessages");
 /**
  * Service function to register a new user.
  * @param {string} username - The username of the user.
@@ -14,9 +14,20 @@ const errorMessages = require('../constants/errorMessages');
  * @param {string} bio - The bio of the user.
  * @param {string} profilePicture - The profile picture of the user.
  * @param {boolean} isAdmin - The isAdmin status of the user.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-exports.registerUser = async (username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin) => {
+exports.registerUser = async (
+  username,
+  email,
+  password,
+  fullName,
+  dateOfBirth,
+  gender,
+  country,
+  interests,
+  bio,
+  profilePicture,
+  isAdmin
+) => {
   try {
     // Check if the email already exists
     const existingUserWithEmail = await User.findOne({ email });
@@ -45,7 +56,7 @@ exports.registerUser = async (username, email, password, fullName, dateOfBirth, 
       interests,
       bio,
       profilePicture,
-      isAdmin
+      isAdmin,
     });
 
     // Save the user to the database
@@ -83,7 +94,6 @@ exports.getUserProfile = async (userId) => {
  * Service function to update the profile of the user.
  * @param {string} userId - The ID of the user whose profile is being updated.
  * @param {object} updatedUserData - The updated user data.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.updateUserProfile = async (userId, updatedUserData) => {
   try {
@@ -116,7 +126,6 @@ exports.getUserByUsername = async (username) => {
 /**
  * Delete a user by user ID.
  * @param {string} userId - The ID of the user to delete.
- * @returns {Promise<void>} A Promise representing the completion of the delete operation.
  * @throws {Error} If an error occurs while deleting the user.
  */
 exports.deleteUser = async (userId) => {
@@ -254,12 +263,17 @@ exports.getAllUsers = async () => {
   }
 };
 
-
+/**
+ * Fetch a user by their ID from the database.
+ * @param {string} userId - The ID of the user to fetch.
+ * @returns {Promise<User|null>} A Promise that resolves with the user object if found, or null if not found.
+ * @throws {Error} If an error occurs while fetching the user.
+ */
 exports.getUserById = async (userId) => {
   try {
-      const user = await User.findById(userId);
-      return user;
+    const user = await User.findById(userId);
+    return user;
   } catch (error) {
-      throw error;
+    throw error;
   }
 };

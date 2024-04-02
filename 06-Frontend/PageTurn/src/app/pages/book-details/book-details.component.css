@@ -1,120 +1,124 @@
-*{
+  * {
     font-family: "Poppins", sans-serif;
-}
-.detailsLayout{
- height: 38rem;
- width: auto;
- /* background-color: aqua; */
- display: flex;   
-}
+  }
+  .detailsLayout {
+    /* height: 38rem; */
+    width: auto;
+    /* background-color: aqua; */
+    display: flex;
+  }
 
-.leftSide{
+  .leftSide {
     height: 38rem;
     width: 35rem;
     /* background-color: blue; */
     display: flex;
- 
+
     justify-content: center;
-}
-.leftSideLayout{
+  }
+  .leftSideLayout {
     display: flex;
-    
+
     flex-direction: column;
     justify-content: center;
-}
+  }
 
-.book{
+  .book {
     margin-left: 5.5rem;
     height: 12rem;
     width: 8rem;
     /* background-color: red; */
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-}
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
 
-.bookRatings{
+  .bookRatings {
     margin-top: 3rem;
     height: 10rem;
     width: 20rem;
     /* background-color: orange; */
     text-align: center;
-}
+  }
 
-.actualRatings{
+  .actualRatings {
     height: 40px;
     margin-top: 10px;
     width: auto;
     /* background-color: chartreuse; */
-}
+  }
 
-.bookTitle{
-    
+  .bookTitle {
     font-size: 24px;
-   
-}
+  }
 
-.rightSide{
+  .rightSide {
     margin-top: 3rem;
     margin-right: 10rem;
     /* background-color: aqua; */
     flex: 1;
-    height: 30rem;
-    
-}   
+    /* height: 30rem; */
+  }
 
-
-.title {
+  .title {
     font-weight: 500;
     font-size: 28px;
   }
-  
+
   .title {
     margin-bottom: 10px;
   }
-  
+
   .authors {
     margin-top: 10px;
   }
-  
+
   .description {
     margin-top: 10px;
   }
-  
+  .description {
+    margin-top: 10px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 200px; /* Adjust max height as needed */
+  }
   .genre {
     margin-top: 10px;
   }
-  
+
   .language {
     margin-top: 10px;
   }
-  
+
   .isbn {
     margin-top: 10px;
   }
-  
+
   .publisher {
     margin-top: 10px;
   }
-  
+
   .published-date {
     margin-top: 10px;
   }
-  
+
   .edition {
     margin-top: 10px;
   }
-  
-  .buttonsLayout{
-    margin-top: 5rem;
+
+  .buttonsLayout {
+    /* margin-top: 5rem; */
     width: auto;
-    height: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* height: 200px; */
     background-color: #e9e5cd;
     display: flex;
     justify-content: space-evenly;
   }
 
-
-  .addToCurrentlyReadingBtn , .addToWantToReadBtn , .addToReadBtn{
-    margin-top: 5rem;
+  .addToCurrentlyReadingBtn,
+  .addToWantToReadBtn,
+  .addToReadBtn {
+    /* margin-top: 5rem; */
     width: 250px;
     height: 50px;
     border-radius: 10px;
@@ -124,50 +128,49 @@
     cursor: pointer;
   }
 
-
-  .ratingLayout{
-
+  .ratingLayout {
+    margin-left: 40px;
     display: flex;
     align-items: center;
-  } 
+  }
 
   .star-rating {
-    border:solid 1px #ccc;
-    display:flex;
+    border: solid 1px #ccc;
+    display: flex;
     flex-direction: row-reverse;
-    font-size:3rem;
-    justify-content:space-around;
-    padding:0 .2em;
-    text-align:center;
-    width:5em;
+    font-size: 3rem;
+    justify-content: space-around;
+    padding: 0 0.2em;
+    text-align: center;
+    width: 5em;
   }
-  
+
   .star-rating input {
-    display:none;
+    display: none;
   }
-  
+
   .star-rating label {
-    color:#ccc;
-    cursor:pointer;
+    color: #ccc;
+    cursor: pointer;
   }
-  
+
   .star-rating :checked ~ label {
-    color:#f90;
+    color: #f90;
   }
-  
+
   .star-rating label:hover,
   .star-rating label:hover ~ label {
-    color:#fc0;
+    color: #fc0;
   }
-  .review{
+  .review {
     margin-top: 50px;
     margin-left: 50px;
     width: 500px;
     height: 100px;
   }
 
-
-  .submitBtn{
+  .submitBtn,
+  .cmtButton,.likeButton {
     margin-left: 5rem;
     margin-top: 5rem;
     width: 250px;
@@ -178,18 +181,41 @@
     cursor: pointer;
   }
 
-  .showReviewsLayout{
+  .showReviewsLayout {
     /* background-color: #6a4a3a; */
     height: 20vh;
   }
 
-
-  .card{
+  .card {
     color: black;
-      margin-bottom: 5px;
-
-    width: 300px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    width: auto;
     background-color: #e9e5cd;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  padding-left: 20px;
+    padding-left: 40px;
+  }
+  .cmtButton,.likeButton {
+    background-color: #6a4a3a;
+    width: 100px;
+    margin: 5px;
+    color: white;
+  }
+  .submitBtn{
+    margin-top: 5rem;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #6a4a3a;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cmtButton,.likeButton {
+   
+    width: 150px;
+    border-radius: 15px;
+    height: 40px;
+  
   }

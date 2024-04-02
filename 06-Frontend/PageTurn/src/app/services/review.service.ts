@@ -28,6 +28,11 @@ export class ReviewService {
   likeReview(reviewId: string, token: string): Observable<any> {
     const url = `http://localhost:3000/api/books/${reviewId}/like`;
     const headers = new HttpHeaders().set('Authorization', `${token}`);
-    return this.http.post<any>(url, { headers });
+    return this.http.post<any>(url,{}, { headers });
+  }
+  unlikeReview(reviewId: string, token: string): Observable<any>{
+    const url = `http://localhost:3000/api/books/${reviewId}/unlike`;
+    const headers = new HttpHeaders().set('Authorization', `${token}`);
+    return this.http.post<any>(url,{}, { headers });
   }
 }

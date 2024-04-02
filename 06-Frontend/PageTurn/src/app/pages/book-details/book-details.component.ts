@@ -7,13 +7,14 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/register.service';
 import { ReviewService } from '../../services/review.service';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css',
-  imports: [NavbarComponent, CommonModule,FormsModule],
+  imports: [NavbarComponent, CommonModule, FormsModule],
 })
 export class BookDetailsComponent {
   bookId!: string;
@@ -21,14 +22,15 @@ export class BookDetailsComponent {
   token!: string;
   newReview: any = { rating: 1, content: '' };
   reviews: any[] = [];
-
+  userId!: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private bookService: BookService,
     private authService: AuthService,
     private userService: UserService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -38,16 +40,15 @@ export class BookDetailsComponent {
       this.router.navigate(['/login']);
     } else {
       this.getBookDetails();
-      this.getReviews(); 
-     
+      this.getReviews();
     }
 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
-          return;
+        return;
       }
-      window.scrollTo(0, 0) // for example
-  });
+      window.scrollTo(0, 0); 
+    });
   }
 
   getBookDetails(): void {
@@ -65,9 +66,7 @@ export class BookDetailsComponent {
     this.bookService.getBookReviews(this.bookId).subscribe(
       (response) => {
         this.reviews = response;
-        // Handle reviews response
-        console.log('Reviews:', this.reviews);
-        this.fetchUsernamesForReviews();
+        this.fetchUsernamesForReviewsAndComments();
       },
       (error) => {
         console.error('Error fetching reviews:', error);
@@ -125,8 +124,14 @@ export class BookDetailsComponent {
     );
   }
 
-
-  submitReview(star1: HTMLInputElement, star2: HTMLInputElement, star3: HTMLInputElement, star4: HTMLInputElement, star5: HTMLInputElement, review: string): void {
+  submitReview(
+    star1: HTMLInputElement,
+    star2: HTMLInputElement,
+    star3: HTMLInputElement,
+    star4: HTMLInputElement,
+    star5: HTMLInputElement,
+    review: string
+  ): void {
     let rating: string;
     if (star1.checked) rating = star1.value;
     else if (star2.checked) rating = star2.value;
@@ -137,67 +142,89 @@ export class BookDetailsComponent {
       console.error('No rating selected');
       return;
     }
-    console.log(' rating:', rating);
-    console.log('content:', review);
-    this.postReview(this.bookId, rating, review)
+    this.postReview(this.bookId, rating, review);
+
+    review = '';
+    star1.checked = false;
+    star2.checked = false;
+    star3.checked = false;
+    star4.checked = false;
+    star5.checked = false;
   }
 
   postReview(bookId: string, rating: string, content: string) {
-    this.reviewService.postReview(bookId, rating, content)
-      .subscribe(
-        () => {
-          console.log('Review posted successfully');
-          this.getReviews(); 
-          // Optionally, you can handle success response here
-        },
-        (error) => {
-          console.error('Error posting review:', error);
-          // Optionally, you can handle error response here
-        }
-      );
+    this.reviewService.postReview(bookId, rating, content).subscribe(
+      () => {
+        console.log('Review posted successfully');
+        this.getReviews();
+        // Optionally, you can handle success response here
+      },
+      (error) => {
+        console.error('Error posting review:', error);
+        // Optionally, you can handle error response here
+      }
+    );
   }
-  fetchUsernamesForReviews(): void {
+  fetchUsernamesForReviewsAndComments(): void {
+    // Iterate over each review
     for (let review of this.reviews) {
+      // Fetch username for the review's user ID
       this.userService.getUserById(review.user).subscribe(
         (user) => {
           review.username = user.username;
-          console.log("username",user.username);
-          
         },
         (error) => {
           console.error('Error fetching user:', error);
         }
       );
+
+      // Iterate over each comment in the review
+      for (let comment of review.comments) {
+        // Fetch username for the comment's user ID
+        this.userService.getUserById(comment.user).subscribe(
+          (user) => {
+            comment.username = user.username;
+          },
+          (error) => {
+            console.error('Error fetching user:', error);
+          }
+        );
+      }
     }
   }
 
-
   toggleCommentBox(review: any): void {
-    review.showCommentBox = !review.showCommentBox; // Toggle visibility of comment box
-    review.newComment = ''; // Clear any existing comment
+    review.showCommentBox = !review.showCommentBox; 
+    review.newComment = ''; 
   }
 
   postComment(review: any): void {
-    // Call the API to post the comment
-    console.log("Comment ",review.
-    _id);
-    this.reviewService.addCommentToReview(review._id, review.userId, review.newComment,this.token).subscribe(
-      (response) => {
-        console.log('Comment posted successfully:', response);
-        review.showCommentBox = false;
-      },
-      (error) => {
-        // Handle error
-        console.error('Error posting comment:', error);
-      }
-    );
+    this.reviewService
+      .addCommentToReview(
+        review._id,
+        review.userId,
+        review.newComment,
+        this.token
+      )
+      .subscribe(
+        (response) => {
+          console.log('Comment posted successfully:', response);
+          this.ngOnInit();
+          review.showCommentBox = false;
+        },
+        (error) => {
+          // Handle error
+          console.error('Error posting comment:', error);
+        }
+      );
   }
   likeReview(review: any): void {
     review.likes = review.likes ? review.likes + 1 : 1;
-    this.reviewService.likeReview(review._id,this.token).subscribe(
+    this.reviewService.likeReview(review._id, this.token).subscribe(
       (response) => {
         // Handle success
         console.log('Review liked successfully:', response);
+        this.ngOnInit();
       },
       (error) => {
         // Handle error
@@ -205,5 +232,32 @@ export class BookDetailsComponent {
       }
     );
   }
-  
+  toggleComments(review: any) {
+    review.showComments = !review.showComments;
+  }
+  unlikeReview(review: any): void {
+    const authToken = localStorage.getItem('token');
+    if (authToken) {
+      this.http
+        .get<any>('http://localhost:3000/api/users/me', {
+          headers: { Authorization: `${authToken}` },
+        })
+        .subscribe((userData) => {
+          this.userId = userData._id; // Replace with the actual user ID
+          console.log('User data:', this.userId);
+        });
+    }
+
+    this.reviewService.unlikeReview(review._id, this.token).subscribe(
+      (response) => {
+        // Handle success
+        console.log('Review unliked successfully:', response);
+        this.ngOnInit(); // Refresh data after unliking review
+      },
+      (error) => {
+        // Handle error
+        console.error('Error unliking review:', error);
+      }
+    );
+  }
 }

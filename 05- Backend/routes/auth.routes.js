@@ -1,11 +1,6 @@
-/**
- * Express router for authentication-related routes.
- * @module routes/authRoutes
- */
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authController = require('../controllers/auth.controller');
+const authController = require("../controllers/auth.controller");
 
 /**
  * Route to authenticate user login.
@@ -15,6 +10,6 @@ const authController = require('../controllers/auth.controller');
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.post('/login', authController.loginUser);
+router.post("/login", authController.loginUser);
 
 module.exports = router;

@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/register.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import tags from '../../constants/tags';
 @Component({
     selector: 'app-profile',
     standalone: true,
@@ -19,7 +19,7 @@ export class ProfileComponent {
   userData: any;
   updateForm: FormGroup;
   showUpdateForm: boolean = false;
-
+  genres: string[] = tags;
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -31,11 +31,13 @@ export class ProfileComponent {
       dob: ['', Validators.required],
       gender: ['', Validators.required],
       country: ['', Validators.required],
-      interests: ['']
+      interests: ['', Validators.required]
     });
   }
   
   ngOnInit(): void {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
     const token = this.authService.getToken();
     if (token) {
       this.authService.getUserDetails(token).subscribe(
@@ -68,9 +70,7 @@ export class ProfileComponent {
     }
   }
 
-  submitUpdateForm(): void {
-    console.log("updated form",this.updateForm);
-    
+  submitUpdateForm(): void { 
     if (this.updateForm.valid) {
       const token = this.authService.getToken();
       if (token) {

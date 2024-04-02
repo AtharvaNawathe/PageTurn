@@ -1,0 +1,31 @@
+.customInputField{
+    height: 2rem;
+    margin-top: 5px;
+    border-radius: 25px;
+    background-color: #EEE9CE;
+    padding-left:40px ;
+    border: none;
+    transition: border 0.3s ease;
+    border: 1px solid #726522;
+   }
+
+   .signInBtn,.signUpBtn {
+    margin-top: 10px;
+    height: 2.5rem; 
+    width: 10rem;
+    border-radius: 2.5rem; 
+    background-color: #5A471D;
+    color: #EEE9CE;
+    font-size: 100%; 
+    border: none;
+  }
+  .signInBtn:disabled{
+    background-color:#5a471d6a ;
+  }
+  .signInBtn:hover,.signUpBtn:hover{
+    cursor: pointer;
+  }
+  .signin,.signup{
+    width: 20%;
+    margin-top: 5px;
+  }

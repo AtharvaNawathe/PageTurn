@@ -9,12 +9,16 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   username: string = '';
 
-  constructor(private authService: AuthService,private http: HttpClient, private router: Router ) { }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const token = this.authService.getToken();
@@ -30,24 +34,28 @@ export class NavbarComponent {
     }
   }
 
-
+  logout() {
+    localStorage.clear();
+  }
 
   onEnterPressed(searchValue: string) {
-    console.log("HELLo");
-    
     if (searchValue.trim() !== '') {
       const apiUrl = 'http://localhost:3000/api/books/search';
       const params = { q: searchValue };
-      
-      this.http.get(apiUrl, { params }).subscribe((response: any) => {
-        console.log('Search Result:', response);
-        this.router.navigate(['/search'], { state: { searchData: response } });
-      }, (error) => {
-        console.error('Error occurred while searching:', error);
-      });
+
+      this.http.get(apiUrl, { params }).subscribe(
+        (response: any) => {
+          console.log('Search Result:', response);
+          this.router.navigate(['/search'], {
+            state: { searchData: response },
+          });
+        },
+        (error) => {
+          console.error('Error occurred while searching:', error);
+        }
+      );
     } else {
       console.log('Please enter a search term.');
     }
   }
-
 }

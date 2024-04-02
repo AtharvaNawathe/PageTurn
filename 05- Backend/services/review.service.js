@@ -44,20 +44,17 @@ exports.createReviewForBook = async (bookId, userId, rating, content) => {
 
     const existingReviews = await Review.find({ book: bookId });
     let totalRating = 0;
-    existingReviews.forEach(review => {
+    existingReviews.forEach((review) => {
       totalRating += review.rating;
     });
     const averageRating = totalRating / existingReviews.length;
 
-    
-  
     // Update the book's averageRating field
     book.averageRating = averageRating;
     await book.save();
 
-    
-      return newReview;
-    } catch (error) {
+    return newReview;
+  } catch (error) {
     throw error;
   }
 };
@@ -125,7 +122,6 @@ exports.getReviewsForBook = async (bookId) => {
 /**
  * Service function to delete a review by its ID.
  * @param {string} reviewId - The ID of the review to delete.
- * @returns {Promise<void>} A Promise representing the completion of the delete operation.
  * @throws {Error} If an error occurs while deleting the review.
  */
 exports.deleteReviewById = async (reviewId) => {
@@ -139,7 +135,6 @@ exports.deleteReviewById = async (reviewId) => {
  * Service function to like a review by its ID.
  * @param {string} reviewId - The ID of the review to like.
  * @param {string} userId - The ID of the user liking the review.
- * @returns {Promise<void>} A Promise representing the completion of the like operation.
  * @throws {Error} If an error occurs while liking the review.
  */
 
@@ -163,7 +158,6 @@ exports.likeReviewById = async (reviewId, userId) => {
  * Service function to unlike a review by its ID.
  * @param {string} reviewId - The ID of the review to unlike.
  * @param {string} userId - The ID of the user unliking the review.
- * @returns {Promise<void>} A Promise representing the completion of the unlike operation.
  * @throws {Error} If an error occurs while unliking the review.
  */
 exports.unlikeReview = async (reviewId, userId) => {
@@ -189,7 +183,6 @@ exports.unlikeReview = async (reviewId, userId) => {
  * @param {string} reviewId - The ID of the review to add the comment to.
  * @param {string} userId - The ID of the user adding the comment.
  * @param {string} comment - The content of the comment.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  * @throws {Error} If an error occurs while adding the comment.
  */
 exports.addCommentToReview = async (reviewId, userId, comment) => {

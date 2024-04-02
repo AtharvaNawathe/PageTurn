@@ -62,9 +62,9 @@
 
 @media screen and (max-width: 768px) {
   .searchBar {
-    display: none; /* Hide the search bar on smaller screens */
+    display: none;
   }
   .username {
-    display: none; /* Hide the username on smaller screens */
+    display: none;
   }
 }

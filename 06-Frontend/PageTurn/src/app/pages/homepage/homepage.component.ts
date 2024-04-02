@@ -10,23 +10,23 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css',
-  imports: [NavbarComponent,CommonModule,RouterModule ],
+  imports: [NavbarComponent, CommonModule, RouterModule],
 })
 export class HomepageComponent {
   quote: string = '';
   author: string = '';
   books: any[] = [];
   filteredBooks: any[] = [];
-  allBooks :any[] =[];
-
-  constructor(private http: HttpClient, private bookService: BookService) { }
+  allBooks: any[] = [];
+  recommendedBooks: any[] = [];
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
   ngOnInit(): void {
     this.fetchQuote();
+    this.fetchRecommendedBooks();
     this.bookService.getBooks().subscribe(
       (data) => {
         this.books = data;
-        this.fetchUserInterests(); // Fetch user interests after fetching books
       },
       (error) => {
         console.error('Error fetching books:', error);
@@ -45,62 +45,39 @@ export class HomepageComponent {
       }
     );
   }
-  fetchUserInterests() {
-    // Retrieve authentication token from local storage
+
+  generateRatingArray(averageRating: number): number[] {
+    const ratingArray = [];
+    for (let i = 0; i < averageRating; i++) {
+      ratingArray.push(1);
+    }
+    const totalStars = ratingArray.length;
+    for (let i = totalStars; i < averageRating; i++) {
+      ratingArray.push(0);
+    }
+    return ratingArray;
+  }
+
+  fetchRecommendedBooks(): void {
     const authToken = localStorage.getItem('token');
     if (authToken) {
-      // Fetch user data from backend API using the authentication token
-      this.http.get<any>('http://localhost:3000/api/users/me', { headers: { 'Authorization': `${authToken}` } })
-        .subscribe(
-          (userData) => {
-            console.log('User data:', userData); // Log user data
-            // Extract user interests from the user data
-            const userInterests = userData.interests;
-            console.log('User interests:', userInterests); // Log user interests
-            // Fetch all books
-            this.bookService.getBooks().subscribe(
-              (booksData) => {
-                console.log('All books:', booksData); // Log all books
-                this.allBooks=booksData;
-                // Filter books based on user's interests
-                const filteredBooks = this.filterBooks(booksData, userInterests);
-                console.log('Filtered books:', filteredBooks); // Log filtered books
-                this.books=filteredBooks
-              },
-              (error) => {
-                console.error('Error fetching all books:', error); // Log error fetching all books
-              }
-            );
-          },
-          (error) => {
-            console.error('Error fetching user data:', error); // Log error fetching user data
-          }
-        );
+      this.http
+        .get<any>('http://localhost:3000/api/users/me', {
+          headers: { Authorization: `${authToken}` },
+        })
+        .subscribe((userData) => {
+          const userId = userData._id;
+          this.bookService.getSimilarBooks(userId).subscribe(
+            (books) => {
+              this.recommendedBooks = books;
+            },
+            (error) => {
+              console.error('Error fetching recommended books:', error);
+            }
+          );
+        });
     } else {
-      console.error('Authentication token not found'); // Log error for missing authentication token
+      console.error('Authentication token not found');
     }
   }
-
-  // Function to filter books based on user's interests
-  filterBooks(booksData: any[], userInterests: string[]): any[] {
-    // Implement book filtering logic here
-    // For now, let's assume we have a simple filter based on genre
-    return booksData.filter(book => userInterests.includes(book.genre));
-}
-
-    generateRatingArray(averageRating: number): number[] {
-      const ratingArray = [];
-      for (let i = 0; i < averageRating; i++) {
-          ratingArray.push(1);
-      }
-      const totalStars = ratingArray.length;
-      for (let i = totalStars; i < averageRating; i++) {
-          ratingArray.push(0);
-      }
-      return ratingArray;
-  }
-
-
-
- 
 }

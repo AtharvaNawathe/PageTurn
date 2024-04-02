@@ -3,13 +3,10 @@ const Book = require('../models/book.model');
 /**
  * Controller function to add a new book.
  * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.addBook = async (req, res, next) => {
   try {
     const { isbn, title, authors, genre, description, publishedDate, coverImage, language, publisher, edition } = req.body;
-        // Validate required fields
         const missingFields = [];
         if (!isbn) missingFields.push('ISBN');
         if (!title) missingFields.push('Title');
@@ -41,12 +38,8 @@ exports.addBook = async (req, res, next) => {
   }
 };
 
-
 /**
  * Controller function to get all books.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.getAllBooks = async (req, res, next) => {
   try {
@@ -61,9 +54,6 @@ exports.getAllBooks = async (req, res, next) => {
 
 /**
  * Controller function to get a book by its ID.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.getBookById = async (req, res, next) => {
   try {
@@ -81,9 +71,6 @@ exports.getBookById = async (req, res, next) => {
 
 /**
  * Controller function to update a book by its ID.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.updateBookById = async (req, res, next) => {
   try {
@@ -99,9 +86,6 @@ exports.updateBookById = async (req, res, next) => {
 
 /**
  * Controller function to delete a book by its ID.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.deleteBookById = async (req, res, next) => {
   try {
@@ -116,9 +100,6 @@ exports.deleteBookById = async (req, res, next) => {
 
 /**
  * Controller function to search books by title, author name, and ISBN number.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.searchBooks = async (req, res, next) => {
   try {
@@ -134,3 +115,15 @@ exports.searchBooks = async (req, res, next) => {
 };
 
 
+/**
+ * Controller function to get books with the same genre as the user's interests.
+ */
+exports.getSimilarBooks = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const books = await bookService.getSimilarBooks(userId);
+    res.json(books);
+  } catch (error) {
+    next(error);
+  }
+};

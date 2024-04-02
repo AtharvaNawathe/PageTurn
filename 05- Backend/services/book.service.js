@@ -1,9 +1,8 @@
 const Book = require("../models/book.model");
-
+const User = require("../models/user.model");
 /**
  * Service function to add a new book.
  * @param {object} bookData - The book data object containing book details.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.addBook = async (bookData) => {
   try {
@@ -12,10 +11,8 @@ exports.addBook = async (bookData) => {
     if (existingBook) {
       throw new Error("A book with this ISBN already exists");
     }
-
     // Create the book object
     const book = new Book(bookData);
-
     // Save the book to the database
     await book.save();
   } catch (error) {
@@ -71,7 +68,6 @@ exports.updateBookById = async (bookId, updatedBookData) => {
 /**
  * Service function to delete a book by its ID.
  * @param {string} bookId - The ID of the book to delete.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.deleteBookById = async (bookId) => {
   try {
@@ -115,6 +111,25 @@ exports.bookExists = async (bookId) => {
     const book = await Book.findById(bookId);
     console.log("Book", book);
     return !!book;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Service function to get books with the same genre as the user's interests.
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<Array>} A Promise representing an array of books with similar genres.
+ */
+exports.getSimilarBooks = async (userId) => {
+  try {
+    // Fetch user's interests from the database
+    const userInterests = await User.findById(userId).select("interests");
+    console.log("User Intersts from Backend:", userInterests);
+    // Fetch books with genres matching user's interests
+    const books = await Book.find({ genre: { $in: userInterests.interests } });
+    console.log("Books FOund in backend :", books);
+    return books;
   } catch (error) {
     throw error;
   }

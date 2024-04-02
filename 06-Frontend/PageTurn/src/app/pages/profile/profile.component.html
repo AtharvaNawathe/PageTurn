@@ -9,61 +9,63 @@
     <div class="fullName">{{ userData.fullName }}</div>
     <div class="userName">Username: {{ userData.username }}</div>
     <div class="email">Email: {{ userData.email }}</div>
-    <div class="dob">DOB: {{ userData.dateOfBirth  | date:'yyyy-MM-dd'}}</div>
+    <div class="dob">DOB: {{ userData.dateOfBirth | date : "yyyy-MM-dd" }}</div>
     <div class="gender">Gender: {{ userData.gender }}</div>
     <div class="country">Country: {{ userData.country }}</div>
     <div>Your Favourite Genre: {{ userData.interests }}</div>
-    <div class="createdAt">Joined: {{ userData.createdAt  | date:'yyyy-MM-dd'}}</div>
+    <div class="createdAt">
+      Joined: {{ userData.createdAt | date : "yyyy-MM-dd" }}
+    </div>
 
     <!-- Button to toggle update form -->
-    <button (click)="toggleUpdateForm()">Update Profile</button>
+    <button (click)="toggleUpdateForm()" class="updateBtn">
+      Update Profile
+    </button>
 
     <!-- Update profile form -->
     <div *ngIf="showUpdateForm" class="updateForm">
       <h2>Update Profile</h2>
       <form [formGroup]="updateForm" (ngSubmit)="submitUpdateForm()">
         <div>
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" formControlName="fullName" />
+          <label for="fullName">Full Name : </label>
+          <input type="text" id="fullName" formControlName="fullName" class="customInputField" />
         </div>
-        <div>
+        <div style="margin-top: 8px">
           <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" />
+          <input type="email" id="email" formControlName="email" class="customInputField" />
         </div>
-        <div>
+        <div style="margin-top: 8px">
           <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" formControlName="dob" />
+          <input type="date" id="dob" formControlName="dob" class="customInputField" />
         </div>
-        <div>
+        <div style="margin-top: 8px">
           <label for="gender">Gender</label>
-          <select id="gender" formControlName="gender">
+          <select id="gender" formControlName="gender" class="customInputField">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
         </div>
-        <div>
+        <div style="margin-top: 8px">
           <label for="country">Country</label>
+          <div class="countryInputLayout">
+            <select id="country" formControlName="country" class="customInputField">
+              <option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </option>
+            </select>
+          </div>
+        </div>
 
-            <div class="countryInputLayout">
-          
-          <select
-          id="country"
-            formControlName="country"
-            class="customInputField"
-            style="margin-left: 2rem"
-          >
-            <option *ngFor="let country of countries" [value]="country">
-              {{ country }}
-            </option>
+        <div style="margin-top: 8px">
+          <label for="interests">Favourite Genre</label>
+          <select id="interests" formControlName="interests" class="customInputField">
+            <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
           </select>
         </div>
-        </div>
-        <div>
-          <label for="interests">Favourite Genre</label>
-          <input type="text" id="interests" formControlName="interests" />
-        </div>
-        <button type="submit">Update</button>
+
+
+        <button type="submit" class="update">Update</button>
       </form>
     </div>
   </div>

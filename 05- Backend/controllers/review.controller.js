@@ -2,12 +2,7 @@ const reviewService = require("../services/review.service");
 
 /**
  * Controller function to create a new review for a book.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-
 exports.createReviewForBook = async (req, res, next) => {
   try {
     const { bookId } = req.params;
@@ -39,12 +34,7 @@ exports.createReviewForBook = async (req, res, next) => {
 
 /**
  * Controller function to update a review.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-
 exports.updateReview = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -62,12 +52,7 @@ exports.updateReview = async (req, res, next) => {
 
 /**
  * Controller function to get a review by its ID.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-
 exports.getReviewById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -81,12 +66,7 @@ exports.getReviewById = async (req, res, next) => {
 
 /**
  * Controller function to get reviews for a book.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
-
 exports.getReviewsForBook = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -99,10 +79,6 @@ exports.getReviewsForBook = async (req, res, next) => {
 
 /**
  * Controller function to delete a review by its ID.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.deleteReviewById = async (req, res, next) => {
   try {
@@ -116,10 +92,6 @@ exports.deleteReviewById = async (req, res, next) => {
 
 /**
  * Controller function to like a review by its ID.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.likeReviewById = async (req, res, next) => {
   try {
@@ -134,15 +106,11 @@ exports.likeReviewById = async (req, res, next) => {
 
 /**
  * Controller function to unlike a review.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.unlikeReview = async (req, res, next) => {
   try {
     const reviewId = req.params.id;
-    const userId = req.user.id; // Extract user ID from authenticated user
+    const userId = req.user.id; 
 
     await reviewService.unlikeReview(reviewId, userId);
 
@@ -154,10 +122,6 @@ exports.unlikeReview = async (req, res, next) => {
 
 /**
  * Controller function to add a comment to a review.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {function} next - Express next function.
- * @returns {Promise<void>} A Promise representing the completion of the operation.
  */
 exports.addCommentToReview = async (req, res, next) => {
   try {

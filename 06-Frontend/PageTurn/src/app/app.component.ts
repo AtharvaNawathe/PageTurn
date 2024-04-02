@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   imports: [RouterOutlet, HttpClientModule],
+  
 })
 export class AppComponent {
   title = 'PageTurn';

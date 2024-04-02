@@ -66,6 +66,7 @@ p {
   padding-left: 40px;
   border: none;
   transition: all 0.3s ease;
+  border: 1px solid #726522;
 }
 
 .customInputField:focus {
@@ -89,10 +90,18 @@ p {
   background-color: #5a471d;
   color: #eee9ce;
 }
+.signInBtn:disabled {
+  background-color: gray;
+  cursor: default;
+}
 
 .signInBtn:hover {
   background-color: #726522;
   cursor: pointer;
+}
+.signInBtn:hover:disabled {
+  background-color: gray;
+  cursor: default;
 }
 
 .signup {
@@ -104,6 +113,7 @@ p {
 .signUpBtn {
   background-color: #eee9ce;
   color: #5a471d;
+  border: 1px solid #726522;
 }
 
 .signUpBtn:hover {
@@ -137,24 +147,32 @@ p {
   flex-direction: column;
 }
 
-/* Set border radius for mat-select panel */
 .mat-select-panel {
   border-radius: 15px;
 }
 
-/* Set background color for mat-select */
 .mat-select-value {
-  background-color: #EEE9CE !important; /* Important to override default styles */
+  background-color: #eee9ce !important;
 }
 
-/* Set styles when mat-select is focused */
 .mat-select-trigger:focus {
-  background-color: #EEE9CE !important; /* Change background color when focused */
-  border-radius: 15px; /* Maintain border radius */
+  background-color: #eee9ce !important;
+  border-radius: 15px;
 }
 
-/* Set styles when mat-select is active */
 .mat-select-trigger:active {
-  background-color: #EEE9CE !important; /* Change background color when active */
-  border-radius: 15px; /* Maintain border radius */
+  background-color: #eee9ce !important;
+  border-radius: 15px;
+}
+
+.errorLayout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.forgotPassword {
+  color: #726522;
+  font-size: 0.8rem;
 }

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-myshelf',
-    standalone: true,
-    templateUrl: './myshelf.component.html',
-    styleUrl: './myshelf.component.css',
-    imports: [NavbarComponent,CommonModule]
+  selector: 'app-myshelf',
+  standalone: true,
+  templateUrl: './myshelf.component.html',
+  styleUrl: './myshelf.component.css',
+  imports: [NavbarComponent, CommonModule, RouterModule],
 })
 export class MyshelfComponent {
   userData: any;
@@ -18,8 +19,11 @@ export class MyshelfComponent {
   wantToReadBooks: any[] = [];
   readBooks: any[] = [];
   currentlyReadingBooks: any[] = [];
-  
-  constructor(private authService: AuthService, private bookService: BookService) { }
+
+  constructor(
+    private authService: AuthService,
+    private bookService: BookService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserData();

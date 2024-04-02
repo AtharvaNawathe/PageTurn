@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 /**
  * Middleware to authenticate JWT token in the request header.
  * @module middlewares/authenticateToken
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- * @param {function} next - The next middleware function.
  */
 exports.authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];

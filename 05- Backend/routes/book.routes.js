@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authMiddleware = require('../middlewares/auth.middleware');
-const adminMiddleware = require('../middlewares/admin.middleware');
-const bookController = require('../controllers/book.controller');
-const reviewController = require('../controllers/review.controller');
+const authMiddleware = require("../middlewares/auth.middleware");
+const adminMiddleware = require("../middlewares/admin.middleware");
+const bookController = require("../controllers/book.controller");
+const reviewController = require("../controllers/review.controller");
 /**
  * Route to add a new book.
  * @name POST /api/books
@@ -14,8 +14,12 @@ const reviewController = require('../controllers/review.controller');
  * @param {callback} middleware - Middleware to authenticate admin users.
  * @param {callback} callback - Route handler function.
  */
-router.post('/', authMiddleware.authenticateToken, adminMiddleware.authenticateAdmin, bookController.addBook);
-
+router.post(
+  "/",
+  authMiddleware.authenticateToken,
+  adminMiddleware.authenticateAdmin,
+  bookController.addBook
+);
 
 /**
  * Route to get all books.
@@ -25,7 +29,7 @@ router.post('/', authMiddleware.authenticateToken, adminMiddleware.authenticateA
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/', bookController.getAllBooks);
+router.get("/", bookController.getAllBooks);
 
 /**
  * Route to get a book by its ID.
@@ -35,9 +39,11 @@ router.get('/', bookController.getAllBooks);
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/getBookById/:id',authMiddleware.authenticateToken, bookController.getBookById);
-
-
+router.get(
+  "/getBookById/:id",
+  authMiddleware.authenticateToken,
+  bookController.getBookById
+);
 
 /**
  * Route to update a book by its ID.
@@ -47,9 +53,12 @@ router.get('/getBookById/:id',authMiddleware.authenticateToken, bookController.g
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.put('/:id', authMiddleware.authenticateToken, adminMiddleware.authenticateAdmin,bookController.updateBookById);
-
-
+router.put(
+  "/:id",
+  authMiddleware.authenticateToken,
+  adminMiddleware.authenticateAdmin,
+  bookController.updateBookById
+);
 
 /**
  * Route to delete a book by its ID.
@@ -59,8 +68,12 @@ router.put('/:id', authMiddleware.authenticateToken, adminMiddleware.authenticat
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.delete('/:id', authMiddleware.authenticateToken, adminMiddleware.authenticateAdmin,bookController.deleteBookById);
-
+router.delete(
+  "/:id",
+  authMiddleware.authenticateToken,
+  adminMiddleware.authenticateAdmin,
+  bookController.deleteBookById
+);
 
 /**
  * Route to search books by title, author name, and ISBN number.
@@ -70,9 +83,7 @@ router.delete('/:id', authMiddleware.authenticateToken, adminMiddleware.authenti
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/search', bookController.searchBooks);
-
-
+router.get("/search", bookController.searchBooks);
 
 /**
  * Route to get reviews for a book by its ID.
@@ -82,7 +93,16 @@ router.get('/search', bookController.searchBooks);
  * @param {string} path - Express route path.
  * @param {function} callback - Route handler function.
  */
-router.get('/:id/reviews', reviewController.getReviewsForBook);
+router.get("/:id/reviews", reviewController.getReviewsForBook);
 
+/**
+ * Route to get books with the same genre as the user's interests.
+ * @name GET /api/books/similar/:userId
+ * @function
+ * @memberof module:routes/bookRoutes
+ * @param {string} path - Express route path.
+ * @param {function} callback - Route handler function.
+ */
+router.get("/similar/:userId", bookController.getSimilarBooks);
 
 module.exports = router;

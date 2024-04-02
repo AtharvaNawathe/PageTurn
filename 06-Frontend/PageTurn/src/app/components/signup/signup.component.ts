@@ -18,8 +18,13 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-sign-up',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,MatSelectModule,
-    MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatIconModule,
+  ],
   standalone: true,
 })
 export class SignUpComponent {
@@ -28,7 +33,7 @@ export class SignUpComponent {
   interests: string[] = tags;
   currentStep: number = 0;
   steps: number[] = [0, 1, 2, 3];
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -38,15 +43,14 @@ export class SignUpComponent {
       username: ['', Validators.required],
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
-      country: ['', Validators.required],
+      gender: ['male', Validators.required],
+      country: ['India', Validators.required],
       dateOfBirth: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      interests: [[]] 
+      interests: [[]],
     });
   }
 
-  
   nextPrev(step: number) {
     this.currentStep += step;
     if (this.currentStep < 0) {
@@ -59,8 +63,6 @@ export class SignUpComponent {
   onSubmit() {
     this.userService.registerUser(this.signUpForm.value).subscribe(
       (response) => {
-        console.log("Final DATA:",this.signUpForm.value);
-        
         console.log('User registered successfully:', response);
         this.signUpForm.reset();
         this.currentStep = 0;

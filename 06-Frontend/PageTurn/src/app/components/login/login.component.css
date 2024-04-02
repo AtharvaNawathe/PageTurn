@@ -34,35 +34,40 @@ p {
   margin: 0.1875rem 0;
 }
 
-.emailInputLayout,.passwordInputLayout,.forgotPasswordLayout,.errorLayout{
+.emailInputLayout,
+.passwordInputLayout,
+.forgotPasswordLayout,
+.errorLayout {
   height: 5rem;
   width: 50%;
   display: flex;
   margin-top: 20px;
   flex-direction: column;
 }
-.customInputField{
+.customInputField {
   height: 5rem;
   margin-top: 10px;
   border-radius: 25px;
-  background-color: #EEE9CE;
-  padding-left:40px ;
+  background-color: #eee9ce;
+  padding-left: 40px;
   border: none;
   transition: border 0.3s ease;
   border: 1px solid #726522;
- }
- 
- .customInputField:focus {
-   border: 1px solid #726522;
-   outline: none;
- }
- 
- .email,.password{
-   color: #726522;
-   cursor: default;
- }
+}
 
- .forgotPasswordLayout,.errorLayout{
+.customInputField:focus {
+  border: 1px solid #726522;
+  outline: none;
+}
+
+.email,
+.password {
+  color: #726522;
+  cursor: default;
+}
+
+.forgotPasswordLayout,
+.errorLayout {
   display: flex;
   height: auto;
   align-items: end;
@@ -70,38 +75,51 @@ p {
   cursor: default;
 }
 
- .forgotPassword{
+.forgotPassword {
   color: #726522;
   font-size: 0.8rem;
   cursor: pointer;
 }
-.signInBtn,.signUpBtn {
+.signInBtn,
+.signUpBtn {
   margin-top: 10px;
-  height: 3.5rem; 
-  width: 20%; 
-  border-radius: 2.5rem; 
-  background-color: #5A471D;
-  color: #EEE9CE;
-  font-size: 100%; 
+  height: 3.5rem;
+  width: 20%;
+  border-radius: 2.5rem;
+  background-color: #5a471d;
+  color: #eee9ce;
+  font-size: 100%;
   border: none;
 }
-
-.signInBtn:hover,.signUpBtn:hover{
+.signInBtn:disabled {
+  background-color: #5a471d6a;
+}
+.signInBtn:hover,
+.signUpBtn:hover {
   cursor: pointer;
 }
-.signin,.signup{
+.signin,
+.signup {
   width: 20%;
   margin-top: 5px;
 }
-.newToPageTurn{
+.newToPageTurn {
   margin-top: 15px;
-  
 }
-.forgotPasswordLayout{
+.forgotPasswordLayout {
   margin-top: 3px;
 }
-.errorLayout{
+.errorLayout {
   margin-top: 0px;
+}
+.signUpBtn {
+  background-color: #eee9ce;
+  color: #5a471d;
+  border: 1px solid #726522;
+}
+.signUpBtn:hover {
+  background-color: #d6cba6;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 320px) {
@@ -109,8 +127,9 @@ p {
     width: 90%;
   }
 
-  .signInBtn,.signUpBtn {
-    width: 90%; 
+  .signInBtn,
+  .signUpBtn {
+    width: 90%;
   }
 }
 
@@ -119,8 +138,9 @@ p {
     width: 100%;
   }
 
-  .signInBtn ,.signUpBtn{
-    width: 90%; 
+  .signInBtn,
+  .signUpBtn {
+    width: 90%;
   }
 }
 
@@ -129,8 +149,9 @@ p {
     width: 90%;
   }
 
-  .signInBtn ,.signUpBtn{
-    width: 90%; 
+  .signInBtn,
+  .signUpBtn {
+    width: 90%;
   }
 }
 
@@ -139,8 +160,9 @@ p {
     width: 70%;
   }
 
-  .signInBtn ,.signUpBtn{
-    width: 90%; 
+  .signInBtn,
+  .signUpBtn {
+    width: 90%;
   }
 }
 
@@ -149,7 +171,8 @@ p {
     width: 50%;
   }
 
-  .signInBtn,.signUpBtn {
-    width: 90%; 
+  .signInBtn,
+  .signUpBtn {
+    width: 90%;
   }
 }

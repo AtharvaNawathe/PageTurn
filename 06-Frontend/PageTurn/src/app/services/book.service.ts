@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
   private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBooks(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/books`);
@@ -16,9 +16,11 @@ export class BookService {
 
   getBookById(bookId: string, token: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `${token}`
+      Authorization: `${token}`,
     });
-    return this.http.get<any>(`${this.apiUrl}/books/getBookById/${bookId}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/books/getBookById/${bookId}`, {
+      headers,
+    });
   }
 
   getBookReviews(bookId: string): Observable<any[]> {
@@ -28,10 +30,12 @@ export class BookService {
   getUserById(userId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `${token}`
+      Authorization: `${token}`,
     });
     return this.http.get<any>(`${this.apiUrl}/users/${userId}`, { headers });
   }
 
-
+  getSimilarBooks(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/books/similar/${userId}`);
+  }
 }

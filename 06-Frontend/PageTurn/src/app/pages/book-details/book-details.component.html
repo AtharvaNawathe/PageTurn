@@ -4,31 +4,19 @@
     <div class="leftSide">
       <div class="leftSideLayout">
         <div *ngIf="bookDetails" class="book">
-          <img
-            [src]="bookDetails.coverImage"
-            alt="Book Cover"
-            width="150"
-            height="200"
-          />
+          <img [src]="bookDetails.coverImage" alt="Book Cover" width="150" height="200" />
         </div>
         <div class="bookRatings">
           <span class="bookTitle" *ngIf="bookDetails" style="color: #726522">{{
             bookDetails.title
-          }}</span>
+            }}</span>
           <div class="actualRatings" *ngIf="bookDetails">
             Rating :
-            <ng-container
-              *ngFor="
+            <ng-container *ngFor="
                 let rating of generateRatingArray(bookDetails.averageRating)
-              "
-            >
-              <img
-                width="16"
-                height="16"
-                src="https://img.icons8.com/office/16/book.png"
-                alt="book"
-                [ngClass]="{ 'half-star': rating === 0.5 }"
-              />
+              ">
+              <img width="16" height="16" src="https://img.icons8.com/office/16/book.png" alt="book"
+                [ngClass]="{ 'half-star': rating === 0.5 }" />
             </ng-container>
           </div>
         </div>
@@ -38,31 +26,26 @@
       <div class="details-container" *ngIf="bookDetails">
         <div class="title">{{ bookDetails.title }}</div>
         <div class="authors">
-          <span style="color: #726522"> Authors: </span
-          >{{ bookDetails.authors.join(", ") }}
+          <span style="color: #726522"> Authors: </span>{{ bookDetails.authors.join(", ") }}
         </div>
         <div class="description">{{ bookDetails.description }}</div>
         <div class="genre">
           <span style="color: #726522"> Genre: </span>{{ bookDetails.genre }}
         </div>
         <div class="language">
-          <span style="color: #726522"> Language: </span
-          >{{ bookDetails.language }}
+          <span style="color: #726522"> Language: </span>{{ bookDetails.language }}
         </div>
         <div class="isbn">
           <span style="color: #726522"> ISBN: </span>{{ bookDetails.isbn }}
         </div>
         <div class="publisher">
-          <span style="color: #726522"> Publisher: </span
-          >{{ bookDetails.publisher }}
+          <span style="color: #726522"> Publisher: </span>{{ bookDetails.publisher }}
         </div>
         <div class="published-date">
-          <span style="color: #726522"> First Published: </span
-          >{{ bookDetails.publishedDate }}
+          <span style="color: #726522"> First Published: </span>{{ bookDetails.publishedDate }}
         </div>
         <div class="edition">
-          <span style="color: #726522"> Edition: </span
-          >{{ bookDetails.edition }}
+          <span style="color: #726522"> Edition: </span>{{ bookDetails.edition }}
         </div>
       </div>
     </div>
@@ -95,18 +78,11 @@
       </div>
     </div>
     <div class="writeReview">
-      <textarea
-        placeholder="Write your review here"
-        class="review"
-        #reviewInput
-      ></textarea>
+      <textarea placeholder="Write your review here" class="review" #reviewInput></textarea>
     </div>
-    <button
-      class="submitBtn"
-      (click)="
+    <button class="submitBtn" (click)="
         submitReview(star1, star2, star3, star4, star5, reviewInput.value)
-      "
-    >
+      ">
       Submit
     </button>
   </div>
@@ -114,39 +90,45 @@
   <div class="showReviewsLayout">
     <div class="reviewsSection">
       <h3>Reviews from Other Users</h3>
-  
+
       <div *ngFor="let review of reviews" class="review-item">
         <div class="card">
-          <div class="user">{{ review.username }}</div>
+          <div class="user" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{
+            review.username }}</div>
           <div class="rating">Stars: {{ review.rating }}</div>
           <div class="content">{{ review.content }}</div>
-          
-          <!-- Comments section -->
-          <div *ngIf="review.comments && review.comments.length > 0">
-            <h4>Comments:</h4>
-            <div *ngFor="let comment of review.comments">
-              <div class="comment-item">
-                <div class="comment-user">{{ comment.user }}</div>
-                <div class="comment-text">{{ comment.comment }}</div>
-              </div>
-            </div>
-          </div>
-  
           <!-- Like button -->
-          <button (click)="likeReview(review)">Like</button>
-  
+          <button (click)="likeReview(review)" class="likeButton"> <span>{{ review.likeCount }}</span> Like</button>
+          <!-- Unlike button -->
+          <button (click)="unlikeReview(review)" class="likeButton">Unlike</button>
+
           <!-- Comment button -->
-          <button (click)="toggleCommentBox(review)">Comment</button>
-          
+          <button (click)="toggleCommentBox(review)" class="cmtButton">Comment</button>
+
           <!-- Comment text box and post button -->
           <div *ngIf="review.showCommentBox">
-            <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment"></textarea>
-            <button (click)="postComment(review)">Post</button>
+            <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment" style="width: 200px;"></textarea>
+            <button (click)="postComment(review)" class="likeButton">Post</button>
           </div>
+          <!-- Show Comments button -->
+          <button (click)="toggleComments(review)" class="likeButton">{{ review.showComments ? 'Hide Comments' : 'Show
+            Comments' }}</button>
+
+          <!-- Comments section -->
+          <div *ngIf="review.showComments && review.comments && review.comments.length > 0">
+            <h4>Comments:</h4>
+            <div *ngFor="let comment of review.comments" class="comment-item">
+              <div class="comment-user">{{ comment.username }} :</div>
+              <div class="comment-text">{{ comment.comment }}</div>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>
   </div>
-  
-  
+
+
 </main>

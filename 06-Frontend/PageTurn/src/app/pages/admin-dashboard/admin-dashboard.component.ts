@@ -1,31 +1,107 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { CanvasJS, CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import {
+  CanvasJS,
+  CanvasJSAngularChartsModule,
+} from '@canvasjs/angular-charts';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import tags from '../../constants/tags';
+import { BookService } from '../../services/book.service';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CanvasJSAngularChartsModule],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  styleUrl: './admin-dashboard.component.css',
+  imports: [
+    CanvasJSAngularChartsModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavbarComponent,
+  ],
 })
 export class AdminDashboardComponent {
   allUsers: any[] = [];
-
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  tags: string[] = tags;
+  books: any[] = [];
+  showAddBookForm: boolean = false;
+  addBookForm!: FormGroup;
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private bookService: BookService
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.initAddBookForm();
+    this.bookService.getBooks().subscribe(
+      (data) => {
+        this.books = data;
+        this.generateBarChart();
+      },
+      (error) => {
+        console.error('Error fetching books:', error);
+      }
+    );
   }
+  initAddBookForm(): void {
+    this.addBookForm = this.fb.group({
+      isbn: ['', Validators.required],
+      title: ['', Validators.required],
+      authors: ['', Validators.required],
+      genre: [this.tags[0], Validators.required],
+      description: [''],
+      publishedDate: [''],
+      coverImage: [''],
+      language: [''],
+      publisher: [''],
+      edition: [''],
+    });
+  }
+  toggleAddBookForm(): void {
+    this.showAddBookForm = !this.showAddBookForm;
+  }
+  submitBook(): void {
+    const url = 'http://localhost:3000/api/books';
+    const token = this.authService.getToken();
 
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `${token}`,
+      });
+
+      this.http.post<any>(url, this.addBookForm.value, { headers }).subscribe(
+        (response) => {
+          console.log('Book added successfully:', response);
+          this.addBookForm.reset();
+        },
+        (error) => {
+          console.error('Error adding book:', error);
+        }
+      );
+    } else {
+      console.error('JWT token not found.');
+    }
+  }
   getAllUsers(): void {
     const url = 'http://localhost:3000/api/users/all/users';
-    const token = this.authService.getToken(); // Assuming getToken method exists in AuthService
+    const token = this.authService.getToken();
 
     // Check if token exists
     if (token) {
       const headers = new HttpHeaders({
-        'Authorization': `${token}`
+        Authorization: `${token}`,
       });
 
       this.http.get<any[]>(url, { headers }).subscribe(
@@ -42,37 +118,68 @@ export class AdminDashboardComponent {
       console.error('JWT token not found.');
     }
   }
-
   generatePieChart(): void {
-    let dataPoints = [];
+    let maleCount = this.allUsers.filter(
+      (user) => user.gender === 'male'
+    ).length;
+    let femaleCount = this.allUsers.filter(
+      (user) => user.gender === 'female'
+    ).length;
 
-    // Count male and female users
-    let maleCount = this.allUsers.filter(user => user.gender === 'male').length;
-    let femaleCount = this.allUsers.filter(user => user.gender === 'female').length;
+    let totalCount = maleCount + femaleCount;
 
-    // Add data points to array
-    dataPoints.push({ y: maleCount, name: "Male" });
-    dataPoints.push({ y: femaleCount, name: "Female" });
+    let malePercentage = ((maleCount / totalCount) * 100).toFixed(2);
+    let femalePercentage = ((femaleCount / totalCount) * 100).toFixed(2);
 
-    // Generate chart options
     let chartOptions = {
       animationEnabled: true,
-      theme: "dark2",
+      theme: 'light',
       title: {
-        text: "Gender Distribution"
+        text: 'Gender Distribution',
       },
-      data: [{
-        type: "pie",
-        startAngle: 45,
-        indexLabel: "{name}: {y}",
-        indexLabelPlacement: "inside",
-        yValueFormatString: "#,###.##'%'",
-        dataPoints: dataPoints
-      }]
+      data: [
+        {
+          type: 'pie',
+          startAngle: 45,
+          indexLabel: '{name}: {y}%',
+          indexLabelPlacement: 'inside',
+          dataPoints: [
+            { y: parseFloat(malePercentage), name: 'Male' },
+            { y: parseFloat(femalePercentage), name: 'Female' },
+          ],
+        },
+      ],
     };
 
-    // Render chart
-    let chart = new CanvasJS.Chart("chartContainer", chartOptions);
+    let chart = new CanvasJS.Chart('pieChartContainer', chartOptions);
     chart.render();
   }
+  generateBarChart(): void {
+    const genres = this.books.map((book) => book.genre);
+    const genreCounts: { [key: string]: number } = {};
+
+    genres.forEach((genre: string) => {
+      genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+    });
+
+    const labels = Object.keys(genreCounts);
+    const data = Object.values(genreCounts);
+    const chartOptions = {
+      animationEnabled: true,
+      theme: 'light',
+      title: {
+        text: 'Genre Distribution',
+      },
+      data: [
+        {
+          type: 'column',
+          dataPoints: labels.map((label, index) => ({ label, y: data[index] })),
+        },
+      ],
+    };
+
+    const chart = new CanvasJS.Chart('barChartContainer', chartOptions);
+    chart.render();
+  }
+  
 }

@@ -53,7 +53,7 @@ Pageturn: Your go-to destination for discovering, sharing, and discussing books.
 ## Authentication Endpoints:
 - [✅] Register User: `POST /api/auth/register`
 - [✅] Login User: `POST /api/auth/login`
-- [ ] Logout User: `POST /api/auth/logout`    [will implement while building frontend]
+- [✅] Logout User
 
 ## User Management Endpoints:
 - [✅] Get User Profile: `GET /api/users/me`

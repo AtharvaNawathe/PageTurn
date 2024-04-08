@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,6 +30,8 @@ export class LoginComponent {
           // Decode the JWT token
           const decodedToken: any = jwtDecode(token);
           // Check if the token is expired
+          console.log("decoded ",decodedToken);
+          
           const currentTime = Date.now() / 1000;
 
           if (decodedToken.exp && decodedToken.exp < currentTime) {
@@ -38,7 +39,12 @@ export class LoginComponent {
           } else {
             this.authService.storeToken(token);
             console.log('Sign-in successful! Token stored.');
-            this.authService.navigateToHomepage();
+            if(decodedToken.isAdmin){
+              this.router.navigate(['/admin']);
+            }else{
+
+              this.authService.navigateToHomepage();
+            }
           }
         } else {
           console.error('Token not found in response.');
@@ -58,3 +64,6 @@ export class LoginComponent {
     this.router.navigate(['/home']);
   }
 }
+
+
+

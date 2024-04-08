@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
-<div id="pieChartContainer" style="height: 300px; width: 100%"></div>
+<div style="display: flex;flex-direction: row; margin-top: 15px;" > 
+  <div id="pieChartContainer" style="height: 300px; width: 40%; border: 1px solid black;margin-right: 15px; "  ></div>
+  <div id="barChartContainer" style="height: 300px; width: 50%; border: 1px solid black;"></div>
 
-<div id="barChartContainer" style="height: 300px; width: 100%"></div>
+</div>
 
-<button (click)="toggleAddBookForm()" class="signInBtn" style="margin-left: 20px; margin-bottom: 20px">
+<button (click)="openAddBookModal()" class="signInBtn" style="margin-left: 20px; margin-bottom: 20px">
   Add Book
 </button>
 
-<div *ngIf="showAddBookForm">
+<!-- <div *ngIf="showAddBookForm" style="width: 50%; margin-left: 20px;" >
   <h3>Add New Book</h3>
   <form [formGroup]="addBookForm" (ngSubmit)="submitBook()">
     <div>
@@ -52,6 +54,33 @@
       <label for="edition">Edition :</label>
       <input type="text" id="edition" formControlName="edition" class="customInputField" />
     </div>
-    <button type="submit" class="signInBtn">Submit</button>
+    <button type="submit" class="signInBtn" style="margin-bottom: 20px;">Submit</button>
   </form>
+</div> -->
+
+<!-- List of all books -->
+<h3>All Books:</h3>
+<div class="container mt-4">
+  <div class="row">
+    <div *ngFor="let book of books" class="col-md-4 mb-4" style="margin-bottom: 5px;">
+      <div class="card shadow" style="display: flex; justify-content: space-between;">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <div class="card-text">Author: {{ book.authors }}</div>
+          <!-- You can add more book details here -->
+        </div>
+        <div>
+          <button class="delete-button" style="background-color: forestgreen;" (click)="openEditBookModal(book)">Edit</button>
+          <button class="delete-button" (click)="deleteBook(book._id)" >Delete</button>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
 </div>
+
+<div *ngIf="books.length === 0" class="mt-4">
+  <p>No books available.</p>
+</div>
+

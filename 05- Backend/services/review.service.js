@@ -126,11 +126,29 @@ exports.getReviewsForBook = async (bookId) => {
  */
 exports.deleteReviewById = async (reviewId) => {
   try {
+    // Find the review to be deleted
+    const reviewToDelete = await Review.findById(reviewId);
+    if (!reviewToDelete) {
+      throw new Error("Review not found");
+    }
+    
+    // Delete the review
     await Review.findByIdAndDelete(reviewId);
+
+    // Update the book's averageRating field
+    const existingReviews = await Review.find({ book: reviewToDelete.book });
+    const totalRating = existingReviews.reduce((acc, review) => acc + review.rating, 0);
+    const averageRating = existingReviews.length > 0 ? totalRating / existingReviews.length : 0;
+
+    // Update the averageRating of the book
+    await Book.findByIdAndUpdate(reviewToDelete.book, { averageRating });
+
+    return;
   } catch (error) {
     throw error;
   }
 };
+
 /**
  * Service function to like a review by its ID.
  * @param {string} reviewId - The ID of the review to like.

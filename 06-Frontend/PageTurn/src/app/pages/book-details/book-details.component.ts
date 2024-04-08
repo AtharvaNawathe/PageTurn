@@ -23,6 +23,7 @@ export class BookDetailsComponent {
   newReview: any = { rating: 1, content: '' };
   reviews: any[] = [];
   userId!: string;
+  userReviewId: string | undefined;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -157,6 +158,7 @@ export class BookDetailsComponent {
       () => {
         console.log('Review posted successfully');
         this.getReviews();
+        this.ngOnInit();
         // Optionally, you can handle success response here
       },
       (error) => {
@@ -260,4 +262,68 @@ export class BookDetailsComponent {
       }
     );
   }
+
+  checkUserReview(): void {
+    const authToken = localStorage.getItem('token');
+  
+    if (authToken) {
+      this.http
+        .get<any>('http://localhost:3000/api/users/me', {
+          headers: { Authorization: `${authToken}` },
+        })
+        .subscribe(
+          (userData) => {
+            this.userId = userData._id;
+            console.log("Logged-in User ID:", this.userId);
+            console.log("Reviews:", this.reviews);
+  
+            const userReview = this.reviews.find(
+              (review) => review.user === this.userId
+            );
+  
+            console.log("User Review:", userReview);
+  
+            if (userReview) {
+              this.userReviewId = userReview._id;
+              console.log("User Review ID:", this.userReviewId);
+              this.deleteReview();
+            } else {
+              console.log("User has not reviewed this book.");
+            }
+          },
+          (error) => {
+            console.error('Error fetching user data:', error);
+          }
+        );
+    } else {
+      console.error('Authentication token not found');
+    }
+  }
+  
+  deleteReview(): void {
+    if (this.userReviewId) {
+      this.bookService.deleteReview(this.userReviewId).subscribe(
+        () => {
+          console.log('Review deleted successfully');
+          
+          this.ngOnInit();
+        },
+        (error) => {
+          console.error('Error deleting review:', error);
+        }
+      );
+    } else {
+      console.error('User review ID not found');
+    }
+  }
+  
+
+  recalculateAverageRating(): void {
+    // Calculate new average rating based on remaining reviews
+    const totalRatings = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+    const newAverageRating = totalRatings / this.reviews.length;
+    // Update bookDetails with the new average rating
+    this.bookDetails.averageRating = newAverageRating;
+  }
+  
 }

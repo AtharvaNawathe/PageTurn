@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+
 import {
   CanvasJS,
   CanvasJSAngularChartsModule,
@@ -16,6 +18,8 @@ import { CommonModule } from '@angular/common';
 import tags from '../../constants/tags';
 import { BookService } from '../../services/book.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { AddBookModalComponent } from '../../add-book-modal/add-book-modal.component';
+import { EditBookModalComponent } from '../../edit-book-modal/edit-book-modal.component';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -27,6 +31,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
+    EditBookModalComponent
   ],
 })
 export class AdminDashboardComponent {
@@ -39,7 +44,8 @@ export class AdminDashboardComponent {
     private http: HttpClient,
     private authService: AuthService,
     private fb: FormBuilder,
-    private bookService: BookService
+    private bookService: BookService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -181,5 +187,33 @@ export class AdminDashboardComponent {
     const chart = new CanvasJS.Chart('barChartContainer', chartOptions);
     chart.render();
   }
-  
+  deleteBook(bookId: string): void {
+    this.bookService.deleteBook(bookId).subscribe(
+      () => {
+        console.log('Book deleted successfully');
+        this.ngOnInit();
+      },
+      (error) => {
+        console.error('Error deleting book:', error);
+
+      }
+    );
+  }
+  openAddBookModal(): void {
+    const dialogRef = this.dialog.open(AddBookModalComponent, {
+      width: '500px', 
+      data: {}, 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+      this.ngOnInit();
+    });
+  }
+  openEditBookModal(book: any): void {
+    const dialogRef = this.dialog.open(EditBookModalComponent, {
+      width: '600px',
+      data: { book: book }
+    });
+  }
 }

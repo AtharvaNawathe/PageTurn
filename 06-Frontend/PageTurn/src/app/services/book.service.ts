@@ -38,4 +38,37 @@ export class BookService {
   getSimilarBooks(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/books/similar/${userId}`);
   }
+  deleteReview(reviewId: string): Observable<any> {
+    const authToken = localStorage.getItem('token');
+    if (!authToken) {
+      throw new Error('Authentication token not found');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `${authToken}`,
+    });
+    const url = `${this.apiUrl}/books/review/${reviewId}`;
+    return this.http.delete(url, { headers });
+  }
+  deleteBook(bookId: string): Observable<any> {
+    const authToken = localStorage.getItem('token');
+    if (!authToken) {
+      throw new Error('Authentication token not found');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `${authToken}`,
+    });
+    const url = `${this.apiUrl}/books/${bookId}`;
+    return this.http.delete(url, { headers });
+  }
+
+  updateBook(bookId: string, bookData: any): Observable<any> {
+    const url = `${this.apiUrl}/books/${bookId}`;
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `${token}`
+    });
+
+    return this.http.put<any>(url, bookData, { headers });
+  }
 }

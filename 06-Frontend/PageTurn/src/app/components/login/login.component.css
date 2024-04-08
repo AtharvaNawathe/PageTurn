@@ -93,10 +93,14 @@ p {
 }
 .signInBtn:disabled {
   background-color: #5a471d6a;
+  
 }
 .signInBtn:hover,
 .signUpBtn:hover {
   cursor: pointer;
+}
+.signInBtn:disabled:hover{
+  cursor: not-allowed;
 }
 .signin,
 .signup {

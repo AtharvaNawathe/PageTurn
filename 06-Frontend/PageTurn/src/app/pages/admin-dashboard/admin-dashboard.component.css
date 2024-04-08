@@ -29,3 +29,38 @@
     width: 20%;
     margin-top: 5px;
   }
+ 
+.card {
+  background-color: white;
+  width: 40%;
+  border: none; 
+  transition: box-shadow 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-bottom: 0px;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem; 
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.card-text {
+  color: #6c757d; 
+}
+
+
+.delete-button {
+  background-color: rgba(255, 0, 0, 0.601); /* Set button background color to red */
+  color: white; /* Set text color to white */
+  border: none; /* Remove button border */
+  padding: 8px 16px;
+  margin-top: 5px;
+  margin-right: 5px;
+  border-radius: 4px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}

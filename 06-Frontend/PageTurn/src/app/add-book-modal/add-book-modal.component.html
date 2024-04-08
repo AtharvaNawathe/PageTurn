@@ -1,0 +1,48 @@
+<h1 mat-dialog-title >Add New Book</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addBookForm" (ngSubmit)="submitBook()" style="margin: 10px; margin-left: 15px;">
+    <div>
+        <label for="isbn">ISBN : </label>
+        <input type="text" id="isbn" formControlName="isbn" class="customInputField" />
+      </div>
+      <div>
+        <label for="title">Title :</label>
+        <input type="text" id="title" formControlName="title" class="customInputField" />
+      </div>
+      <div>
+        <label for="authors">Authors :</label>
+        <input type="text" id="authors" formControlName="authors" class="customInputField" />
+      </div>
+      <div>
+        <label for="genre">Genre :</label>
+        <select id="genre" formControlName="genre" class="customInputField">
+          <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="description">Description :</label>
+        <textarea id="description" formControlName="description" class="customInputField"></textarea>
+      </div>
+      <div>
+        <label for="publishedDate">Published Date :</label>
+        <input type="date" id="publishedDate" formControlName="publishedDate" class="customInputField" />
+      </div>
+      <div>
+        <label for="coverImage">Cover Image :</label>
+        <input type="text" id="coverImage" formControlName="coverImage" class="customInputField" />
+      </div>
+      <div>
+        <label for="language">Language :</label>
+        <input type="text" id="language" formControlName="language" class="customInputField" />
+      </div>
+      <div>
+        <label for="publisher">Publisher :</label>
+        <input type="text" id="publisher" formControlName="publisher" class="customInputField" />
+      </div>
+      <div>
+        <label for="edition">Edition :</label>
+        <input type="text" id="edition" formControlName="edition" class="customInputField" />
+      </div>
+      <button type="submit" class="signInBtn" style="margin-bottom: 20px;">Submit</button>
+  </form>
+</div>

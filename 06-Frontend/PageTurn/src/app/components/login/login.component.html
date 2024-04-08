@@ -6,69 +6,39 @@
 
     <div class="emailInputLayout">
       <span class="email"> Email: </span>
-      <input
-        class="customInputField"
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        #emailInput="ngModel"
-        autocomplete="off"
-        required
-        email
-      />
+      <input class="customInputField" type="email" [(ngModel)]="email" name="email" #emailInput="ngModel"
+        autocomplete="off" required email />
     </div>
     <div class="errorLayout">
-      <div
-        *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
-        class="error"
-      >
-        <span *ngIf="emailInput.errors?.['email']" class="forgotPassword"
-          >Invalid email format</span
-        >
-        <span *ngIf="emailInput.errors?.['required']" class="forgotPassword"
-          >Email is required</span
-        >
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error">
+        <span *ngIf="emailInput.errors?.['email']" class="forgotPassword">Invalid email format</span>
+        <span *ngIf="emailInput.errors?.['required']" class="forgotPassword">Email is required</span>
       </div>
     </div>
 
     <div class="passwordInputLayout">
       <span class="password"> Password: </span>
-      <input
-        class="customInputField"
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        #passwordInput="ngModel"
-        required
-        minlength="6"
-      />
+      <input class="customInputField" type="password" [(ngModel)]="password" name="password" #passwordInput="ngModel"
+        required minlength="6" />
     </div>
     <div class="errorLayout">
-      <div
-        *ngIf="
+      <div *ngIf="
           passwordInput.invalid &&
           (passwordInput.dirty || passwordInput.touched)
-        "
-        class="forgotPassword"
-      >
-        <span *ngIf="passwordInput.errors?.['required']"
-          >Password is required</span
-        >
-        <span *ngIf="passwordInput.errors?.['minlength']"
-          >Password must be at least 6 characters long</span
-        >
+        " class="forgotPassword">
+        <span *ngIf="passwordInput.errors?.['required']">Password is required</span>
+        <span *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters long</span>
       </div>
     </div>
 
     <div class="forgotPasswordLayout">
       <span class="forgotPassword">Forgot Password ?</span>
     </div>
+
     <div class="signin">
-      <button
-        class="signInBtn"
-        (click)="signIn(emailInput.value, passwordInput.value)"
-        [disabled]="!emailInput.valid || !passwordInput.valid"
-      >
+      <button class="signInBtn" (click)="signIn(emailInput.value, passwordInput.value)"
+        [disabled]="!emailInput.valid || !passwordInput.valid">
+
         Sign In
       </button>
     </div>

@@ -79,12 +79,16 @@
     </div>
     <div class="writeReview">
       <textarea placeholder="Write your review here" class="review" #reviewInput></textarea>
+   
     </div>
     <button class="submitBtn" (click)="
         submitReview(star1, star2, star3, star4, star5, reviewInput.value)
       ">
       Submit
     </button>
+       <!-- Delete button for the user's own review -->
+       <button  (click)="checkUserReview()" class="submitBtn">Delete</button>
+
   </div>
 
   <div class="showReviewsLayout">
@@ -105,6 +109,7 @@
           <!-- Comment button -->
           <button (click)="toggleCommentBox(review)" class="cmtButton">Comment</button>
 
+
           <!-- Comment text box and post button -->
           <div *ngIf="review.showCommentBox">
             <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment" style="width: 200px;"></textarea>
@@ -122,9 +127,6 @@
               <div class="comment-text">{{ comment.comment }}</div>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </div>

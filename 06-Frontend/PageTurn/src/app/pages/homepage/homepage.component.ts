@@ -39,6 +39,8 @@ export class HomepageComponent {
       (response) => {
         this.quote = response.content;
         this.author = response.author;
+        console.log("Quote:",this.quote);
+        
       },
       (error) => {
         console.error('Error fetching quote:', error);

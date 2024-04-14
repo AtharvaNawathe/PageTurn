@@ -30,7 +30,7 @@
         <div class="tab-content">
           <div *ngIf="currentlyReadingBooks.length > 0">
 
-            <div *ngFor="let book of currentlyReadingBooks" style="display: flex; ">
+            <div *ngFor="let book of currentlyReadingBooks" style="display: flex;  margin-bottom: 10px;">
               <a [routerLink]="['/books', book._id]" style="display: flex;">
                 <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
                 <div style="margin-left: 50px;">{{book.title}}</div>
@@ -43,7 +43,7 @@
           <div *ngIf="wantToReadBooks.length > 0">
             <!-- Wrap each book card in an anchor tag -->
             <div *ngFor="let book of wantToReadBooks" style="display: flex;">
-              <a [routerLink]="['/books', book._id]" style="display: flex;">
+              <a [routerLink]="['/books', book._id]" style="display: flex; margin-bottom: 10px;">
                 <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
                 <div style="margin-left: 50px;">{{book.title}}</div>
               </a>
@@ -53,7 +53,7 @@
         <div class="tab-content">
           <div *ngIf="readBooks.length > 0">
             <!-- Wrap each book card in an anchor tag -->
-            <div *ngFor="let book of readBooks" style="display: flex;">
+            <div *ngFor="let book of readBooks" style="display: flex;  margin-bottom: 10px;">
               <a [routerLink]="['/books', book._id]" style="display: flex;">
                 <img [src]="book.coverImage" alt="Book Cover" width="150" height="200">
                 <div style="margin-left: 50px;">{{book.title}}</div>

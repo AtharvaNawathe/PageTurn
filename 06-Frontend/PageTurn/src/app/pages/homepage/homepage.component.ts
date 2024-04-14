@@ -19,6 +19,7 @@ export class HomepageComponent {
   filteredBooks: any[] = [];
   allBooks: any[] = [];
   recommendedBooks: any[] = [];
+  randomBook: any;
   constructor(private http: HttpClient, private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -27,11 +28,13 @@ export class HomepageComponent {
     this.bookService.getBooks().subscribe(
       (data) => {
         this.books = data;
+        this.getRandomBook();
       },
       (error) => {
         console.error('Error fetching books:', error);
       }
     );
+  
   }
 
   fetchQuote() {
@@ -81,5 +84,14 @@ export class HomepageComponent {
     } else {
       console.error('Authentication token not found');
     }
+  }
+  getRandomBook(): any {
+    const randomIndex = Math.floor(Math.random() * this.books.length);
+    this.randomBook = this.books[randomIndex]
+    console.log(this.randomBook);
+    
+    
+  
+   
   }
 }

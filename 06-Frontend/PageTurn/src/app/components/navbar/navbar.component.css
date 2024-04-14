@@ -28,8 +28,13 @@
   background-color: #e9e5cd;
   border-radius: 25px;
   border: none;
-  width: 15rem;
+  width: 40rem;
   height: 30px;
+}
+
+.searchBar::placeholder{
+  text-align: center;
+  margin-right: 70px;
 }
 
 .searchBar:focus {
@@ -68,5 +73,40 @@
     display: none;
   }
 
+
+
   
+}
+
+@media screen and (max-width: 513px) {
+  .searchBar {
+    display: none;
+  }
+  .username {
+    display: none;
+  }
+  .iconsContainer{
+    display: none;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .searchBar {
+
+    width: 25rem;
+  }
+  
+}
+@media screen and (max-width: 1000px) {
+  .searchBar {
+
+    width: 15rem;
+  }
+  
+}
+@media screen and (max-width: 830px) {
+  .searchBar {
+
+    width: 10rem;
+  }
+
 }

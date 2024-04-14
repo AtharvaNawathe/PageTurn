@@ -28,7 +28,7 @@ export class ProfileComponent {
     this.updateForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      dob: ['', Validators.required],
+      dob: ['',],
       gender: ['', Validators.required],
       country: ['', Validators.required],
       interests: ['', Validators.required]
@@ -43,6 +43,8 @@ export class ProfileComponent {
       this.authService.getUserDetails(token).subscribe(
         (response) => {
           this.userData = response;
+          console.log(this.userData);
+          
           this.populateUpdateForm();
         },
         (error) => {

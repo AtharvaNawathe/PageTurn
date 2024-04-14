@@ -8,7 +8,7 @@ import { UserService } from '../../services/register.service';
 import { ReviewService } from '../../services/review.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-book-details',
   standalone: true,
@@ -31,7 +31,8 @@ export class BookDetailsComponent {
     private authService: AuthService,
     private userService: UserService,
     private reviewService: ReviewService,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -92,8 +93,9 @@ export class BookDetailsComponent {
   addToCurrentlyReading(): void {
     this.userService.addToCurrentlyReading(this.bookId, this.token).subscribe(
       () => {
-        // Handle success
         console.log('Added to Currently Reading');
+        this.showSnackbar('Added to Currently Reading');
+        
       },
       (error) => {
         console.error('Error adding to Currently Reading:', error);
@@ -106,6 +108,7 @@ export class BookDetailsComponent {
       () => {
         // Handle success
         console.log('Added to Want to Read');
+        this.showSnackbar('Added to Want to Read');
       },
       (error) => {
         console.error('Error adding to Want to Read:', error);
@@ -118,6 +121,7 @@ export class BookDetailsComponent {
       () => {
         // Handle success
         console.log('Added to Read');
+        this.showSnackbar('Added to Read');
       },
       (error) => {
         console.error('Error adding to Read:', error);
@@ -317,7 +321,6 @@ export class BookDetailsComponent {
     }
   }
   
-
   recalculateAverageRating(): void {
     // Calculate new average rating based on remaining reviews
     const totalRatings = this.reviews.reduce((acc, review) => acc + review.rating, 0);
@@ -325,5 +328,33 @@ export class BookDetailsComponent {
     // Update bookDetails with the new average rating
     this.bookDetails.averageRating = newAverageRating;
   }
+
   
+  generateStarRating(rating: number): string {
+    const fullStars = Math.floor(rating);
+    const halfStars = Math.ceil(rating - fullStars);
+    const emptyStars = 5 - fullStars - halfStars;
+  
+    let starsHTML = '';
+  
+    
+    for (let i = 0; i < fullStars; i++) {
+      starsHTML += '<span class="star">&#9733;</span>'; 
+    }
+    for (let i = 0; i < halfStars; i++) {
+      starsHTML += '<span class="star">&#9734;</span>';
+    }
+  
+  
+    for (let i = 0; i < emptyStars; i++) {
+      starsHTML += '<span class="star">&#9734;</span>'; 
+    }
+  
+    return starsHTML;
+  }
+  private showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, // 3 seconds
+    });
+  }
 }

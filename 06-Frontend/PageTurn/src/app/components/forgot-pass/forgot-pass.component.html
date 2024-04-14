@@ -1,0 +1,24 @@
+<main>
+    <div class="loginLayout">
+        <p class="heading3" #textElement>Welcome back to,</p>
+        <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
+        <p class="heading2" style="margin-top: 8px">Forgot Password</p>
+    
+        <div class="emailInputLayout">
+          <span class="email"> Enter your Email Here: </span>
+          <input class="customInputField" type="email" [(ngModel)]="email" name="email" #emailInput="ngModel"
+            autocomplete="off" required email />
+        </div>
+        <div class="errorLayout" style="color: #5a471d">
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error">
+            <span *ngIf="emailInput.errors?.['email']" class="forgotPassword">Invalid email format</span>
+            <span *ngIf="emailInput.errors?.['required']" class="forgotPassword">Email is required</span>
+          </div>
+        </div>
+ 
+            <button class="signUpBtn">Send Password Reset Link</button>
+       
+    </div>
+
+ 
+</main>

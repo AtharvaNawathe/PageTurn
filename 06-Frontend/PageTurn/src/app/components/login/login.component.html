@@ -1,6 +1,6 @@
 <main>
   <div class="loginLayout">
-    <p class="heading3">Welcome back to,</p>
+    <p class="heading3" #textElement>Welcome back to,</p>
     <p class="heading1"><span style="color: #b8a785">Page</span>turn</p>
     <p class="heading2" style="margin-top: 8px">Sign In</p>
 
@@ -32,12 +32,13 @@
     </div>
 
     <div class="forgotPasswordLayout">
-      <span class="forgotPassword">Forgot Password ?</span>
+      <span class="forgotPassword" (click)="forgotPass()"> Forgot Password ?</span>
     </div>
-
+    <re-captcha (resolved)="resolved($event)" siteKey="6LfnqrkpAAAAAHKp78QhcuWB2gnEzWSgQR1ONu9S">
+    </re-captcha>
     <div class="signin">
       <button class="signInBtn" (click)="signIn(emailInput.value, passwordInput.value)"
-        [disabled]="!emailInput.valid || !passwordInput.valid">
+        [disabled]="!emailInput.valid || !passwordInput.valid || !captchaResolved" >
 
         Sign In
       </button>

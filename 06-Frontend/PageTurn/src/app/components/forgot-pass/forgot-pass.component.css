@@ -1,0 +1,88 @@
+main {
+    display: flex;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    cursor: default;
+  }
+  
+  .loginLayout {
+    margin-top: 2%;
+    /* background-color: pink; */
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  .heading3 {
+    font-size: 1.5rem;
+    color: #726522;
+  }
+  
+  .heading1 {
+    font-size: 2.5rem;
+    color: #726522;
+  }
+  
+  .heading2 {
+    font-size: 1.375rem;
+    color: #726522;
+  }
+  
+  p {
+    margin: 0.1875rem 0;
+  }
+  
+  .emailInputLayout,
+  .passwordInputLayout,
+  .forgotPasswordLayout,
+  .errorLayout {
+    height: 5rem;
+    width: 80%;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+  .customInputField {
+    height: 5rem;
+    margin-top: 10px;
+    border-radius: 25px;
+    background-color: #eee9ce;
+    padding-left: 40px;
+    border: none;
+    transition: border 0.3s ease;
+    border: 1px solid #726522;
+  }
+  
+  .customInputField:focus {
+    border: 1px solid #726522;
+    outline: none;
+  }
+  
+  .email,
+  .password {
+    color: #726522;
+    cursor: default;
+  }
+  .signInBtn,
+  .signUpBtn {
+    width: 70%;
+    height: 3.5rem;
+    border-radius: 2.5rem;
+    background-color: #5a471d;
+    color: #eee9ce;
+    font-size: 100%;
+    border: none;
+  }
+  .signInBtn:disabled {
+    background-color: #5a471d6a;
+    
+  }
+  .signInBtn:hover,
+  .signUpBtn:hover {
+    cursor: pointer;
+  }
+  .signInBtn:disabled:hover{
+    cursor: not-allowed;
+  }

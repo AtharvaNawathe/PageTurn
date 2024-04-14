@@ -31,9 +31,10 @@
   }
  
 .card {
-  background-color: white;
+  background-color: #EEE9CE;
+  border: 1px solid #726522;
   width: 40%;
-  border: none; 
+  /* border: none;  */
   transition: box-shadow 0.3s;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   margin-bottom: 0px;

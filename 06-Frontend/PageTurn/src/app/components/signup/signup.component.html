@@ -58,20 +58,21 @@
 
       <!-- Step 3: Date of Birth and Interests -->
       <div *ngIf="currentStep === 2">
-        <div class="dobInputLayout">
+        <div class="dobInputLayout ">
           <span class="dob"> Date of Birth: </span>
-          <input formControlName="dateOfBirth" class="customInputField" type="date" style="margin-left: 2rem" />
+          <input formControlName="dateOfBirth" class="customInputField" type="date" style="margin-left: 2rem; width: 100px; padding-right: 15px; " max="{{ today | date:'yyyy-MM-dd' }}"  />
         </div>
-        <br />
-        <span class="dob">Select Interests : </span>
-        <mat-form-field appearance="fill" color="primary">
-          <mat-label>Select Interests</mat-label>
-          <mat-select multiple formControlName="interests" style="background-color: #eee9ce">
-            <mat-option *ngFor="let interest of interests" [value]="interest">{{
+       
+         <div class="countryInputLayout intersts">
+          <span class="country">Favourite Genre: </span>
+          <select formControlName="interests" class="customInputField"  style="background-color: #eee9ce; margin-left: 1rem">
+            <option *ngFor="let interest of interests" [value]="interest">{{
               interest
-              }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+              }}
+            </option>
+          </select>
+        </div>
+
       </div>
 
       <!-- Step 4: Password -->

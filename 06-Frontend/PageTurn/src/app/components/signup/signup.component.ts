@@ -7,6 +7,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/register.service';
 import countries from '../../constants/countries';
 import { Router } from '@angular/router';
@@ -33,10 +34,12 @@ export class SignUpComponent {
   interests: string[] = tags;
   currentStep: number = 0;
   steps: number[] = [0, 1, 2, 3];
+  today: Date = new Date();
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.signUpForm = this.formBuilder.group({
@@ -47,7 +50,7 @@ export class SignUpComponent {
       country: ['India', Validators.required],
       dateOfBirth: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      interests: [[]],
+      interests: ['fiction',Validators.required],
     });
   }
 
@@ -64,6 +67,7 @@ export class SignUpComponent {
     this.userService.registerUser(this.signUpForm.value).subscribe(
       (response) => {
         console.log('User registered successfully:', response);
+        this.router.navigate(['/login']);
         this.signUpForm.reset();
         this.currentStep = 0;
       },

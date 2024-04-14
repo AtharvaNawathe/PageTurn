@@ -139,7 +139,8 @@ export class AdminDashboardComponent {
 
     let chartOptions = {
       animationEnabled: true,
-      theme: 'light',
+      theme: 'light1',
+      backgroundColor: "#EEE9CE",
       title: {
         text: 'Gender Distribution',
       },
@@ -173,6 +174,7 @@ export class AdminDashboardComponent {
     const chartOptions = {
       animationEnabled: true,
       theme: 'light',
+      backgroundColor: "#EEE9CE",
       title: {
         text: 'Genre Distribution',
       },

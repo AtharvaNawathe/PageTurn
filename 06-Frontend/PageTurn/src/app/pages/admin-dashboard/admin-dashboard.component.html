@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div style="display: flex;flex-direction: row; margin-top: 15px;" > 
-  <div id="pieChartContainer" style="height: 300px; width: 40%; border: 1px solid black;margin-right: 15px; "  ></div>
-  <div id="barChartContainer" style="height: 300px; width: 50%; border: 1px solid black;"></div>
+  <div id="pieChartContainer" style="height: 300px; width: 40%;margin-left:25px;margin-right: 15px; "  ></div>
+  <div id="barChartContainer" style="height: 300px; width: 50%;"></div>
 
 </div>
 
@@ -59,12 +59,12 @@
 </div> -->
 
 <!-- List of all books -->
-<h3>All Books:</h3>
-<div class="container mt-4">
+<h3 style="margin-left: 15px;">All Books:</h3>
+<div class="container mt-4" style="margin-left: 15px;">
   <div class="row">
     <div *ngFor="let book of books" class="col-md-4 mb-4" style="margin-bottom: 5px;">
       <div class="card shadow" style="display: flex; justify-content: space-between;">
-        <div class="card-body">
+        <div class="card-body" style="padding-left: 10px;">
           <h5 class="card-title">{{ book.title }}</h5>
           <div class="card-text">Author: {{ book.authors }}</div>
           <!-- You can add more book details here -->

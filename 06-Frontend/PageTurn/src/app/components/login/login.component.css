@@ -6,7 +6,7 @@ main {
 }
 
 .loginLayout {
-  margin-top: 5%;
+  margin-top: 2%;
   /* background-color: pink; */
   width: 25rem;
   display: flex;
@@ -111,7 +111,8 @@ p {
   margin-top: 15px;
 }
 .forgotPasswordLayout {
-  margin-top: 3px;
+  margin-top: 10px;
+  margin-bottom: 6px;
 }
 .errorLayout {
   margin-top: 0px;

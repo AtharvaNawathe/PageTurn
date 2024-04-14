@@ -12,7 +12,8 @@ a {
   text-align: center;
   /* height: 10rem; */
   width: auto;
-  /* background-color: #e9e5cd; */
+
+
   color: #75420e;
 }
 
@@ -30,7 +31,7 @@ a {
 }
 .recommendation {
   /* background-color: #b8a785;   */
-  background-color: #e9e5cd;
+  /* background-color: #e9e5cd; */
 }
 
 .heading2 {
@@ -48,6 +49,7 @@ a {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+  
 }
 
 .book {
@@ -57,8 +59,19 @@ a {
   margin-right: 10px;
   display: flex;
   flex-direction: column;
+
 }
 
+.scrollClass{
+  animation: scroll 20s linear infinite;
+  
+}
+
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - 10px)); }
+} 
 .recommendedBooks::-webkit-scrollbar {
   width: 12px;
   display: none;
@@ -95,7 +108,9 @@ a {
   background-color: aqua;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
-
+.bookImage:hover{
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
 .bookTitle {
   text-align: center;
   margin-top: 24px;
@@ -121,4 +136,52 @@ a {
 
 .half-star {
   opacity: 0.5;
+}
+
+.surpriseLayout{
+  margin-left: 20px;
+  margin-top: 50px;
+  width:50%;
+  height: 400px;
+  background-color: #e9e5cd;
+  display: flex;
+  color: #75420e;
+}
+.surpriseImg{
+  height: 100%;
+  flex: 1;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.surpriseDetails{
+  flex: 1;
+  max-height: 100%; 
+  overflow-y: auto;
+  /* background-color: green; */
+}
+.scroll{
+
+  font-style: italic;
+  margin-bottom: 10px;
+  z-index: 1;
+  animation: scrollAnimation 15s linear infinite;
+}
+.surpriseHeader{
+  background-color: #e9e5cd;
+  z-index: 99;
+  width: 360px;
+  position: absolute;
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: translateY(80%); 
+  }
+  100% {
+    
+    transform: translateY(0%); 
+  }
 }

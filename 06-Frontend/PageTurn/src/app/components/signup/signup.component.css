@@ -6,6 +6,7 @@ main {
   justify-content: center;
   font-family: "Poppins", sans-serif;
   cursor: default;
+  color: #5a471d;
 }
 
 .loginLayout {
@@ -49,6 +50,7 @@ p {
   margin-top: 20px;
   flex-direction: column;
   transition: all 0.4s ease-in-out;
+  color: #5a471d;
 }
 
 .forgotPasswordLayout {
@@ -176,3 +178,7 @@ p {
   color: #726522;
   font-size: 0.8rem;
 }
+.intersts{
+  margin-top: 0px;
+}
+

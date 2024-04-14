@@ -6,7 +6,12 @@
   </div>
 
   <div class="rightSide" *ngIf="userData">
+    <div style="background-color: red; width: 400px; height: 300px; padding: 25px; background-color: #e9e5cd;">
+
+    
     <div class="fullName">{{ userData.fullName }}</div>
+    <br>
+    <br>
     <div class="userName">Username: {{ userData.username }}</div>
     <div class="email">Email: {{ userData.email }}</div>
     <div class="dob">DOB: {{ userData.dateOfBirth | date : "yyyy-MM-dd" }}</div>
@@ -16,7 +21,7 @@
     <div class="createdAt">
       Joined: {{ userData.createdAt | date : "yyyy-MM-dd" }}
     </div>
-
+  </div>
     <!-- Button to toggle update form -->
     <button (click)="toggleUpdateForm()" class="updateBtn">
       Update Profile

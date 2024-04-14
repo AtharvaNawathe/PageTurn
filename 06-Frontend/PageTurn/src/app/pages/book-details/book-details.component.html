@@ -3,7 +3,7 @@
   <div class="detailsLayout">
     <div class="leftSide">
       <div class="leftSideLayout">
-        <div *ngIf="bookDetails" class="book">
+        <div *ngIf="bookDetails" class="book" >
           <img [src]="bookDetails.coverImage" alt="Book Cover" width="150" height="200" />
         </div>
         <div class="bookRatings">
@@ -28,7 +28,7 @@
         <div class="authors">
           <span style="color: #726522"> Authors: </span>{{ bookDetails.authors.join(", ") }}
         </div>
-        <div class="description">{{ bookDetails.description }}</div>
+        <div class="description" style="font-style: italic;">{{ bookDetails.description }}</div>
         <div class="genre">
           <span style="color: #726522"> Genre: </span>{{ bookDetails.genre }}
         </div>
@@ -55,6 +55,7 @@
     <button class="addToCurrentlyReadingBtn" (click)="addToCurrentlyReading()">
       Add to Currently Reading
     </button>
+
     <button class="addToWantToReadBtn" (click)="addToWantToRead()">
       Add to Want to Read
     </button>
@@ -63,7 +64,7 @@
 
   <div class="ratingLayout">
     <div class="selectRating">
-      <h3>Select Ratings :</h3>
+      <h3>What do you think ?</h3>
       <div class="star-rating">
         <input type="radio" id="5-stars" name="rating" value="5" #star5 />
         <label for="5-stars" class="star">&#9733;</label>
@@ -79,51 +80,72 @@
     </div>
     <div class="writeReview">
       <textarea placeholder="Write your review here" class="review" #reviewInput></textarea>
-   
     </div>
-    <button class="submitBtn" (click)="
-        submitReview(star1, star2, star3, star4, star5, reviewInput.value)
-      ">
-      Submit
-    </button>
-       <!-- Delete button for the user's own review -->
-       <button  (click)="checkUserReview()" class="submitBtn">Delete</button>
-
+    <div style="display: flex;">
+      <button class="submitBtn reviewSubmit" (click)="submitReview(star1, star2, star3, star4, star5, reviewInput.value)">
+        Submit
+      </button>
+      <button (click)="checkUserReview()" class="submitBtn reviewSubmit" >Delete</button>
+    </div>
   </div>
 
   <div class="showReviewsLayout">
     <div class="reviewsSection">
-      <h3>Reviews from Other Users</h3>
+      <h3 style="margin-left: 35px;">Reviews from Other Users</h3>
 
       <div *ngFor="let review of reviews" class="review-item">
         <div class="card">
-          <div class="user" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{{
-            review.username }}</div>
-          <div class="rating">Stars: {{ review.rating }}</div>
+          <div class="user" style="
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                sans-serif;
+            ">
+            {{ review.username }}
+          </div>
+          <div class="rating" style="color: #6a4a3a; font-size: 24px;" [innerHTML]="generateStarRating(review.rating)"></div>
+          <br>
+          <!-- <div class="rating">Rating: {{ review.rating }}</div> -->
           <div class="content">{{ review.content }}</div>
           <!-- Like button -->
-          <button (click)="likeReview(review)" class="likeButton"> <span>{{ review.likeCount }}</span> Like</button>
+          <br>
+          <button (click)="likeReview(review)" class="likeButton">
+            <span>{{ review.likeCount }}</span> 👍🏾 Like
+          </button>
           <!-- Unlike button -->
-          <button (click)="unlikeReview(review)" class="likeButton">Unlike</button>
+          <button (click)="unlikeReview(review)" class="likeButton">
+            👎🏾 Unlike
+          </button>
 
           <!-- Comment button -->
-          <button (click)="toggleCommentBox(review)" class="cmtButton">Comment</button>
-
+          <button (click)="toggleCommentBox(review)" class="cmtButton">
+            🗨️ Comment
+          </button>
 
           <!-- Comment text box and post button -->
-          <div *ngIf="review.showCommentBox">
-            <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment" style="width: 200px;"></textarea>
-            <button (click)="postComment(review)" class="likeButton">Post</button>
+          <div *ngIf="review.showCommentBox" > 
+            <textarea [(ngModel)]="review.newComment" placeholder="Enter your comment" style="width: 200px"></textarea>
+            <button (click)="postComment(review)" class="likeButton">
+              Post
+            </button>
           </div>
           <!-- Show Comments button -->
-          <button (click)="toggleComments(review)" class="likeButton">{{ review.showComments ? 'Hide Comments' : 'Show
-            Comments' }}</button>
+          <button (click)="toggleComments(review)" class="likeButton showCmtbtn">
+            {{
+            review.showComments
+            ? "Hide Comments ▲"
+            : "Show Comments ▼"
+            }}
+          </button>
 
           <!-- Comments section -->
-          <div *ngIf="review.showComments && review.comments && review.comments.length > 0">
+          <div *ngIf="
+              review.showComments &&
+              review.comments &&
+              review.comments.length > 0
+               
+            ">
             <h4>Comments:</h4>
-            <div *ngFor="let comment of review.comments" class="comment-item">
-              <div class="comment-user">{{ comment.username }} :</div>
+            <div *ngFor="let comment of review.comments" class="comment-item" style="margin-left: 20px;">
+              <div class="comment-user" style="font-weight: bold;">{{ comment.username }} :</div>
               <div class="comment-text">{{ comment.comment }}</div>
             </div>
           </div>
@@ -133,4 +155,6 @@
   </div>
 
 
+
+  
 </main>

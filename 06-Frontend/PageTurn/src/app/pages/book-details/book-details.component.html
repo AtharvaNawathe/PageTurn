@@ -42,7 +42,7 @@
           <span style="color: #726522"> Publisher: </span>{{ bookDetails.publisher }}
         </div>
         <div class="published-date">
-          <span style="color: #726522"> First Published: </span>{{ bookDetails.publishedDate }}
+          <span style="color: #726522"> First Published: </span>{{ bookDetails.publishedDate | date:'yyyy-MM-dd'  }}
         </div>
         <div class="edition">
           <span style="color: #726522"> Edition: </span>{{ bookDetails.edition }}

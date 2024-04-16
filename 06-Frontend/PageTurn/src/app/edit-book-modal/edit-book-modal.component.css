@@ -32,7 +32,8 @@
  
 :host {
     display: block;
-    width: 400px;
+    width: 600px;
+    background-color: #EEE9CE;
   }
   
   .mat-dialog-content {

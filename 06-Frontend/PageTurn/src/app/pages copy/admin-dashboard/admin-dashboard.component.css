@@ -1,0 +1,67 @@
+.customInputField{
+    height: 2rem;
+    margin-top: 5px;
+    border-radius: 25px;
+    background-color: #EEE9CE;
+    padding-left:40px ;
+    border: none;
+    transition: border 0.3s ease;
+    border: 1px solid #726522;
+   }
+
+   .signInBtn,.signUpBtn {
+    margin-top: 10px;
+    height: 2.5rem; 
+    width: 10rem;
+    border-radius: 2.5rem; 
+    background-color: #5A471D;
+    color: #EEE9CE;
+    font-size: 100%; 
+    border: none;
+  }
+  .signInBtn:disabled{
+    background-color:#5a471d6a ;
+  }
+  .signInBtn:hover,.signUpBtn:hover{
+    cursor: pointer;
+  }
+  .signin,.signup{
+    width: 20%;
+    margin-top: 5px;
+  }
+ 
+.card {
+  background-color: #EEE9CE;
+  border: 1px solid #726522;
+  width: 45%;
+  /* border: none;  */
+  transition: box-shadow 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-bottom: 0px;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem; 
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.card-text {
+  color: #6c757d; 
+}
+
+
+.delete-button {
+  background-color: rgba(255, 0, 0, 0.601); /* Set button background color to red */
+  color: white; /* Set text color to white */
+  border: none; /* Remove button border */
+  padding: 8px 16px;
+  margin-top: 5px;
+  margin-right: 5px;
+  border-radius: 4px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}

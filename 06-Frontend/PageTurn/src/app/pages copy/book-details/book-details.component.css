@@ -1,0 +1,274 @@
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+  .detailsLayout {
+    /* height: 38rem; */
+    width: auto;
+    /* background-color: aqua; */
+    display: flex;
+  }
+
+  .leftSide {
+    height: 38rem;
+    width: 35rem;
+    /* background-color: blue; */
+    display: flex;
+
+    justify-content: center;
+  }
+  .leftSideLayout {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .book {
+    margin-left: 5.5rem;
+    height: 12rem;
+    width: 8rem;
+    /* background-color: red; */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .bookRatings {
+    margin-top: 3rem;
+    height: 10rem;
+    width: 20rem;
+    /* background-color: orange; */
+    text-align: center;
+  }
+
+  .actualRatings {
+    height: 40px;
+    margin-top: 10px;
+    width: auto;
+    /* background-color: chartreuse; */
+  }
+
+  .bookTitle {
+    font-size: 24px;
+  }
+
+  .rightSide {
+    margin-top: 3rem;
+    margin-right: 10rem;
+    /* background-color: aqua; */
+    flex: 1;
+    /* height: 30rem; */
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 28px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .authors {
+    margin-top: 10px;
+  }
+
+  .description {
+    margin-top: 10px;
+  }
+  .description {
+    margin-top: 10px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 200px; /* Adjust max height as needed */
+  }
+  .genre {
+    margin-top: 10px;
+  }
+
+  .language {
+    margin-top: 10px;
+  }
+
+  .isbn {
+    margin-top: 10px;
+  }
+
+  .publisher {
+    margin-top: 10px;
+  }
+
+  .published-date {
+    margin-top: 10px;
+  }
+
+  .edition {
+    margin-top: 10px;
+  }
+
+  .buttonsLayout {
+    /* margin-top: 5rem; */
+    width: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* height: 200px; */
+    background-color: #e9e5cd;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .addToCurrentlyReadingBtn,
+  .addToWantToReadBtn,
+  .addToReadBtn {
+    /* margin-top: 5rem; */
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #6a4a3a;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .addToCurrentlyReadingBtn:hover,.addToWantToReadBtn:hover,.addToReadBtn:hover{
+    box-shadow: rgba(117, 70, 15, 0.944) 0px 0px 0px 2px, rgba(104, 59, 20, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  }
+  .ratingLayout {
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .star-rating {
+    border: solid 1px #ccc;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 3rem;
+    justify-content: space-around;
+    padding: 0 0.2em;
+    text-align: center;
+    width: 5em;
+  }
+
+  .star-rating input {
+    display: none;
+  }
+
+  .star-rating label {
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .star-rating :checked ~ label {
+    color: #f90;
+  }
+
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: #fc0;
+  }
+  .review {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 500px;
+    height: 100px;
+  }
+
+  .submitBtn,
+  .cmtButton,.likeButton {
+    margin-left: 2rem;
+    margin-top: 5rem;
+    width: 200px;
+    height: 50px;
+    background-color: #e9e5cd;
+    color: #6a4a3a;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .showReviewsLayout {
+    /* background-color: #6a4a3a; */
+    height: 20vh;
+  }
+
+  .card {
+    color: black;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    width: auto;
+    background-color: #e9e5cd;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding-left: 40px;
+  }
+  .cmtButton,.likeButton {
+    /* background-color: #6a4a3a; */
+    width: 100px;
+    background-color: transparent;
+    border: 1px solid #6a4a3a;
+    margin: 5px;
+    color: #6a4a3a;
+  }
+  .cmtButton:hover,.likeButton:hover {
+    background-color: #6a4a3a;
+      /* background-color: transparent; */
+    border: 1px solid #6a4a3a;
+
+    /* color: #6a4a3a; */
+    color: white;
+  }
+  .submitBtn{
+    margin-top: 5rem;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #6a4a3a;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cmtButton,.likeButton {
+   
+    width: 150px;
+    border-radius: 15px;
+    height: 40px;
+  
+  }
+
+
+  .likeButton{
+    width: 80px;
+    height: 30px;
+  }
+
+  .cmtButton{
+    width:120px;
+    height: 30px;
+  }
+
+  .showCmtbtn{
+    width: 150px;
+  }
+  
+
+
+  .reviewSubmit{
+    width: 100px;
+  }
+  .reviewSubmit:hover{
+    box-shadow: rgba(117, 70, 15, 0.944) 0px 0px 0px 2px, rgba(104, 59, 20, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  }
+
+  .loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3; /* Light grey */
+    border-top: 2px solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 5px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

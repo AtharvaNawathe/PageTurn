@@ -149,7 +149,7 @@ export class BookDetailsComponent {
     }
     this.postReview(this.bookId, rating, review);
 
-    review ='';
+    review = '';
     star1.checked = false;
     star2.checked = false;
     star3.checked = false;
@@ -201,7 +201,7 @@ export class BookDetailsComponent {
 
   toggleCommentBox(review: any): void {
     review.showCommentBox = !review.showCommentBox; 
-    review.newComment =''; 
+    review.newComment = ''; 
   }
 
   postComment(review: any): void {

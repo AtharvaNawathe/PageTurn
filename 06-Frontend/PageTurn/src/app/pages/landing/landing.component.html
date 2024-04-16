@@ -1,24 +1,23 @@
 
-<div class="main">
-    <div class="textLayout">
-    <span class="heading1">
-        Welcome 
-    </span>   
-      <br>
-    <span class="heading1"> 
-        To 
-    </span>  
-    <br>
-    <span class="heading1 title " >
-      PageTurn 
-    </span>  
-    <br>
-    <span class="heading1">
-        The Ultimate Reader's Hub
-    </span>  
-    </div>
-    <div class="buttonsLayout">
-      
-        <button class="loginBtn" [routerLink]="['/signup']">Take Me there</button>
-    </div>
+<div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+</div >
+
+<div class="context">
+    <h1>Welcome To PageTurn</h1>
+ <h3>The Ultimate Reader's Hub</h3>
+ <div class="buttonsLayout">
+    <button class="loginBtn" [routerLink]="['/signup']" (click)="btnclick()">Take Me there</button>
+</div>
 </div>

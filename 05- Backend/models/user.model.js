@@ -143,11 +143,11 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Middleware to update book counts when a user modifies their virtual shelf
-userSchema.pre('save', updateBookCounts);
+// // Middleware to update book counts when a user modifies their virtual shelf
+// userSchema.pre('save', updateBookCounts);
 
-// Middleware to remove books from user's virtual shelf when the corresponding book is deleted
-userSchema.pre('findOneAndDelete', removeBookFromShelves);
+// // Middleware to remove books from user's virtual shelf when the corresponding book is deleted
+// userSchema.pre('findOneAndDelete', removeBookFromShelves);
 
 const User = mongoose.model('User', userSchema);
 

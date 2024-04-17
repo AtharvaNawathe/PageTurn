@@ -10,19 +10,13 @@ const cors = require("cors");
 // Middleware
 app.use(express.json());
 app.use(cors());
+
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/books", reviewRoutes);
 
-
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Internal server error" });
-});
 
 // Connect to MongoDB
 connectToDatabase()

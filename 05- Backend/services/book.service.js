@@ -6,14 +6,11 @@ const User = require("../models/user.model");
  */
 exports.addBook = async (bookData) => {
   try {
-    // Check if the ISBN already exists
     const existingBook = await Book.findOne({ isbn: bookData.isbn });
     if (existingBook) {
       throw new Error("A book with this ISBN already exists");
     }
-    // Create the book object
     const book = new Book(bookData);
-    // Save the book to the database
     await book.save();
   } catch (error) {
     throw error;
@@ -55,6 +52,7 @@ exports.getBookById = async (bookId) => {
  */
 exports.updateBookById = async (bookId, updatedBookData) => {
   try {
+    // it return the updated document
     const updatedBook = await Book.findByIdAndUpdate(bookId, updatedBookData);
     if (!updatedBook) {
       throw new Error("Book not found");
@@ -125,10 +123,10 @@ exports.getSimilarBooks = async (userId) => {
   try {
     // Fetch user's interests from the database
     const userInterests = await User.findById(userId).select("interests");
-    console.log("User Intersts from Backend:", userInterests);
+    // console.log("User Intersts from Backend:", userInterests);
     // Fetch books with genres matching user's interests
     const books = await Book.find({ genre: { $in: userInterests.interests } });
-    console.log("Books FOund in backend :", books);
+    // console.log("Books FOund in backend :", books);
     return books;
   } catch (error) {
     throw error;

@@ -26,7 +26,9 @@ exports.createReviewForBook = async (req, res, next) => {
       content
     );
 
-    res.status(201).json({ message: "Review added successfully", review: newReview });
+    res
+      .status(201)
+      .json({ message: "Review added successfully", review: newReview });
   } catch (error) {
     next(error);
   }
@@ -56,7 +58,6 @@ exports.updateReview = async (req, res, next) => {
 exports.getReviewById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log("ID :", id);
     const review = await reviewService.getReviewById(id);
     res.status(200).json(review);
   } catch (error) {
@@ -110,7 +111,7 @@ exports.likeReviewById = async (req, res, next) => {
 exports.unlikeReview = async (req, res, next) => {
   try {
     const reviewId = req.params.id;
-    const userId = req.user.id; 
+    const userId = req.user.id;
 
     await reviewService.unlikeReview(reviewId, userId);
 

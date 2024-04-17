@@ -1,13 +1,5 @@
 /**
  * List of predefined countries for users to select from.
- * @module constants/countries
- */
-
-/**
- * Array containing predefined countries.
- * Users can select their country from this list when signing up or updating their profile.
- * @type {string[]}
- * @constant
  */
 const countries = [
     'Afghanistan',

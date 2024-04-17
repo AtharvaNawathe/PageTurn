@@ -103,7 +103,7 @@ exports.deleteBookById = async (req, res, next) => {
  */
 exports.searchBooks = async (req, res, next) => {
   try {
-    const query = req.query.q; // Get the search query from request query parameters
+    const query = req.query.q;
     if (!query) {
       return res.status(400).json({ message: 'Search query is required' });
     }

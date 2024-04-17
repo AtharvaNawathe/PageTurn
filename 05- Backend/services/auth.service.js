@@ -15,18 +15,14 @@ dotenv.config();
  */
 exports.authenticateUser = async (email, password) => {
   try {
-    // Find the user by email
+ 
     const user = await User.findOne({ email });
-
-    // Check if the user exists
     if (!user) {
       throw new Error(errorMessages.USER_NOT_FOUND);
     }
 
-    // Compare the provided password with the hashed password in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    // If passwords don't match, throw an error
     if (!isPasswordValid) {
       throw new Error(errorMessages.INCORRECT_PASSWORD);
     }

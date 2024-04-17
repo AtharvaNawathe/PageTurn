@@ -16,25 +16,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/books", reviewRoutes);
 
-// Offline handling
-app.use((req, res, next) => {
-  if (
-    !req.headers["x-forwarded-for"] ||
-    req.connection.remoteAddress === "127.0.0.1"
-  ) {
-    // Request is from localhost, continue normally
-    return next();
-  }
 
-  if (!navigator.onLine) {
-    // Client is offline, handle appropriately
-    return res
-      .status(503)
-      .json({ error: "Service Unavailable - You are currently offline." });
-  }
-
-  next();
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

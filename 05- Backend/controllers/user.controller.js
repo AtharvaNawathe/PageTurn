@@ -8,10 +8,7 @@ const { isValidEmail } = require('../utils/validations');
 exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, fullName, dateOfBirth, gender, country, interests, bio, profilePicture, isAdmin } = req.body;
-
-    console.log("body from backend register",req.body);
-    console.log("interests in backend :",interests);
-    // Validate required fields
+    
     const missingFields = [];
     if (!username) missingFields.push('Username');
     if (!email) missingFields.push('Email');
@@ -22,19 +19,15 @@ exports.registerUser = async (req, res, next) => {
       return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
     }
 
-    // Validate email format
+    
     if (!isValidEmail(email)) {
       return res.status(400).json({ error: 'Invalid email address' });
     }
 
-    // Validate password length
     if (password.length < 6) {
       return res.status(400).json({ error: 'Password should be at least 6 characters long' });
     }
 
-
-
-    // Validate gender (if provided)
     if (gender && !['male', 'female', 'other'].includes(gender)) {
       return res.status(400).json({ error: 'Invalid gender value' });
     }

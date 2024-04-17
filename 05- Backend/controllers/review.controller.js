@@ -96,7 +96,7 @@ exports.deleteReviewById = async (req, res, next) => {
 exports.likeReviewById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userId = req.user.id; // Extract user ID from token
+    const userId = req.user.id;
     await reviewService.likeReviewById(id, userId);
     res.status(200).json({ message: "Review liked successfully" });
   } catch (error) {
@@ -127,7 +127,7 @@ exports.addCommentToReview = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { comment } = req.body;
-    const userId = req.user.id; // User ID extracted by auth middleware
+    const userId = req.user.id;
 
     await reviewService.addCommentToReview(id, userId, comment);
 

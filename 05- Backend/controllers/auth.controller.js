@@ -7,11 +7,9 @@ const { isValidEmail } = require('../utils/validations');
 exports.loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    // Check if email is valid
     if (!isValidEmail(email)) {
       return res.status(400).json({ error: "Invalid email address" });
     }
-    // Check if password meets minimum length requirement
     if (password.length < 6) {
       return res.status(400).json({ error: "Password should be at least 6 characters long" });
     }

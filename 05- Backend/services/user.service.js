@@ -29,22 +29,18 @@ exports.registerUser = async (
   isAdmin
 ) => {
   try {
-    // Check if the email already exists
     const existingUserWithEmail = await User.findOne({ email });
     if (existingUserWithEmail) {
       throw new Error(errorMessages.EMAIL_ALREADY_EXISTS);
     }
 
-    // Check if the username already exists
     const existingUserWithUsername = await User.findOne({ username });
     if (existingUserWithUsername) {
       throw new Error(errorMessages.USERNAME_ALREADY_EXISTS);
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the user
     const user = new User({
       username,
       email,
@@ -59,7 +55,6 @@ exports.registerUser = async (
       isAdmin,
     });
 
-    // Save the user to the database
     await user.save();
   } catch (error) {
     throw error;
@@ -73,7 +68,7 @@ exports.registerUser = async (
  */
 exports.getUserProfile = async (userId) => {
   try {
-    const user = await User.findById(userId).select("-password"); // Exclude password field
+    const user = await User.findById(userId).select("-password");
     if (!user) {
       throw new Error("User not found");
     }
@@ -130,7 +125,6 @@ exports.getUserByUsername = async (username) => {
  */
 exports.deleteUser = async (userId) => {
   try {
-    // Delete the user from the database
     await User.findByIdAndDelete(userId);
   } catch (error) {
     throw error;
@@ -160,7 +154,6 @@ exports.userExists = async (userId) => {
  * @throws {Error} If an error occurs while adding the book to the shelf.
  */
 exports.addToCurrentlyReading = async (userId, bookId) => {
-  // Retrieve the user document from the database
   const user = await User.findById(userId);
 
   if (!user) {
@@ -174,20 +167,16 @@ exports.addToCurrentlyReading = async (userId, bookId) => {
 
   // Check if the book is in the Want to Read list
   if (user.wantToRead.includes(bookId)) {
-    // Remove the book from the Want to Read list
     user.wantToRead.pull(bookId);
   }
 
   // Check if the book is in the Read list
   if (user.read.includes(bookId)) {
-    // Remove the book from the Read list
     user.read.pull(bookId);
   }
 
-  // Add the book to the Currently Reading list
   user.currentlyReading.push(bookId);
 
-  // Save the updated user document
   await user.save();
 
   return user;

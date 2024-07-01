@@ -1,4 +1,4 @@
-# 20240319_Capstone_PageTurn
+# PageTurn
 Pageturn: Your go-to destination for discovering, sharing, and discussing books. Explore diverse genres, and read reviews. Dive into a world of literature and ignite your passion for reading with Pageturn.
 
 ![image](https://github.com/Sumit4482/20240319_Capstone_PageTurn/assets/61246873/939e6ed1-3e24-444f-867a-374c66180914)

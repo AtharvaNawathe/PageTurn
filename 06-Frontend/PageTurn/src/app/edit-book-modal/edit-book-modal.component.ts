@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import tags from '../constants/tags';
+import tags from '../Constants/tags';
 import { BookService } from '../services/book.service';
 @Component({
   selector: 'app-edit-book-modal',

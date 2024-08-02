@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import tags from '../constants/tags';
+import tags from '../Constants/tags';
 import { AuthService } from '../services/auth.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({

@@ -9,9 +9,9 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/register.service';
-import countries from '../../constants/countries';
+import countries from '../../Constants/countries';
 import { Router } from '@angular/router';
-import tags from '../../constants/tags';
+import tags from '../../Constants/tags';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 

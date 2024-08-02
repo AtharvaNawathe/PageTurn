@@ -15,7 +15,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import tags from '../../constants/tags';
+import tags from '../../Constants/tags';
 import { BookService } from '../../services/book.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { AddBookModalComponent } from '../../add-book-modal/add-book-modal.component';

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
-import countries from '../../constants/countries';
+import countries from '../../Constants/countries';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/register.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import tags from '../../constants/tags';
+import tags from '../../Constants/tags';
 @Component({
     selector: 'app-profile',
     standalone: true,
